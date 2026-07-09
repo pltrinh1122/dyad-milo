@@ -1,3 +1,3 @@
-# dyad-<name> — CLAUDE.md
+# dyad-milo — CLAUDE.md
 
 **Read `DYAD.md` immediately.**
