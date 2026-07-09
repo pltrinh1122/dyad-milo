@@ -1,0 +1,7 @@
+#!/bin/sh
+# dyad-rt anchor-integrity guard hook — runs on every commit (reliably in-path).
+# Self-run, no external authority; the mechanical error steers.
+#
+# Activate once per clone (tracked hooks, not .git/hooks):
+#   git config core.hooksPath dialectic/githooks
+exec python3 dialectic/guards/anchor_guard.py
