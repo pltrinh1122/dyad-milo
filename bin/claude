@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# bin/claude — dyad-milo launcher: start Claude Code in DYAD mode (bypassPermissions).
+#   The launcher layer of dyad-milo's dyad-rt (Dyad Runtime). Native-adaptation of
+#   dyad-touchstone's dyad-rt (which adapted dyad-cairn's). See dialectic/design/dyad-rt.md.
+#
+# WHY (Operator-directed): a PER-LAUNCH choice between the native permission gate and gate-off,
+#   WITHOUT baking bypass into config. Run `claude` = normal (native gate on). Run `bin/claude`
+#   = DYAD mode: the native permission gate is OFF and dyad-rt (the git-layer guards below) is
+#   the authority. This is the Operator's explicit OPT-IN act — NOT an Agent self-grant:
+#   invoked by path, never auto-applied to a bare `claude`. dyad-milo's craft is mental-capacity
+#   management; dyad-rt applies it to the substrate — spend the Operator's attention only on
+#   the irreversible acts, let the reversible ones flow (no per-action prompt tax).
+#
+# SAFETY ENVELOPE — VERIFIED, not asserted (the touchstone lesson: a launcher's *description*
+#   of protection is worthless; only the mechanism that fires is the guard). Guards live in
+#   dialectic/githooks/ (core.hooksPath), git-layer, so they fire under EVERY permission mode —
+#   including here with the native gate OFF:
+#     • pre-push  → dialectic/guards/main_history_guard.py — refuses a local push to `main`
+#                   (direct/force/delete); `main` advances only via a forge-merged PR.
+#     • pre-commit → dialectic/guards/anchor_guard.py — refuses an anchor (DYAD.md/CLAUDE.md)
+#                   staged on `main` directly.
+#   PRECONDITION: `git config core.hooksPath dialectic/githooks` set once per clone (else NO
+#   hook fires — verify before trusting this envelope).
+#   EXPOSED: the NON-git destructive class (`rm -rf <subdir>`, `git reset --hard`,
+#   `git clean -fd`) — no hook covers it; safety then rests on an isolated/disposable run host.
+#   `rm -rf /`·`~`, explicit ask-rules, and MCP consent still prompt even here.
+#   `--no-verify` is the visible, deliberate Operator escape (wu-wei: the human is never forced).
+#   Use `bin/claude` only where that envelope holds.
+#
+# NAMING: extensionless `claude`, path-invoked (`bin/claude`), NOT a PATH shadow. The PATH-strip
+#   below is DEFENSIVE (recursion-safe even if bin/ is ever added to PATH).
+#
+# Usage:  bin/claude [args...]              # launch Claude Code with the native gate OFF
+#         CLAUDE_SH_DRY_RUN=1 bin/claude    # print the resolved launch command, do NOT exec
+
+set -euo pipefail
+
+# Strip our own bin dir from PATH so a bare `claude` resolves to the REAL binary, never this
+# wrapper (recursion guard).
+MY_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PATH="$(echo "$PATH" | sed -e "s|$MY_BIN:||g" -e "s|:$MY_BIN||g" -e "s|^$MY_BIN\$||g")"
+export PATH
+
+command -v claude >/dev/null 2>&1 \
+  || { echo "bin/claude: real 'claude' not found on PATH after de-shadowing bin/." >&2; exit 127; }
+
+if [[ "${CLAUDE_SH_DRY_RUN:-0}" == "1" ]]; then
+  printf 'bin/claude: (dry-run) would exec → %s --dangerously-skip-permissions %s\n' \
+    "$(command -v claude)" "$*" >&2
+  exit 0
+fi
+
+echo "bin/claude: launching in DYAD mode — bypassPermissions (native gate OFF; guards = dialectic/githooks + discipline). → dialectic/design/dyad-rt.md" >&2
+exec claude --dangerously-skip-permissions "$@"

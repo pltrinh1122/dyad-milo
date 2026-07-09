@@ -60,9 +60,26 @@ mechanism is compassion-toward-lapse.
 
 ## Operating-policy
 
-`NOT_YET_WORN` — materializes through practice (concurrency/WIP, git-workflow, tooling,
-proactivity). Seeded: a single working repo; changes land through commit → review; the Agent
-surfaces, the Operator disposes (no-self-ratify).
+Mostly `NOT_YET_WORN` (concurrency/WIP, tooling, proactivity materialize through practice).
+**Git-workflow — worn in:** `main` advances only through a forge-merged PR; anchors change only
+through a reviewed PR; the Agent surfaces, the Operator disposes (no-self-ratify). Enforced
+mechanically by dyad-rt (below), not by agent compliance.
+
+## Runtime — operating mode (dyad-rt)
+
+Two launch modes, a per-launch Operator election:
+- `claude` — native permission gate **ON** (normal).
+- `bin/claude` — **DYAD mode**: native gate **OFF**; dyad-rt is the authority. Operator opt-in
+  (path-invoked), never an Agent self-grant.
+
+dyad-rt = git-layer mechanical guards (fire under every permission mode, not agent compliance):
+- **pre-push** → refuses a local push to `main` (direct/force/delete) — the unbypassable spine.
+- **pre-commit** → refuses an anchor (`DYAD.md`/`CLAUDE.md`) staged on `main` directly.
+
+Both gate the irreversible step; `--no-verify` is the visible Operator escape. **Precondition:**
+`git config core.hooksPath dialectic/githooks` per clone (else no guard fires). Exposed: the
+non-git destructive class (`rm -rf`, `git reset --hard`, `git clean -fd`) rests on the run host.
+Full reasoning + envelope honesty: `dialectic/design/dyad-rt.md`.
 
 ## Externality (durable record) — two homes
 

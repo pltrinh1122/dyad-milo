@@ -1,0 +1,9 @@
+#!/bin/sh
+# dyad-rt main-history guard hook — the runtime's unbypassable spine.
+# Tracked-in-repo hook (core.hooksPath=dialectic/githooks); fires under EVERY permission
+# mode, so main-history protection survives `bin/claude` (native gate OFF).
+# git passes <remote-name> <remote-url> as args and the ref payload on stdin.
+#
+# Activate once per clone (shared with pre-commit):
+#   git config core.hooksPath dialectic/githooks
+exec python3 dialectic/guards/main_history_guard.py "$@"
