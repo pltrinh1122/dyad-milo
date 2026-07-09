@@ -19,7 +19,7 @@ the whole reason a wrapper is legitimate where a checked-in config default is no
 
 ## Why this fits dyad-milo's craft
 
-dyad-milo's craft is mental-capacity management. dyad-rt is that craft turned on the substrate:
+dyad-milo's craft is building the Operator's mental-fitness. dyad-rt is that craft turned on the substrate:
 a permission prompt on every reversible write is an **attention tax** — it spends the Operator's
 scarce mental-stamina on acts that don't warrant it. dyad-rt removes that tax (gate off) and
 re-spends the attention budget only where it belongs: the **irreversible** step, guarded

@@ -51,7 +51,7 @@ practice, and it atrophies without it. Most attempts fail not for lack of techni
 technique is everywhere — but at **adherence**: practicing reliably, and returning after a
 slip. The gap shows up two ways — you **avoid** the taxing activity before you start (the
 discomfort stops you spawning the dyad, doing the rep), and you **lapse** after you've begun;
-both are the same emotional-capacity-and-stamina shortfall, and the discomfort you're avoiding
+both are the same emotional-capability-and-stamina shortfall, and the discomfort you're avoiding
 is exactly the load that would build the fitness. You stop when you can't bear the truth of
 having lapsed, so you hide it — and a hidden lapse can't be trained. So the system builds on **honesty over appearance**, and guards that
 honesty with **compassion toward lapse**: falling out of practice is a feature of being human,

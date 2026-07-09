@@ -28,6 +28,9 @@
 - **mental-stamina** *(component)* — endurance to sustain daily practice and recover after a
   lapse; **scarce**.
 - **mental-fitness system** — the craft (the artifact). Bare **mental-fitness** = the capacity.
+- **client** — the party the mental-fitness system serves. At n=1 the client *is* the Operator;
+  the term is reserved for generalization (a separate private repo per client,
+  `dyad-milo-<client>` — see § Externality). Distinct from **Operator**, the dyad's human half.
 - **adherence** — the observable reliability of practice (~90% target).
 - **lapse** — a break in practice; a feature of being human.
 - **self-recovery** — resuming practice after a lapse, unaided.
