@@ -1,0 +1,22 @@
+# dyad-rt forge leg — the README-discipline mechanical gate (cairn HOW-0006 C17).
+# Runs the vendored linter + its deterministic test pair (No-Pure-G, C19) on every PR,
+# so C18's "branch → CI green → PR → Operator merge" path has a real CI leg.
+# Vendored verbatim from dyad-cairn @ 2e1a2e9b9c01ab7cc367b5c4b43f455a7a9bde17.
+name: readme-lint
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml pytest
+      - name: README conforms to the falsifiable-manifesto form (C17)
+        run: python3 skills/readme_lint.py README.md
+      - name: Linter's own test pair passes (C19 / No-Pure-G)
+        run: python3 -m pytest tests/test_readme_lint.py -q

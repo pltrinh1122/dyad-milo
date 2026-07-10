@@ -96,6 +96,30 @@ personal details are not required in the dyad's public ledger.
 - Umbrella revisit: "mental-fitness" vs "self-healing-and-recovery".
 - Grounding modality (CBT) is a contingent parameter, not craft essence.
 
+## README refinement arc (2026-07-10 — in flight, paused)
+
+Self-audit vs dyad-cairn's README-writing discipline (`kb/HOW-0006`, C1–C19) + exemplar,
+adversarially verified. Mechanical closer landed first: claims restyled `**Claim N`, cairn's
+`readme_lint.py` + test pair vendored whole (@ `2e1a2e9`), gate wired as PR CI.
+
+- **Spine completion (cairn C11): target pinned — reader/attacker = "you", the human
+  operating (or about to operate) a dyad.** Register mapping ratified: the anchor stays
+  Operator-framed (the Lexicon owns the role terms); the README-as-lens projects
+  Operator→you, bridged once at first body use ("you paired with one AI (milo, your
+  training partner)"). The asymmetry-vs-default spine quadrant remains open.
+- Dispositions applied (sections 1–3 of 7): wu-wei glossed inline at first mention
+  (canonical wording from § Contract); conviction-first opening (lens note folded into the
+  closing pointer); audience=you throughout. `belief.statement` consensus-edited
+  accordingly (C15 record: adds the wu-wei gloss; Operator→you).
+- **Paused before Section 4 — sequencing:** dyad-milo's manifesto builds on the foundation
+  established by dyad-bond ("The Covalent Bond", form ancestor of the falsifiable-manifesto
+  form); the Operator is updating dyad-bond's claims + README first. Resume at Section 4
+  (Why it matters).
+- Open queue on resume: Claim 1's "binding constraint" thesis has no home in § Craft
+  (cairn C12, high — slot decision: consensus-add to the anchor vs narrow the claim);
+  're-rubbable' (C6/C8 carry); 'spawning the dyad'; 'modality'/'graduation-grade'/'per
+  cycle'; Section-3 minors ("builds" ×4, "grounds on").
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
