@@ -67,38 +67,38 @@ accrues, and it falls.
 
 ## The claims
 
-**C1 — The mind is the binding constraint.** Over a lifetime, the limiting factor on a
+**Claim 1 — The mind is the binding constraint.** Over a lifetime, the limiting factor on a
 human's dyad practice is their own mental-fitness — not the agents, the tooling, or the craft.
 *Break it:* an Operator who sustains dyad practice across years and stress while their
 mental-fitness fails; or dyads that reliably fail of other causes *before* the Operator's
 mental-fitness gives out. *(Home: DYAD.md § Craft.)*
 
-**C2 — The scarce strand is emotional capability + stamina, not technique.** What runs out
+**Claim 2 — The scarce strand is emotional capability + stamina, not technique.** What runs out
 first is emotional capability and mental-stamina; technique — of whatever modality — is table
 stakes. *Break it:* an Operator with ample emotional capability and stamina who still can't
 sustain practice for lack of technique; or supplying technique (not emotional/stamina work) is
 what reliably restarts a lapsed practice. *(Home: DYAD.md § Craft_telos.)*
 
-**C3 — Adherence, not instruction, is the target.** Mastery is reliable, self-restarting
+**Claim 3 — Adherence, not instruction, is the target.** Mastery is reliable, self-restarting
 practice — ~90% adherence with unaided recovery — not the acquisition of knowledge.
 *Break it:* graduation-grade durability reached through instruction while practice only
 continues under the dyad's prompting; or a bar other than self-restarting ~90% adherence
 better marks mastery. *(Home: DYAD.md § Craft_telos.)*
 
-**C4 — A hidden lapse can't be trained.** Because a concealed lapse can't be worked with, the
+**Claim 4 — A hidden lapse can't be trained.** Because a concealed lapse can't be worked with, the
 system builds on honest self-report — a true 40% over a flattering 90%.
 *Break it:* durable self-restarting practice built on flattering or gamed metrics, honest
 self-report playing no load-bearing role; or concealing lapses doesn't block self-recovery.
 *(Home: DYAD.md § Craft_value.)*
 
-**C5 — Honesty is only safe under compassion.** Honest self-report survives only when lapse is
+**Claim 5 — Honesty is only safe under compassion.** Honest self-report survives only when lapse is
 met with compassion, not judgment — so unconditional compassion toward relapse is the
 mechanism that makes both honesty and self-recovery possible.
 *Break it:* sustained honest self-report and reliable self-recovery under a punitive stance
 toward lapse; or compassion toward lapse reliably slackens adherence rather than enabling
 return. *(Home: DYAD.md § Craft_invariant.)*
 
-**C6 — 1+1=3 is earned, not asserted.** dyad-milo earns its 1+1=3 only per cycle — when
+**Claim 6 — 1+1=3 is earned, not asserted.** dyad-milo earns its 1+1=3 only per cycle — when
 Operator and Agent together build mental-fitness neither would reach alone — and holds this
 falsifiably, never as doctrine. *Standing invitation:* attack any claim here against the
 ledger as it accrues; every claim is a hypothesis, true-for-now, re-rubbable. *(Home:
