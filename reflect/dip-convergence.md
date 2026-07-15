@@ -144,6 +144,40 @@ out *why* produced a discriminator, drafted for cairn at `dm/dyad-cairn/2026-07-
   `register: plain` in the README frontmatter and the `→ **Break it:**` marker — when the README review
   resumes. No `FALSIFICATION.md`. The four slots are unaffected by the split decision.
 
+## Claim ladder: the problem/solution dis-conflation (2026-07-15)
+
+Promoting the indictment to **Claim 0** (Operator disposition) dis-conflates the belief — which
+conflates problem+solution in one headline line — into two atomic claims held intentionally apart:
+
+- **Claim 0 — the problem (default-problem).** Left to the default (willpower + technique),
+  practice fails at adherence. Falsifier-space: *the status quo suffices; no deliberate system is
+  needed.*
+- **Claim 1 — the solution-locus.** The mind is the binding constraint, so that is what the craft
+  builds. Falsifier-space: *the binding constraint is something other than mental-fitness.*
+
+**Why they stay separate — atomicity = rep-honesty (load-bearing; future-proofs against a "why not
+merge these?" edit).** The two occupy distinct falsifier-spaces (each carries its own knife), so
+they *cannot* merge without producing a claim that fails its own falsifier — the separation is
+mechanical, not stylistic. It doubles as an **intentional-frictional-rep** (Operator's frame):
+keeping problem and solution apart makes the reader re-derive the link, the deliberate friction
+milo's craft prescribes against wetware staleness. The guard that keeps the rep honest is the same
+atomicity test — friction is a *rep* only when it exercises a real muscle (re-deriving a
+load-bearing link); splitting a genuinely-single claim would be *empty* friction, a forfeited rep
+("the discomfort avoided is the training load" said back to the form). Atomicity and rep-honesty
+are one test viewed twice; the ladder's form instances the craft it argues.
+
+**Wu-wei — leave the split unannotated in the README lens.** The rep works by making the reader
+re-derive the problem→solution link; labeling it ("note the split") spoon-feeds the derivation and
+forfeits the friction. Two claims, ordered 0→1, no meta-commentary. Explicitness is fine in the
+anchor (substrate, not lens).
+
+**Anchor architecture — the problem precedes the craft (Operator disposition; home = option "b").**
+Claim 0 is logically prior to `§ Craft`: the craft *exists to answer* the problem. So the anchor
+gains a **`§ Problem`** section (working name) positioned **before `§ Craft`**, and Claim 0 homes
+there — not inside § Craft. Lock-step, landing anchor-first (source before derived view): the
+anchor edit is its own reviewed PR; the README's Claim 0 home, `canonical_home`, and
+`belief.foundation` gain `§ Problem` in the review branch.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
