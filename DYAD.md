@@ -37,6 +37,13 @@
 - **mastery / graduation** — self-restarting practice; the Operator no longer *needs* the
   dyad (may still *use* it).
 
+## Problem
+
+**Left to the default, practice fails at adherence.** The status quo for building
+mental-fitness is willpower and technique; it breaks at **adherence** — the Operator avoids
+the taxing rep before starting, lapses after, and the default meets neither. Without a
+deliberate system, sustained practice does not hold. `§ Craft` is the answer.
+
 ## Craft
 
 **A durable mental-fitness system.** The dyad's output is a reusable system that builds and
