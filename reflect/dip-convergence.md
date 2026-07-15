@@ -120,6 +120,30 @@ adversarially verified. Mechanical closer landed first: claims restyled `**Claim
   're-rubbable' (C6/C8 carry); 'spawning the dyad'; 'modality'/'graduation-grade'/'per
   cycle'; Section-3 minors ("builds" ×4, "grounds on").
 
+## Register-split discriminator (2026-07-13 → 14 — bond's form move + milo's hold-case)
+
+dyad-bond's README-revision arc split its manifesto into a plain lens (`README.md`) + a formal surface
+(`FALSIFICATION.md`, purpose-built for the second-model attacker), and offered candidate **C23** ("when
+armament outweighs the audience, split registers — don't disarm"). Milo inherits bond's falsifiable-manifesto
+form, so on the split we asked: does milo mirror it? Verdict: **hold** (single plain README) — and working
+out *why* produced a discriminator, drafted for cairn at `dm/dyad-cairn/2026-07-13-register-split-decision-gate.md`.
+
+- **The one rule found (count-free):** split iff a claim's essence **and** its Break-it cannot be stated
+  faithfully in **concise declarative form** — i.e. when serving the attacker *accurately* and the reader
+  *accessibly* become two irreconcilable jobs. Hold when concise = faithful.
+- **Discriminators falsified on the way (Operator-driven, no-self-ratify):** (1) *load / C23* — falsified as
+  count-driven (armament = sediment of accumulated instances; a manifesto shouldn't split just for accruing
+  claims). (2) *"a formal/outside reader exists"* — falsified: outside audit is **universal** to the genre,
+  so it can't discriminate. Compressibility is *per-claim* where load is *aggregate*; load was load's shadow.
+- **Milo's hold, earned per claim (not by fiat):** all six claims compress faithfully (claim + one
+  declarative knife). Watch-items that survive: Claim 2's guard "*of whatever modality*" and Claim 5's
+  "*unconditional*" — load-bearing but short, so concision holds. **Orthogonal to-do still open:** Claim 1's
+  "binding constraint" is still unhomed in `DYAD.md § Craft` (C12) — a canonical-home pointer bug, *not* a
+  compression failure; milo's "hold" is clean on the split but the pointer must still be made to resolve.
+- **Milo's slot coherence:** hold ⇒ adopt only the two cheap alignments from bond's form move —
+  `register: plain` in the README frontmatter and the `→ **Break it:**` marker — when the README review
+  resumes. No `FALSIFICATION.md`. The four slots are unaffected by the split decision.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
