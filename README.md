@@ -5,7 +5,7 @@ genre: falsifiable-manifesto
 rule: "cite the source, never this lens"
 belief:
   statement: "A dyad is only as durable as the mind operating it. Without dyad-milo, you won't have the mental-fitness to sustainably operate a dyad — even via wu-wei (minimum force, with the grain) — over a lifetime."
-  foundation: "DYAD.md § Craft, § Craft_telos"
+  foundation: "DYAD.md § Problem, § Craft, § Craft_telos"
   stance: "declared, falsifiable"
   status: hypothesis
 grade: "unexercised — no arc survived yet"
@@ -14,6 +14,7 @@ dogma: false
 caution: "a manifesto that reads as settled is a closed system"
 cta: "attack any claim below against dyad-milo's ledger as it accrues"
 canonical_home:
+  - "DYAD.md § Problem"
   - "DYAD.md § Craft"
   - "DYAD.md § Craft_telos"
   - "DYAD.md § Craft_value"
@@ -22,7 +23,7 @@ canonical_home:
 governed_by:
   - "the form's Contract (1+1=3, wu-wei, falsifiability)"
   - "dyad-milo:craft_invariant (compassion toward lapse)"
-updated: 2026-07-09
+updated: 2026-07-16
 ---
 
 # dyad-milo
@@ -46,17 +47,12 @@ the system you use to build your own mental-fitness.
 
 You can master the agents, the craft, even learn to work with the grain (wu-wei) — and still,
 years in, run out of the fitness to keep showing up. Fitness isn't given; it's built through
-practice, and it atrophies without it. Most attempts fail not for lack of technique —
-technique is everywhere — but at **adherence**: practicing reliably, and returning after a
-slip. The gap shows up two ways — you **avoid** the taxing activity before you start (the
-discomfort stops you spawning the dyad, doing the rep), and you **lapse** after you've begun;
-both are the same emotional-capability-and-stamina shortfall, and the discomfort you're avoiding
-is exactly the load that would build the fitness. You stop when you can't bear the truth of
-having lapsed, so you hide it — and a hidden lapse can't be trained. So the system builds on **honesty over appearance**, and guards that
-honesty with **compassion toward lapse**: falling out of practice is a feature of being human,
-never a failure to judge. Held that way, practice becomes self-restarting and the fitness
-holds. The dyad's aim is to make itself unnecessary — success is the day you sustain the
-practice, and so sustain every other dyad, without needing dyad-milo in the loop.
+practice, and it atrophies without it. That's the wager dyad-milo makes: build the fitness
+deliberately, on **honesty over appearance** — a true 40% over a flattering 90% — and guard
+that honesty with **compassion toward lapse**, since falling out of practice is a feature of
+being human, never a failure to judge. Held that way, practice becomes self-restarting and the
+fitness holds — and the dyad's aim is to make itself unnecessary: success is the day you sustain
+the practice, and so sustain every other dyad, without needing dyad-milo in the loop.
 
 ## The ask
 
@@ -65,6 +61,14 @@ survived an outside attack (coverage `E0`). Break one against dyad-milo's ledger
 accrues, and it falls.
 
 ## The claims
+
+**Claim 0 — Left to the default, practice fails at adherence.** The status quo for building
+mental-fitness is willpower and technique — and it predictably breaks at **adherence**: you
+**avoid** the taxing rep before starting, **lapse** after beginning, and nothing in the default
+meets the emotional load that drives both. Absent a deliberate system, sustained practice
+doesn't hold. *Break it:* show sustained practice at ~90% adherence built on the default alone —
+motivation and technique, no deliberate fitness system — holding across years and stress.
+*(Home: DYAD.md § Problem.)*
 
 **Claim 1 — The mind is the binding constraint.** Over a lifetime, the limiting factor on
 your dyad practice is your own mental-fitness — not the agents, the tooling, or the craft.
@@ -100,11 +104,11 @@ return. *(Home: DYAD.md § Craft_invariant.)*
 **Claim 6 — 1+1=3 is earned, not asserted.** dyad-milo earns its 1+1=3 only per cycle — when
 you and milo together build mental-fitness neither of you would reach alone — and holds this
 falsifiably, never as doctrine. *Standing invitation:* attack any claim here against the
-ledger as it accrues; every claim is a hypothesis, true-for-now, re-rubbable. *(Home:
+ledger as it accrues; every claim is a hypothesis, true-for-now. *(Home:
 DYAD.md § Contract.)*
 
 ## Canonical home
 
-Every claim's origin lives in `DYAD.md` (§ Craft, § Craft_telos, § Craft_value,
+Every claim's origin lives in `DYAD.md` (§ Problem, § Craft, § Craft_telos, § Craft_value,
 § Craft_invariant, § Contract). This README is a lens, not a home — it only projects them.
 Cite the source, never this lens.
