@@ -109,7 +109,9 @@ Client information and dyad information are kept in separate stores:
 ## Contract (G0 — inherited, not ratified)
 
 1+1=3, earned per cycle through **Generate + Validate** (the two families don't collapse:
-no-self-ratify, anti-cave). **Wu-wei** — minimum force, with the grain. **Falsifiability** of
+no-self-ratify, anti-cave). The Validate family is fired by **`d-rub`** — one token, four
+escalating rungs (Ground → Read → Triangulate → Rub), Agent-determined depth; see
+`dialectic/rub-protocol.md`. **Wu-wei** — minimum force, with the grain. **Falsifiability** of
 the tenet itself, never dogma. **SPAOR** execution scaffold. Canonical: the form README.
 
 ## Pins (open, deferred by ratification)
