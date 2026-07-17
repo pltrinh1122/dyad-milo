@@ -46,9 +46,11 @@ deliberate system, sustained practice does not hold. `§ Craft` is the answer.
 
 ## Craft
 
-**A durable mental-fitness system.** The dyad's output is a reusable system that builds and
-sustains the Operator's mental-fitness. Which clients the system serves is recorded in the
-private client record; the system is built to generalize. Grounding modality is not material
+**A durable mental-fitness system.** The binding constraint on sustained practice is
+mental-fitness — not the agents, the tooling, or the technique; the craft targets the mind for
+that reason. The dyad's output is a reusable system that builds and sustains the Operator's
+mental-fitness. Which clients the system serves is recorded in the private client record; the
+system is built to generalize. Grounding modality is not material
 to the craft — currently CBT (naming-bias legacy), swappable.
 
 ## Craft_telos
