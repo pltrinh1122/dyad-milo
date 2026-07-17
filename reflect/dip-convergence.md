@@ -200,6 +200,18 @@ the Operator → pinned (`§ Pins`); grounding-modality lock → contingent, swa
 **Prereq (in progress):** close the README-refinement tail — land Claim 0 + narrowed Section 4 +
 frontmatter (`canonical_home`/`belief.foundation` gain `§ Problem`); review Sections 6–7.
 
+## d-rub adopted (2026-07-16 — Validate-family interface)
+
+Adopted `d-rub` as milo's Validate-family interface — one token, four escalating rungs
+(Ground → Read → Triangulate → Rub), Agent-determined depth, Agent names the rung. Single-home:
+`dialectic/rub-protocol.md`; `DYAD.md § Contract` points to it. **Borrow** from dyad-touchstone
+`dialectic/rub-protocol.md` @ `3d3a4fc` (2026-07-15), re-grounded in milo's own `§ Contract`
+(G0 Generate+Validate). Proportionate to milo: took the rungs + guards + rung-naming; left
+touchstone's cycle/ledger/rack machinery (form-ahead-of-spine for milo). **Durative rubs** live
+in this ledger — no separate `rubbings/` dir (Operator disposition; add one only if a durative
+rub earns its own home). **Grade n=0 in milo** — unexercised here; touchstone carries the source's
+lived rung-proofs, not milo. First live firing: the Ground rung on "all merged" this same turn.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
