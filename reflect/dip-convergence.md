@@ -178,6 +178,28 @@ there — not inside § Craft. Lock-step, landing anchor-first (source before de
 anchor edit is its own reviewed PR; the README's Claim 0 home, `canonical_home`, and
 `belief.foundation` gain `§ Problem` in the review branch.
 
+## Next arc — the fitness practice (ratified 2026-07-16, queued behind the README tail)
+
+**Goal (destination-first):** take milo from n=0 to a *runnable first practice* — design the
+mental-fitness **system's** operating shape (program / process / infrastructure) sufficient to begin
+the first lived cycle; destination fixed by `craft_telos` (~90% adherence, unaided self-recovery).
+This is the arc that starts discharging the `E0 / n=0 / unexercised` caveats.
+
+**Scope (three layers, spine-before-form each):**
+- **Program** — the daily rep: Milo-of-Croton progressive load, CBT-grounded (modality swappable),
+  targeting the two failure modes — lower the activation cost of *approaching* (vs avoidance), keep
+  *lapse safe to report* (vs concealment).
+- **Process** — the daily loop: Generate+Validate, milo catches the failed rep at minimum assist
+  (wu-wei) and fades; honest-report-under-compassion; cadence.
+- **Infrastructure** — the substrate: private `dyad-milo-<client>` for PII/practice data, public repo
+  kept PII-clear; adherence-log + thought-record schema; the public/private boundary mechanics.
+
+**Boundaries (OUT):** PII-bearing execution → private repo (`§ Externality`); generalization beyond
+the Operator → pinned (`§ Pins`); grounding-modality lock → contingent, swappable.
+
+**Prereq (in progress):** close the README-refinement tail — land Claim 0 + narrowed Section 4 +
+frontmatter (`canonical_home`/`belief.foundation` gain `§ Problem`); review Sections 6–7.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
