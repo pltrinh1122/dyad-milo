@@ -212,8 +212,102 @@ in this ledger — no separate `rubbings/` dir (Operator disposition; add one on
 rub earns its own home). **Grade n=0 in milo** — unexercised here; touchstone carries the source's
 lived rung-proofs, not milo. First live firing: the Ground rung on "all merged" this same turn.
 
+## Daily-reflection arc — Validate dispositions (2026-07-18)
+
+First lived `d-re` reps ran this day (private client record). The Generate portion produced the
+telemetry design below; the Operator then disposed it methodically (Validate family, `d-rub` Read
+rung — Agent surfaced, Operator disposed). Decisions are PII-clear and are the account to honor at
+codification; lived content stays in the private client record.
+
+**Telemetry model — base-class + behavioral sub-classes.** Base-class telemetry (the reflection-entry
+/ thought-record) is free-flowing regardless of behavioral programs; programs attach sub-class
+telemetry via a `programs[]` discriminator (inheritance). One layer at a time — sub-classes deferred.
+
+- **Base-class fields:** free-flowing `body` (presence-not-quality floor); envelope = `created`
+  (absolute instant), `practice_day` (PT calendar day via IANA `America/Los_Angeles` = adherence
+  bucket), `zone`, `trigger`, `references[]` (optional), `programs[]` (discriminator, default empty).
+- **`trigger` (base, always present, never empty).** Either *stated* (an external prompt) or
+  *spontaneous* — and spontaneous is **not "none"**: it is a state-capture (what was I feeling / doing
+  / thinking — sensory capture + interpretation). Light stated/implied free-text; never fabricated
+  (fail-closed).
+- **Reference materialization (Agent duty):** a cited source → essence + provenance + link, fail-closed
+  on privacy and honesty. **Essence inclusion criterion (pinned):** multi-facet leave-one-out — a
+  fragment is essence iff removing it gaps the entry's *intent/motivation*; facets **semantic / trust /
+  affirmation**, list open-extensible. The mirror (self-recognition in the source) is the selection
+  lens, not a cached fragment.
+- **CBT thought-record elements → sub-class, not base:** intensity before/after ratings, hot-thought +
+  belief rating, evidence for/against, distortion label, behavioral action. Base stays free-flowing;
+  these attach only under the CBT-intervention program (design deferred to the next arc).
+
+**Behavioral-Program #0 — "ensure telemetry isn't starved" (persistent grounding).** The bootstrap
+program: its behavior *is* the base act (make entries), so its adherence *is* the base meter, and it is
+prior to every other program (all are measured through the base). It owns the "don't starve" half of the
+telemetry policy; the grounded discriminators (essence invariant, base/sub-class boundary,
+presence-not-quality) own the "don't drown" half. Policy: maximize input, distill per discriminator.
+"More is better" is a **gradient above the presence floor, never a threshold** (a volume quota would be
+coercion). BP#0 telemetry = base-presence for now; a starvation-detector (max-gap / cadence) is added
+only if a lapse-tail appears (wu-wei).
+- **Candidate BP#0 pull-mechanism (TODO, undesigned):** surface curiosity-relevant reading (e.g. a
+  news feed) to widen the surface area for an entry to catch — a curiosity *pull*, never an obligation
+  *push*. Coercion-free by construction; first observed as the proximate cause of a real entry.
+- **Coercion-free-motivation-design — BP#0's engine is a *mirror*, not an *optimizer* (principle,
+  adopted 2026-07-18).** The engine reflects self-knowledge back to the Operator (what tends to open a
+  curiosity-gap) — autonomy/competence-supporting (SDT). It must never optimize content on a
+  "fired-an-entry" reward signal; that reading was falsified through behavioral-motivation theory:
+  overjustification crowds out the intrinsic drive (SDT); the trigger-time fragment is only a *prompt*,
+  not the cause — the primed state is (Fogg B=MAP; Loewenstein information-gap); Goodhart-optimization
+  converges on engagement-bait, i.e. the societal coercion being de-programmed. The **essence
+  partition** (trigger-time vs confirmed-after) therefore feeds the *mirror* (self-insight), never an
+  optimizer. **Guard on the pull-mechanism above:** widening surface-area stays mirror-consistent only
+  while it is *not* tuned on an entry-firing reward — the moment it optimizes for triggers it becomes
+  the falsified coercive engine.
+
+**Coercion-free — a system invariant (adopted).** Grounded in the Operator's motivational stance
+(curiosity + purpose, identity-constrained; coercion resisted). Argument banked: **coercion-free ⇐
+graduation** — a coerced practice collapses when the coercer is removed, so only identity-driven practice
+self-sustains; a coercive fitness system could by construction never graduate. Ripples: the ~90%
+adherence figure is *self-observation, not quota*; no streak / loss-aversion mechanics; lapse met with
+compassion (`craft_invariant`); milo invites, never nags (wu-wei).
+
+**Adherence + analytics.** Adherence = covered-days / eligible-days (a PT day with ≥1 entry = covered);
+eligible-days start at enrollment (2026-07-18); reported since-start + rolling 7/30/90-day. **Lapse =
+absence-inferred** (a PT day with zero entries; no explicit failure marker). **Fail-closed publishing:**
+unattended analytics writes to the private client record only; any public surfacing (a de-dated rate) is
+a separate manual gated step that itself fails closed.
+
+**Codification plan (queued).** Public homes: `dialectic/re-protocol.md` (the `d-re` discipline —
+interaction model + acceptance value + reference-materialization rule) + a base-class telemetry schema
+doc + a BP#0 note. Craft lessons to lift to this ledger, PII-clear: *coercion-free ⇐ graduation*, the
+*essence inclusion criterion*, *externalization is necessary for behavioral change*,
+*presence-not-perfection*. Day-1 records retrofit to the pinned base envelope at codification (filename
+convention `reflections/YYYY-MM-DD-NN.md`; first record renamed `-01`).
+
+## Craft lessons — daily-reflection arc (2026-07-18, PII-clear)
+
+Lifted from the arc's first lived cycle; each a hypothesis held falsifiable, n=1.
+
+1. **Externalization is necessary for behavioral change.** The clarity/reframe that drives change does
+   not come as reliably when reflection is kept internal (Operator's lived report). Grounds BP#0
+   ("don't starve telemetry").
+2. **Presence-not-perfection.** A rep is accepted on presence, never quality — a quality bar feeds the
+   perfectionism the practice addresses. The anti-perfectionism floor.
+3. **The essence inclusion criterion.** A cited fragment is essence iff removing it gaps the entry's
+   intent/motivation (multi-facet leave-one-out: semantic / trust / affirmation, open-extensible); the
+   mirror is the selection lens, not a fragment.
+4. **Coercion-free ⇐ graduation.** A coerced practice collapses when the coercer is removed, so only
+   identity-driven practice self-sustains; a coercive fitness system could by construction never
+   graduate. Load-bearing for the telos, not a preference.
+5. **Coercion-free-motivation-design: BP#0's engine is a mirror, not an optimizer.** It reflects
+   self-knowledge back; it must never optimize content on a "fired-an-entry" reward (overjustification /
+   Goodhart / attention-economy coercion — falsified via SDT, Fogg, Loewenstein, Goodhart).
+
+Codified: spec `dialectic/design/daily-reflection-spec.md`; discipline `dialectic/re-protocol.md`;
+schema `dialectic/design/dre-schema.md` + `skills/dre_lint.py`; meter `skills/dre_adherence.py`;
+decisions `dialectic/design/adr/`.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
-bounds are hypotheses awaiting first practice. `craft_value`/`craft_invariant` were elected
+bounds are hypotheses whose first practice began 2026-07-18 (daily-reflection, see above) and is
+mid-flight — no lived cycle survived yet. `craft_value`/`craft_invariant` were elected
 and Operator-framed during the bootstrap, not yet forged under a real breach.
