@@ -250,6 +250,17 @@ only if a lapse-tail appears (wu-wei).
 - **Candidate BP#0 pull-mechanism (TODO, undesigned):** surface curiosity-relevant reading (e.g. a
   news feed) to widen the surface area for an entry to catch — a curiosity *pull*, never an obligation
   *push*. Coercion-free by construction; first observed as the proximate cause of a real entry.
+- **Coercion-free-motivation-design — BP#0's engine is a *mirror*, not an *optimizer* (principle,
+  adopted 2026-07-18).** The engine reflects self-knowledge back to the Operator (what tends to open a
+  curiosity-gap) — autonomy/competence-supporting (SDT). It must never optimize content on a
+  "fired-an-entry" reward signal; that reading was falsified through behavioral-motivation theory:
+  overjustification crowds out the intrinsic drive (SDT); the trigger-time fragment is only a *prompt*,
+  not the cause — the primed state is (Fogg B=MAP; Loewenstein information-gap); Goodhart-optimization
+  converges on engagement-bait, i.e. the societal coercion being de-programmed. The **essence
+  partition** (trigger-time vs confirmed-after) therefore feeds the *mirror* (self-insight), never an
+  optimizer. **Guard on the pull-mechanism above:** widening surface-area stays mirror-consistent only
+  while it is *not* tuned on an entry-firing reward — the moment it optimizes for triggers it becomes
+  the falsified coercive engine.
 
 **Coercion-free — a system invariant (adopted).** Grounded in the Operator's motivational stance
 (curiosity + purpose, identity-constrained; coercion resisted). Argument banked: **coercion-free ⇐
