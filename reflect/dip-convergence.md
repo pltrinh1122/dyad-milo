@@ -212,8 +212,65 @@ in this ledger — no separate `rubbings/` dir (Operator disposition; add one on
 rub earns its own home). **Grade n=0 in milo** — unexercised here; touchstone carries the source's
 lived rung-proofs, not milo. First live firing: the Ground rung on "all merged" this same turn.
 
+## Daily-reflection arc — Validate dispositions (2026-07-18)
+
+First lived `d-re` reps ran this day (private client record). The Generate portion produced the
+telemetry design below; the Operator then disposed it methodically (Validate family, `d-rub` Read
+rung — Agent surfaced, Operator disposed). Decisions are PII-clear and are the account to honor at
+codification; lived content stays in the private client record.
+
+**Telemetry model — base-class + behavioral sub-classes.** Base-class telemetry (the reflection-entry
+/ thought-record) is free-flowing regardless of behavioral programs; programs attach sub-class
+telemetry via a `programs[]` discriminator (inheritance). One layer at a time — sub-classes deferred.
+
+- **Base-class fields:** free-flowing `body` (presence-not-quality floor); envelope = `created`
+  (absolute instant), `practice_day` (PT calendar day via IANA `America/Los_Angeles` = adherence
+  bucket), `zone`, `trigger`, `references[]` (optional), `programs[]` (discriminator, default empty).
+- **`trigger` (base, always present, never empty).** Either *stated* (an external prompt) or
+  *spontaneous* — and spontaneous is **not "none"**: it is a state-capture (what was I feeling / doing
+  / thinking — sensory capture + interpretation). Light stated/implied free-text; never fabricated
+  (fail-closed).
+- **Reference materialization (Agent duty):** a cited source → essence + provenance + link, fail-closed
+  on privacy and honesty. **Essence inclusion criterion (pinned):** multi-facet leave-one-out — a
+  fragment is essence iff removing it gaps the entry's *intent/motivation*; facets **semantic / trust /
+  affirmation**, list open-extensible. The mirror (self-recognition in the source) is the selection
+  lens, not a cached fragment.
+- **CBT thought-record elements → sub-class, not base:** intensity before/after ratings, hot-thought +
+  belief rating, evidence for/against, distortion label, behavioral action. Base stays free-flowing;
+  these attach only under the CBT-intervention program (design deferred to the next arc).
+
+**Behavioral-Program #0 — "ensure telemetry isn't starved" (persistent grounding).** The bootstrap
+program: its behavior *is* the base act (make entries), so its adherence *is* the base meter, and it is
+prior to every other program (all are measured through the base). It owns the "don't starve" half of the
+telemetry policy; the grounded discriminators (essence invariant, base/sub-class boundary,
+presence-not-quality) own the "don't drown" half. Policy: maximize input, distill per discriminator.
+"More is better" is a **gradient above the presence floor, never a threshold** (a volume quota would be
+coercion). BP#0 telemetry = base-presence for now; a starvation-detector (max-gap / cadence) is added
+only if a lapse-tail appears (wu-wei).
+
+**Coercion-free — a system invariant (adopted).** Grounded in the Operator's motivational stance
+(curiosity + purpose, identity-constrained; coercion resisted). Argument banked: **coercion-free ⇐
+graduation** — a coerced practice collapses when the coercer is removed, so only identity-driven practice
+self-sustains; a coercive fitness system could by construction never graduate. Ripples: the ~90%
+adherence figure is *self-observation, not quota*; no streak / loss-aversion mechanics; lapse met with
+compassion (`craft_invariant`); milo invites, never nags (wu-wei).
+
+**Adherence + analytics.** Adherence = covered-days / eligible-days (a PT day with ≥1 entry = covered);
+eligible-days start at enrollment (2026-07-18); reported since-start + rolling 7/30/90-day. **Lapse =
+absence-inferred** (a PT day with zero entries; no explicit failure marker). **Fail-closed publishing:**
+unattended analytics writes to the private client record only; any public surfacing (a de-dated rate) is
+a separate manual gated step that itself fails closed.
+
+**Codification plan (queued).** Public homes: `dialectic/re-protocol.md` (the `d-re` discipline —
+interaction model + acceptance value + reference-materialization rule) + a base-class telemetry schema
+doc + a BP#0 note. Craft lessons to lift to this ledger, PII-clear: *coercion-free ⇐ graduation*, the
+*essence inclusion criterion*, *externalization is necessary for behavioral change*,
+*presence-not-perfection*. Day-1 records retrofit to the pinned base envelope at codification (filename
+convention `reflections/YYYY-MM-DD-NN.md`; first record renamed `-01`).
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
-bounds are hypotheses awaiting first practice. `craft_value`/`craft_invariant` were elected
+bounds are hypotheses whose first practice began 2026-07-18 (daily-reflection, see above) and is
+mid-flight — no lived cycle survived yet. `craft_value`/`craft_invariant` were elected
 and Operator-framed during the bootstrap, not yet forged under a real breach.
