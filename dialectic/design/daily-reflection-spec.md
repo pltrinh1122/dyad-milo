@@ -161,6 +161,7 @@ policy; the grounded discriminators (essence invariant, base/sub-class boundary,
 - **Lift PII-clear craft lessons** to `reflect/`: *coercion-free ⇐ graduation*, *the essence inclusion
   criterion*, *externalization is necessary for behavioral change*, *presence-not-perfection*,
   *coercion-free-motivation-design (mirror not optimizer)*.
+- **Per § 13:** a test or linter for every artifact, and an ADR for every drift-boundary decision.
 
 ## 12. Autonomy & HITL escalation contract
 
@@ -176,7 +177,26 @@ Everything else — naming, file structure, analytics implementation, formatting
 Agent's discretion, reported not escalated. All public changes land on the working branch; `main` advances
 only through a reviewed PR (Operator disposes at merge — no-self-ratify holds).
 
-## 13. Out of scope / deferred
+## 13. Codification method (invariants)
+
+How the codification is built (Operator-set 2026-07-18):
+
+- **ADRs for drift-boundary decisions.** Any key design decision that *could materialize as drift*
+  (goal / constraint / coverage — § 12) is recorded as an Architecture Decision Record under
+  `dialectic/design/adr/NNNN-<slug>.md` — context · decision · consequences · which drift-dimension it
+  touches · status. The ADR set is the reviewable trail of the sensitive decisions; a decision an ADR finds
+  *crosses* into drift is escalated (HITL), not self-ratified — the ADR is the escalation artifact.
+- **TDD — every artifact has its validator.**
+  - **Code ↔ test pairs.** No code without a test written first (test-then-code): the analytics tooling and
+    any script ship with tests.
+  - **Non-code ↔ linter pairs.** Every non-code artifact (the telemetry schema, `d-re` records, protocol /
+    spec docs) has a linter that validates it, and the linter itself has tests — mirroring the repo's
+    existing pattern (`skills/readme_lint.py` + `tests/test_readme_lint.py`).
+  - Validators are **proportionate** (wu-wei): they check the load-bearing invariants (envelope schema,
+    fail-closed rules, presence-not-quality — e.g. never gate on body length), not cosmetics.
+- **Stack:** Python, consistent with existing repo tooling (`skills/`, `tests/`, `dialectic/guards/`).
+
+## 14. Out of scope / deferred
 
 - **CBT-intervention sub-class** (the § 3 "not base" fields) — next arc.
 - **`programs[]` attachment mechanism** — sub-class arc.
