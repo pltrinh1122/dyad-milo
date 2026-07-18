@@ -247,6 +247,9 @@ presence-not-quality) own the "don't drown" half. Policy: maximize input, distil
 "More is better" is a **gradient above the presence floor, never a threshold** (a volume quota would be
 coercion). BP#0 telemetry = base-presence for now; a starvation-detector (max-gap / cadence) is added
 only if a lapse-tail appears (wu-wei).
+- **Candidate BP#0 pull-mechanism (TODO, undesigned):** surface curiosity-relevant reading (e.g. a
+  news feed) to widen the surface area for an entry to catch — a curiosity *pull*, never an obligation
+  *push*. Coercion-free by construction; first observed as the proximate cause of a real entry.
 
 **Coercion-free — a system invariant (adopted).** Grounded in the Operator's motivational stance
 (curiosity + purpose, identity-constrained; coercion resisted). Argument banked: **coercion-free ⇐
