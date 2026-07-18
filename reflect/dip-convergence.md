@@ -282,6 +282,29 @@ doc + a BP#0 note. Craft lessons to lift to this ledger, PII-clear: *coercion-fr
 *presence-not-perfection*. Day-1 records retrofit to the pinned base envelope at codification (filename
 convention `reflections/YYYY-MM-DD-NN.md`; first record renamed `-01`).
 
+## Craft lessons — daily-reflection arc (2026-07-18, PII-clear)
+
+Lifted from the arc's first lived cycle; each a hypothesis held falsifiable, n=1.
+
+1. **Externalization is necessary for behavioral change.** The clarity/reframe that drives change does
+   not come as reliably when reflection is kept internal (Operator's lived report). Grounds BP#0
+   ("don't starve telemetry").
+2. **Presence-not-perfection.** A rep is accepted on presence, never quality — a quality bar feeds the
+   perfectionism the practice addresses. The anti-perfectionism floor.
+3. **The essence inclusion criterion.** A cited fragment is essence iff removing it gaps the entry's
+   intent/motivation (multi-facet leave-one-out: semantic / trust / affirmation, open-extensible); the
+   mirror is the selection lens, not a fragment.
+4. **Coercion-free ⇐ graduation.** A coerced practice collapses when the coercer is removed, so only
+   identity-driven practice self-sustains; a coercive fitness system could by construction never
+   graduate. Load-bearing for the telos, not a preference.
+5. **Coercion-free-motivation-design: BP#0's engine is a mirror, not an optimizer.** It reflects
+   self-knowledge back; it must never optimize content on a "fired-an-entry" reward (overjustification /
+   Goodhart / attention-economy coercion — falsified via SDT, Fogg, Loewenstein, Goodhart).
+
+Codified: spec `dialectic/design/daily-reflection-spec.md`; discipline `dialectic/re-protocol.md`;
+schema `dialectic/design/dre-schema.md` + `skills/dre_lint.py`; meter `skills/dre_adherence.py`;
+decisions `dialectic/design/adr/`.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

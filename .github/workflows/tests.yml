@@ -1,0 +1,19 @@
+# Runs the full deterministic test suite (the TDD invariant, daily-reflection-spec § 13):
+# every code/linter ships with a test pair, and CI is where the pairs get teeth.
+# Records themselves live in the private client repo (PII) and are linted there, not here.
+name: tests
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml pytest
+      - name: Full test suite (readme_lint, dre_lint, dre_adherence)
+        run: python3 -m pytest tests/ -q
