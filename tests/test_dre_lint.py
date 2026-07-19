@@ -49,9 +49,9 @@ programs: []
 ---
 """
 
-# A record serving the first additional program (reduce-anxiety) with a
-# well-formed sub-class telemetry block (an occurrence log). The base envelope
-# is unchanged; program_telemetry attaches under the programs[] discriminator.
+# A record serving the first additional program (reduce-anxiety) with shared,
+# record-level observation telemetry. The base envelope is unchanged; each
+# observation may tag the program(s) it feeds so one datum serves several.
 SUBCLASS_FM = """\
 ---
 record: d-re
@@ -61,12 +61,30 @@ zone: America/Los_Angeles
 trigger:
   primary: state-capture — anxiety high, surfacing somatically
 programs: [reduce-anxiety]
-program_telemetry:
-  reduce-anxiety:
-    occurrences:
-      - intensity: high
-        somatic: sore teeth and jaws on waking (nocturnal bruxism)
-        context: on waking this morning
+observations:
+  - programs: [reduce-anxiety]
+    intensity: high
+    somatic: sore teeth and jaws on waking (nocturnal bruxism)
+    situation: just woke up
+    antecedent: a night of teeth-clenching
+---
+"""
+
+# One observation feeding TWO programs at once (criterion: same record serves
+# telemetry for multiple programs, no duplication).
+MULTIPROGRAM_FM = """\
+---
+record: d-re
+created: 2026-07-19T06:26:58-07:00
+practice_day: 2026-07-19
+zone: America/Los_Angeles
+trigger:
+  primary: state-capture — anxiety high, surfacing somatically
+programs: [reduce-anxiety, improve-sleep]
+observations:
+  - programs: [reduce-anxiety, improve-sleep]
+    intensity: high
+    somatic: sore teeth and jaws on waking (nocturnal bruxism)
 ---
 """
 
@@ -194,113 +212,75 @@ def test_reference_empty_text_fails(tmp_path):
     assert any("text" in e for e in lint(write_record(tmp_path, fm=fm)))
 
 
-# --- program_telemetry (sub-class attachment, spec § 6) --------------------
+# --- observations (shared sub-class telemetry, spec § 6) -------------------
 
-def test_subclass_telemetry_valid_passes(tmp_path):
+def test_observations_valid_passes(tmp_path):
     rec = write_record(tmp_path, fm=SUBCLASS_FM, name="2026-07-19-01.md")
     assert lint(rec) == []
 
 
-def test_program_listed_without_telemetry_passes(tmp_path):
-    # Presence-not-quality extends to the sub-class: a program can ride the
-    # base free-flow with NO telemetry block. Never gated.
-    fm = SUBCLASS_FM[: SUBCLASS_FM.index("program_telemetry:")] + "---\n"
+def test_one_observation_serves_multiple_programs_passes(tmp_path):
+    # The acceptance criterion: same record (one datum) feeds two programs.
+    rec = write_record(tmp_path, fm=MULTIPROGRAM_FM, name="2026-07-19-01.md")
+    assert lint(rec) == []
+
+
+def test_program_listed_without_observations_passes(tmp_path):
+    # Presence-not-quality extends here: a program can ride the base free-flow
+    # with NO observations. Never gated.
+    fm = SUBCLASS_FM[: SUBCLASS_FM.index("observations:")] + "---\n"
     assert lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md")) == []
 
 
-def test_empty_telemetry_block_passes(tmp_path):
-    # An empty sub-class block is accepted — quantity/completeness is never gated.
+def test_empty_observations_list_passes(tmp_path):
+    # Zero observations is valid — quantity/completeness is never gated.
+    fm = SUBCLASS_FM[: SUBCLASS_FM.index("observations:")] + "observations: []\n---\n"
+    assert lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md")) == []
+
+
+def test_observation_open_extensible_extra_field_passes(tmp_path):
+    # Observation fields are open-extensible (mirrors the essence-facet pattern).
     fm = SUBCLASS_FM.replace(
-        "  reduce-anxiety:\n"
-        "    occurrences:\n"
-        "      - intensity: high\n"
-        "        somatic: sore teeth and jaws on waking (nocturnal bruxism)\n"
-        "        context: on waking this morning\n",
-        "  reduce-anxiety: {}\n",
+        "    antecedent: a night of teeth-clenching\n",
+        "    antecedent: a night of teeth-clenching\n"
+        "    felt_where: chest and jaw\n",
     )
     assert lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md")) == []
 
 
-def test_telemetry_open_extensible_extra_field_passes(tmp_path):
-    # Occurrence fields are open-extensible (mirrors the essence-facet pattern).
+def test_observation_program_not_served_by_record_fails(tmp_path):
+    # An observation can only feed a program the record's programs[] serves.
     fm = SUBCLASS_FM.replace(
-        "        context: on waking this morning\n",
-        "        context: on waking this morning\n"
-        "        felt_where: chest and jaw\n",
+        "  - programs: [reduce-anxiety]",
+        "  - programs: [improve-sleep]",
     )
-    assert lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md")) == []
-
-
-def test_telemetry_key_not_in_programs_fails(tmp_path):
-    fm = SUBCLASS_FM.replace("programs: [reduce-anxiety]", "programs: []")
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
-    assert any("program_telemetry" in e and "programs" in e for e in errors)
+    assert any("observations[0].programs" in e and "serve" in e for e in errors)
 
 
-def test_telemetry_keys_bp0_fails(tmp_path):
+def test_observation_programs_bp0_fails(tmp_path):
     fm = SUBCLASS_FM.replace(
-        "programs: [reduce-anxiety]\n"
-        "program_telemetry:\n"
-        "  reduce-anxiety:\n",
-        "programs: [reduce-anxiety]\n"
-        "program_telemetry:\n"
-        "  BP#0:\n",
+        "  - programs: [reduce-anxiety]",
+        "  - programs: [reduce-anxiety, BP#0]",
     )
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
     assert any("BP#0" in e or "implicit" in e for e in errors)
 
 
-def test_telemetry_not_a_mapping_fails(tmp_path):
-    fm = SUBCLASS_FM.replace(
-        "program_telemetry:\n"
-        "  reduce-anxiety:\n"
-        "    occurrences:\n"
-        "      - intensity: high\n"
-        "        somatic: sore teeth and jaws on waking (nocturnal bruxism)\n"
-        "        context: on waking this morning\n",
-        "program_telemetry: reduce-anxiety\n",
-    )
+def test_observations_not_a_list_fails(tmp_path):
+    fm = SUBCLASS_FM[: SUBCLASS_FM.index("observations:")] + "observations: high\n---\n"
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
-    assert any("program_telemetry" in e and "mapping" in e for e in errors)
+    assert any("observations" in e and "list" in e for e in errors)
 
 
-def test_telemetry_block_not_a_mapping_fails(tmp_path):
-    fm = SUBCLASS_FM.replace(
-        "  reduce-anxiety:\n"
-        "    occurrences:\n"
-        "      - intensity: high\n"
-        "        somatic: sore teeth and jaws on waking (nocturnal bruxism)\n"
-        "        context: on waking this morning\n",
-        "  reduce-anxiety: high\n",
-    )
+def test_observation_not_a_mapping_fails(tmp_path):
+    fm = SUBCLASS_FM[: SUBCLASS_FM.index("observations:")] + (
+        "observations:\n  - just a string\n---\n")
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
-    assert any("reduce-anxiety" in e and "mapping" in e for e in errors)
+    assert any("observations[0]" in e and "mapping" in e for e in errors)
 
 
-def test_occurrences_not_a_list_fails(tmp_path):
-    fm = SUBCLASS_FM.replace(
-        "    occurrences:\n"
-        "      - intensity: high\n"
-        "        somatic: sore teeth and jaws on waking (nocturnal bruxism)\n"
-        "        context: on waking this morning\n",
-        "    occurrences: high\n",
-    )
-    errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
-    assert any("occurrences" in e and "list" in e for e in errors)
-
-
-def test_occurrence_not_a_mapping_fails(tmp_path):
-    fm = SUBCLASS_FM.replace(
-        "      - intensity: high\n"
-        "        somatic: sore teeth and jaws on waking (nocturnal bruxism)\n"
-        "        context: on waking this morning\n",
-        "      - just a string\n",
-    )
-    errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
-    assert any("occurrence" in e and "mapping" in e for e in errors)
-
-
-def test_occurrence_empty_field_fails(tmp_path):
+def test_observation_empty_field_fails(tmp_path):
     fm = SUBCLASS_FM.replace("intensity: high", 'intensity: ""')
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
     assert any("intensity" in e for e in errors)

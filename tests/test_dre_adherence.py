@@ -85,6 +85,18 @@ def test_reduce_anxiety_program_measured_from_its_enrollment(tmp_path):
     assert rep["since_start"]["lapses"] == 1
 
 
+def test_one_record_counts_for_multiple_programs(tmp_path):
+    # Same record serves telemetry for multiple programs: it is covered for each
+    # program its programs[] lists, and for the base.
+    make_record(tmp_path, "2026-07-19", programs="['reduce-anxiety', 'improve-sleep']")
+    records, _ = load_records(tmp_path)
+    as_of = dt.date(2026, 7, 19)
+    enroll = dt.date(2026, 7, 19)
+    assert adherence(records, program="reduce-anxiety", enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+    assert adherence(records, program="improve-sleep", enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+    assert adherence(records, program=None, enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+
+
 def test_bp0_program_is_base(tmp_path):
     make_record(tmp_path, "2026-07-18")
     records, _ = load_records(tmp_path)

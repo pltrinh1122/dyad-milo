@@ -315,30 +315,41 @@ attachment mechanism); the Operator disposed the fuller scope — *also design t
 Generated on the working branch, disposed at PR review (no-self-ratify; `main` protected). ADRs 0004
 (mechanism) + 0005 (program) are the escalation artifacts.
 
-- **Attachment mechanism (ADR-0004):** optional `program_telemetry` mapping keyed by program-id;
-  inheritance discriminated by the `programs[]` value. Keys ⊆ `programs`, never BP#0. Frontmatter-only,
-  single-source (ADR-0001). Enforced by `dre_lint._check_program_telemetry` (proportionate — ADR-0002);
-  the meter was already program-agnostic (ADR-0003), so no analytics change.
-- **reduce-anxiety (ADR-0005):** occurrence-log slice only (the antecedent/capture front of CBT);
+- **Attachment mechanism (ADR-0004):** shared, record-level `observations[]` (a list of observation
+  mappings, *not* keyed by program), each tagging the program(s) it feeds (⊆ `programs`, never BP#0).
+  Frontmatter-only, single-source (ADR-0001). Enforced by `dre_lint._check_observations` (proportionate —
+  ADR-0002); the meter was already program-agnostic (ADR-0003), so no analytics change.
+- **reduce-anxiety (ADR-0005):** observation-log slice only (the antecedent/capture front of CBT);
   enrollment 2026-07-19; earlier anxiety-themed records **not** retro-tagged (honesty over appearance).
   The fuller CBT restructuring fields stay deferred until a rep pulls them.
+
+**Operator acceptance criteria (the shape driver, 2026-07-19).** The Operator disposed two criteria that
+chose the shape: (1) **sufficient metadata** — the telemetry must actually assist the goal (root-cause
+finding), so the observation vocabulary reaches past intensity/somatic to `situation`/`antecedent`/
+`thought`/`behavior` (the observational ABC front); (2) **one record serves multiple programs** — which
+falsified the first (keyed-per-program) draft, because a datum shared by two programs would duplicate.
+Shared `observations[]` with per-observation program tags satisfies both.
 
 ### Craft lessons — the sub-class arc (2026-07-19, PII-clear)
 
 Each a hypothesis held falsifiable, n=1.
 
 6. **Presence-not-quality extends to the sub-class.** When a program earns structured telemetry, that
-   telemetry stays optional and non-gated — a listed program with no block, or an empty block, is a
+   telemetry stays optional and non-gated — a listed program with no observation, or an empty list, is a
    complete rep. Making a sub-class schema mandatory would bend presence-not-quality **and** coercion-free
    (a required field-set is a quota by another name); the mandatory-schema reading was rejected as
    constraint drift, not self-ratified. The floor does not rise as structure is added.
 7. **A program materializes at the discriminator before it earns sub-class structure.** The wu-wei
    sequence: name the program (id + home) and let it ride the base free-flow first; add structured
-   telemetry only for the slice a lived method pulls on (here: an occurrence log, not the full CBT
+   telemetry only for the slice a lived method pulls on (here: an observation log, not the full CBT
    thought-record). Build only what a purpose pulls on — the sub-class arc *opens* here, it does not close.
 8. **Honesty sets the enrollment.** A program's meter starts the day the Operator declares it with a
    method, not the first day its theme happened to appear — retro-tagging earlier records would buy a
    flattering adherence number the practice never earned (a true low over a flattering high).
+9. **Telemetry is shared, not owned by a program.** The lived unit is the *observation*, and one
+   observation can be evidence for several programs (the bruxism serves anxiety *and* sleep). Keying
+   telemetry by program forces a copy per program and splits one truth into many; a shared observation,
+   tagged with the programs it feeds, keeps the mirror single. Programs *read* telemetry; they don't own it.
 
 ## Honest scope
 

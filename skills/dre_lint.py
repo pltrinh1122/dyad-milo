@@ -21,13 +21,13 @@ Checks:
   7. ``references`` (optional) — each has a non-empty ``links`` list; each
      ``essence`` fragment has a non-empty ``facet`` (open-extensible) and
      ``text``, and ``partition`` (if present) is trigger-time|confirmed-after.
-  8. ``program_telemetry`` (optional, sub-class attachment, § 6) — a mapping
-     keyed by program-id; every key is listed in ``programs`` and never BP#0
-     (implicit — it *is* the base); each block is a mapping. A block is NEVER
-     required and never gated on quantity (presence-not-quality extends to the
-     sub-class: a program may ride the base free-flow with no block). Known
-     program schemas (``reduce-anxiety``) get a proportionate shape check;
-     fields stay open-extensible.
+  8. ``observations`` (optional, shared sub-class telemetry, § 6) — a list of
+     mappings at the record level (NOT keyed by program), so one datum can serve
+     several programs without duplication. Each observation may tag the
+     program(s) it feeds via ``programs`` (⊆ the record's ``programs`` and never
+     BP#0). Every field is optional and open-extensible; observations are NEVER
+     required and never gated on quantity (presence-not-quality extends here — a
+     program may ride the base free-flow with no observation).
   9. body (below the frontmatter) is non-empty.
 
 Usage: python3 skills/dre_lint.py RECORD.md [RECORD.md ...]
@@ -176,73 +176,58 @@ def _check_programs(programs):
     return errors
 
 
-def _check_reduce_anxiety(block):
-    """Proportionate shape check for the reduce-anxiety sub-class (occurrence log).
+# Optional observation fields, open-extensible (a record may add its own). The
+# listed set is the vocabulary the practice reaches for; extras are allowed.
+OBSERVATION_STR_FIELDS = ("intensity", "somatic", "situation", "antecedent",
+                          "thought", "behavior", "relief", "note")
 
-    The method is 'log anxious feelings whenever they occur' → find the root
-    cause. Telemetry is an ``occurrences`` list; every field is optional and
-    open-extensible (mirrors the essence-facet pattern). Quantity is NEVER
-    gated — zero occurrences is a valid block (presence-not-quality).
+
+def _check_observations(observations, programs):
+    """Shared, record-level sub-class telemetry (§ 6). Optional; never gated.
+
+    A list of observation mappings (NOT keyed by program), so one datum can feed
+    several programs. Invariants: a list of mappings; each field open-extensible
+    and non-empty when a string is given; ``at`` is a timestamp or non-empty
+    string; an observation's own ``programs`` (which program(s) it feeds) is a
+    list ⊆ the record's ``programs`` and never BP#0. Observations are NEVER
+    required and quantity is NEVER gated (presence-not-quality).
     """
     errors = []
-    occurrences = block.get("occurrences")
-    if occurrences is None:
-        return errors  # optional; a block may carry no occurrences yet
-    if not isinstance(occurrences, list):
-        errors.append("program_telemetry['reduce-anxiety'].occurrences must be a list")
-        return errors
-    for i, occ in enumerate(occurrences):
-        tag = f"program_telemetry['reduce-anxiety'].occurrences[{i}]"
-        if not isinstance(occ, dict):
-            errors.append(f"{tag} must be a mapping")
-            continue
-        for field in ("intensity", "somatic", "context", "at", "note"):
-            val = occ.get(field)
-            if val is not None and (not isinstance(val, str) or not val.strip()):
-                errors.append(f"{tag}.{field} must be a non-empty string when present")
-    return errors
-
-
-# Programs with a registered sub-class schema. Unlisted programs attach a
-# free-form mapping (open-extensible); only the generic invariants apply.
-PROGRAM_TELEMETRY_VALIDATORS = {"reduce-anxiety": _check_reduce_anxiety}
-
-
-def _check_program_telemetry(program_telemetry, programs):
-    """Sub-class telemetry attachment (§ 6). Optional; never gated on presence.
-
-    Generic invariants (all programs): mapping keyed by program-id; every key is
-    listed in ``programs`` (a block can only attach to a program the entry
-    serves) and never BP#0 (implicit — it is the base, it has no sub-class
-    telemetry); each block is a mapping. Registered programs also get a
-    proportionate field-shape check.
-    """
-    errors = []
-    if program_telemetry is None:
+    if observations is None:
         return errors  # optional
-    if not isinstance(program_telemetry, dict):
-        errors.append("program_telemetry must be a mapping keyed by program-id when present")
+    if not isinstance(observations, list):
+        errors.append("observations must be a list when present")
         return errors
     listed = {p for p in programs if isinstance(p, str)} if isinstance(programs, list) else set()
-    for key, block in program_telemetry.items():
-        if not isinstance(key, str) or not key.strip():
-            errors.append(f"program_telemetry keys must be program-ids (non-empty strings), got: {key!r}")
+    for i, obs in enumerate(observations):
+        tag = f"observations[{i}]"
+        if not isinstance(obs, dict):
+            errors.append(f"{tag} must be a mapping")
             continue
-        if key.strip().lower() in BP0_ALIASES:
-            errors.append(
-                "program_telemetry must not key BP#0 — it is implicit (the base), "
-                "it has no sub-class telemetry")
-            continue
-        if key not in listed:
-            errors.append(
-                f"program_telemetry key {key!r} is not listed in programs[] — a "
-                f"sub-class block can only attach to a program the entry serves")
-        if not isinstance(block, dict):
-            errors.append(f"program_telemetry[{key!r}] must be a mapping")
-            continue
-        validator = PROGRAM_TELEMETRY_VALIDATORS.get(key)
-        if validator is not None:
-            errors.extend(validator(block))
+        for field in OBSERVATION_STR_FIELDS:
+            val = obs.get(field)
+            if val is not None and (not isinstance(val, str) or not val.strip()):
+                errors.append(f"{tag}.{field} must be a non-empty string when present")
+        at = obs.get("at")
+        if at is not None and not isinstance(at, (str, dt.datetime, dt.date)):
+            errors.append(f"{tag}.at must be a timestamp or non-empty string when present")
+        elif isinstance(at, str) and not at.strip():
+            errors.append(f"{tag}.at must be a timestamp or non-empty string when present")
+        obs_programs = obs.get("programs")
+        if obs_programs is not None:
+            if not isinstance(obs_programs, list):
+                errors.append(f"{tag}.programs must be a list of program-ids when present")
+                continue
+            for prog in obs_programs:
+                if not isinstance(prog, str) or not prog.strip():
+                    errors.append(f"{tag}.programs entries must be non-empty program-ids, got: {prog!r}")
+                elif prog.strip().lower() in BP0_ALIASES:
+                    errors.append(
+                        f"{tag}.programs must not list BP#0 — it is implicit (the base)")
+                elif prog not in listed:
+                    errors.append(
+                        f"{tag}.programs lists {prog!r}, which the record's programs[] does not "
+                        f"serve — an observation can only feed a program the record serves")
     return errors
 
 
@@ -307,7 +292,7 @@ def lint(path):
     errors.extend(_check_envelope(fm, rec))
     errors.extend(_check_trigger(fm.get("trigger")))
     errors.extend(_check_programs(fm.get("programs")))
-    errors.extend(_check_program_telemetry(fm.get("program_telemetry"), fm.get("programs")))
+    errors.extend(_check_observations(fm.get("observations"), fm.get("programs")))
     errors.extend(_check_references(fm.get("references")))
     if not body.strip():
         errors.append(

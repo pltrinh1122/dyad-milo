@@ -10,7 +10,7 @@ updated: 2026-07-19
 
 The **first additional** behavioral program (beyond the implicit BP#0). Materialized 2026-07-19
 from the lived record that named it (`#goal-reduce-anxiety`, `2026-07-19-01`). Listed in a record's
-`programs[]`; it attaches sub-class telemetry via `program_telemetry` (spec § 6 / ADR-0004).
+`programs[]`; it attaches sub-class telemetry via shared record-level `observations[]` (spec § 6 / ADR-0004).
 
 ## Goal
 
@@ -19,34 +19,42 @@ markers as they occur, so a pattern and a **root cause** can be found. The near-
 *understanding* (root cause), a precondition for later intervention; the craft telos is unchanged
 (~90% adherence, unaided self-recovery).
 
-## Method (this arc — occurrence log)
+## Method (this arc — observation log)
 
-*"Log anxious feelings whenever they occur."* Each occurrence is captured lightly:
+*"Log anxious feelings whenever they occur."* Each observation is captured lightly, with enough
+metadata to let a **root cause** surface from the pattern:
 
+- `at` — when it occurred (time-of-day / cadence patterns; may be logged in batch at reflection time).
 - `intensity` — how strong (free-text or a light rating; **never a forced scale** — coercion-free).
 - `somatic` — bodily markers (e.g. sore teeth/jaws from nocturnal bruxism / nighttime clenching).
-- `context` — what was happening / the trigger.
-- `at` — optional time (occurrences may be logged in batch at reflection time).
+- `situation` — where / what / who (the setting).
+- `antecedent` — what preceded it (the candidate trigger — the root-cause front).
+- `thought` — the interpretation that ran (CBT antecedent *capture*, not challenged/re-rated).
+- `behavior` — what I did in response.
+- `relief` — what eased it, if anything.
 - `note` — free text.
 
 All fields optional and **open-extensible**. This is the antecedent / capture front of CBT — **not**
-yet the restructuring front.
+yet the restructuring front (challenge / evidence / reframe stays deferred).
 
-## Telemetry (sub-class — ADR-0004)
+## Telemetry (shared observations — ADR-0004)
+
+Observations live at the **record level** (shared), each tagging the program(s) it feeds — so one
+datum can serve `reduce-anxiety` *and* a future program (e.g. `improve-sleep`) without duplication:
 
 ```yaml
 programs: [reduce-anxiety]
-program_telemetry:
-  reduce-anxiety:
-    occurrences:
-      - intensity: high
-        somatic: sore teeth and jaws on waking (nocturnal bruxism)
-        context: on waking this morning
+observations:
+  - programs: [reduce-anxiety]
+    intensity: high
+    somatic: sore teeth and jaws on waking (nocturnal bruxism)
+    situation: just woke up
+    antecedent: a night of teeth-clenching
 ```
 
-**Presence-not-quality holds at the sub-class too:** the block is optional and never gated on
-quantity. A `reduce-anxiety` day with no structured occurrences — just the free-flowing body — still
-counts. Enforced by `skills/dre_lint.py` (`_check_program_telemetry`); shape-if-present only.
+**Presence-not-quality holds here too:** observations are optional and never gated on quantity. A
+`reduce-anxiety` day with no structured observation — just the free-flowing body — still counts.
+Enforced by `skills/dre_lint.py` (`_check_observations`); shape-if-present only.
 
 ## Adherence
 

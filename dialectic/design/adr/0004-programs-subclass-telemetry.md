@@ -1,64 +1,75 @@
-# ADR-0004 — programs[] sub-class-telemetry attachment mechanism
+# ADR-0004 — shared observation telemetry (programs[] sub-class attachment)
 
-- **Status:** proposed (2026-07-19) — Operator-disposed scope; awaiting PR review
-- **Drift-dimension:** coverage — opens the mechanism spec §§ 6 / 14 explicitly
-  **defer** ("the sub-class arc"). Surfaced to the Operator at `d-start`; the Operator
-  disposed the fuller scope ("also design sub-class telemetry"). This ADR is the
-  escalation artifact (§ 13); `main` advances only through the reviewed PR (no-self-ratify).
+- **Status:** proposed (2026-07-19) — Operator-disposed scope + shape; awaiting PR review
+- **Drift-dimension:** coverage — opens the mechanism spec §§ 6/14 explicitly **defer**
+  ("the sub-class arc"). Surfaced at `d-start`; the Operator disposed the fuller scope
+  ("also design the sub-class telemetry") and, against two acceptance criteria (below), the
+  **shape** (shared `observations[]`). This ADR is the escalation artifact (§ 13); `main`
+  advances only through the reviewed PR (no-self-ratify).
 
 ## Context
 
-Spec § 6 defines `programs[]` as a discriminator of the *additional* behavioral programs an
-entry serves (BP#0 implicit, never listed) and **defers the sub-class-telemetry attachment
-mechanism** to a later arc. The first candidate additional program surfaced in a lived record
-(`2026-07-19-01`, `#goal-reduce-anxiety`), so the mechanism now has a purpose pulling on it
-(wu-wei: build only what a purpose pulls on).
+Spec § 6 defines `programs[]` as the discriminator of the *additional* programs an entry serves
+(BP#0 implicit, never listed) and **defers the sub-class-telemetry attachment mechanism**. The
+first candidate program surfaced in a lived record (`2026-07-19-01`, `#goal-reduce-anxiety`), so
+the mechanism now has a purpose pulling on it (wu-wei).
 
-The design fork with teeth is **not** the YAML shape — it is whether sub-class telemetry is a
-**required structured schema** or an **optional, non-gated** attachment. A required/gated
-schema would bend two invariants (§ 2): **presence-not-quality** (a completeness bar feeds the
-perfectionism the practice addresses) and **coercion-free** (a mandatory field-set is a quota
-by another name). Making sub-class telemetry mandatory is therefore **constraint drift** and is
-**rejected here, not self-ratified**.
+The Operator set two acceptance criteria:
+
+1. **Sufficient metadata** for the telemetry to actually assist the goal (find the root cause of
+   the anxiety) — a bare intensity/somatic pair is too thin.
+2. **One record serves telemetry for multiple programs** — a single datum (e.g. the bruxism
+   observation) may be evidence for `reduce-anxiety` *and* a future `improve-sleep`, without
+   being written twice.
+
+A first draft keyed telemetry **by program** (`program_telemetry: {reduce-anxiety: {…}}`). That
+fails criterion 2: a shared datum duplicates under each program's block. Rejected.
+
+The load-bearing invariant question is unchanged: telemetry must stay **optional and non-gated**
+— a required/structured schema would bend **presence-not-quality** and **coercion-free** (§ 2), so
+the mandatory reading is **rejected as constraint drift**, not self-ratified.
 
 ## Decision
 
-Sub-class telemetry attaches in the record frontmatter as an **optional** `program_telemetry`
-mapping keyed by program-id — inheritance discriminated by the `programs[]` value:
+Structured telemetry lives in a **shared, record-level `observations[]`** — a list of observation
+mappings, *not* keyed by program — each of which may tag the program(s) it feeds:
 
 ```yaml
-programs: [reduce-anxiety]
-program_telemetry:            # optional; presence-not-quality extends here
-  reduce-anxiety:
-    occurrences:              # program-specific, open-extensible, never gated
-      - intensity: high
-        somatic: sore teeth and jaws on waking (nocturnal bruxism)
-        context: on waking this morning
+programs: [reduce-anxiety]        # discriminator (a list → multi-program is native)
+observations:                     # record-level, SHARED; 0..n; optional, never gated
+  - at: 2026-07-19T06:26:58-07:00 # when → time-of-day / cadence patterns
+    programs: [reduce-anxiety]     # which program(s) this datum feeds (⊆ record programs; omit = all)
+    intensity: high               # free-text or a light rating — never a forced scale
+    somatic: sore teeth/jaws on waking (nocturnal bruxism)
+    situation: just woke up        # where / what / who
+    antecedent: a night of teeth-clenching   # what preceded it — the root-cause front
+    thought: <the interpretation that ran>   # antecedent capture (NOT the deferred belief-rating)
+    behavior: <what I did in response>
+    relief: <what eased it, if anything>
+    note: <free text>
 ```
 
-Load-bearing invariants (enforced by `dre_lint._check_program_telemetry`, proportionate — ADR-0002):
+Invariants (enforced by `dre_lint._check_observations`, proportionate — ADR-0002):
 
-- **Presence-not-quality extends to the sub-class.** A block is **never required** and **never
-  gated on quantity/completeness**. A program listed in `programs[]` with **no** block is valid —
-  it rides the base free-flowing body. An empty block (`{}`) is valid. The linter checks
-  *shape-if-present* only.
-- **Discriminator integrity.** Every `program_telemetry` key must be listed in `programs[]` (a
-  block can only attach to a program the entry serves) and must **never** be BP#0 (implicit — it
-  *is* the base; it has no sub-class telemetry).
-- **Open-extensible fields** (mirrors the essence-`facet` pattern): registered programs get a
-  proportionate field-shape check via a small validator registry
-  (`PROGRAM_TELEMETRY_VALIDATORS`); unregistered program-ids attach a free-form mapping.
-- **Single-source, frontmatter-only** (ADR-0001): the sub-class block lives in frontmatter with
-  the rest of the machine-readable record; the body stays free-flowing prose.
+- **Presence-not-quality extends here.** Observations are **never required** and **never gated on
+  quantity/completeness**. A listed program with no observation rides the base free-flowing body;
+  `observations: []` is valid. The linter checks *shape-if-present* only.
+- **One datum, many programs (criterion 2).** An observation's own `programs` is a list ⊆ the
+  record's `programs[]` (an observation can only feed a program the record serves) and never BP#0.
+  Omitting it means the observation feeds every program the record serves. The adherence meter
+  (ADR-0003) already counts a record for each program in its top-level `programs[]`.
+- **Sufficient, open-extensible fields (criterion 1).** A vocabulary aimed at root-cause work
+  (`at`, `intensity`, `somatic`, `situation`, `antecedent`, `thought`, `behavior`, `relief`,
+  `note`); extra keys allowed (mirrors the essence-`facet` pattern). These are the **observational**
+  ABC front (antecedent / thought / behavior *capture*) — **not** the deferred CBT **restructuring**
+  (challenge / re-rate / reframe).
+- **Single-source, frontmatter-only** (ADR-0001).
 
 ## Consequences
 
-- One new linter check (`_check_program_telemetry`) + its test pair; the base envelope,
-  `references[]`, and `dre_adherence` are unchanged (the meter was already program-agnostic —
-  ADR-0003).
-- The **rejected** alternative (mandatory structured sub-class schema) is recorded here as
-  constraint drift so a future edit does not silently re-introduce it.
-- The **fuller CBT-intervention restructuring fields** (spec § 3: hot-thought + belief rating,
-  evidence for/against, distortion label, before/after intensity deltas) remain **deferred** —
-  today's method is occurrence capture toward a root cause, not restructuring. The mechanism is
-  built to carry them when a rep pulls them (see ADR-0005).
+- One new linter check (`_check_observations`) + its test pairs; the base envelope, `references[]`,
+  and `dre_adherence` are unchanged (the meter was already program-agnostic — ADR-0003).
+- The **keyed-per-program** alternative and the **mandatory-schema** alternative are recorded here
+  as rejected (duplication; constraint drift) so a later edit does not silently re-introduce them.
+- The fuller CBT-intervention **restructuring** fields (spec § 3) remain deferred — added only when
+  a rep pulls them (see ADR-0005). `observations[]` carries the capture front now.

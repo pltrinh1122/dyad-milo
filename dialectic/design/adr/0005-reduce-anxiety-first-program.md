@@ -20,11 +20,13 @@ from an empty discriminator into its first materialization (mechanism: ADR-0004)
 - **Home:** `dialectic/design/programs/reduce-anxiety.md` (goal · method · enrollment · sub-class
   schema · adherence relationship · what stays deferred). BP#0 keeps its own home (`design/bp0.md`):
   it is the implicit bootstrap, not a discriminator-listed program.
-- **Method (this arc):** an **occurrence log** — capture anxious feelings as they occur (intensity,
-  somatic markers, context/trigger) so a pattern → root cause can surface. This is the antecedent /
-  capture front of CBT, *not yet* the restructuring front.
-- **Sub-class telemetry:** the `reduce-anxiety` `program_telemetry` block (ADR-0004) —
-  `occurrences[]`, every field optional and open-extensible, **never gated** (presence-not-quality).
+- **Method (this arc):** an **observation log** — capture anxious feelings as they occur
+  (intensity, somatic markers, situation, antecedent, thought, behavior) so a pattern → root cause
+  can surface. This is the antecedent / capture front of CBT, *not yet* the restructuring front.
+- **Sub-class telemetry:** the shared record-level `observations[]` (ADR-0004), each observation
+  tagging `programs: [reduce-anxiety]`. Every field optional and open-extensible, **never gated**
+  (presence-not-quality). Because observations are shared, one datum can also feed a future program
+  (e.g. `improve-sleep`) without duplication.
 - **Enrollment: 2026-07-19** (the day the Operator declared the program with a method). Earlier
   anxiety-themed records are **not** retro-tagged — that would inflate the program's adherence and
   is not what was declared (honesty over appearance). Its meter rides the existing program-agnostic
