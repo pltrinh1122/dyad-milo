@@ -305,6 +305,41 @@ Codified: spec `dialectic/design/daily-reflection-spec.md`; discipline `dialecti
 schema `dialectic/design/dre-schema.md` + `skills/dre_lint.py`; meter `skills/dre_adherence.py`;
 decisions `dialectic/design/adr/`.
 
+## program[] materialized — the sub-class arc opens (2026-07-19)
+
+`programs[]` moved from an empty discriminator (only the implicit BP#0) to its **first
+materialized additional program**, `reduce-anxiety`, surfaced by a lived record (`#goal-reduce-anxiety`,
+`2026-07-19-01`: anxiety high, nocturnal-bruxism somatic marker, method = *log anxious feelings to find
+the root cause*). At `d-start` milo surfaced this as **coverage drift** (spec §§ 6/14 defer the sub-class
+attachment mechanism); the Operator disposed the fuller scope — *also design the sub-class telemetry*.
+Generated on the working branch, disposed at PR review (no-self-ratify; `main` protected). ADRs 0004
+(mechanism) + 0005 (program) are the escalation artifacts.
+
+- **Attachment mechanism (ADR-0004):** optional `program_telemetry` mapping keyed by program-id;
+  inheritance discriminated by the `programs[]` value. Keys ⊆ `programs`, never BP#0. Frontmatter-only,
+  single-source (ADR-0001). Enforced by `dre_lint._check_program_telemetry` (proportionate — ADR-0002);
+  the meter was already program-agnostic (ADR-0003), so no analytics change.
+- **reduce-anxiety (ADR-0005):** occurrence-log slice only (the antecedent/capture front of CBT);
+  enrollment 2026-07-19; earlier anxiety-themed records **not** retro-tagged (honesty over appearance).
+  The fuller CBT restructuring fields stay deferred until a rep pulls them.
+
+### Craft lessons — the sub-class arc (2026-07-19, PII-clear)
+
+Each a hypothesis held falsifiable, n=1.
+
+6. **Presence-not-quality extends to the sub-class.** When a program earns structured telemetry, that
+   telemetry stays optional and non-gated — a listed program with no block, or an empty block, is a
+   complete rep. Making a sub-class schema mandatory would bend presence-not-quality **and** coercion-free
+   (a required field-set is a quota by another name); the mandatory-schema reading was rejected as
+   constraint drift, not self-ratified. The floor does not rise as structure is added.
+7. **A program materializes at the discriminator before it earns sub-class structure.** The wu-wei
+   sequence: name the program (id + home) and let it ride the base free-flow first; add structured
+   telemetry only for the slice a lived method pulls on (here: an occurrence log, not the full CBT
+   thought-record). Build only what a purpose pulls on — the sub-class arc *opens* here, it does not close.
+8. **Honesty sets the enrollment.** A program's meter starts the day the Operator declares it with a
+   method, not the first day its theme happened to appear — retro-tagging earlier records would buy a
+   flattering adherence number the practice never earned (a true low over a flattering high).
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

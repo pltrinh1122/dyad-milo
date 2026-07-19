@@ -21,7 +21,14 @@ Checks:
   7. ``references`` (optional) — each has a non-empty ``links`` list; each
      ``essence`` fragment has a non-empty ``facet`` (open-extensible) and
      ``text``, and ``partition`` (if present) is trigger-time|confirmed-after.
-  8. body (below the frontmatter) is non-empty.
+  8. ``program_telemetry`` (optional, sub-class attachment, § 6) — a mapping
+     keyed by program-id; every key is listed in ``programs`` and never BP#0
+     (implicit — it *is* the base); each block is a mapping. A block is NEVER
+     required and never gated on quantity (presence-not-quality extends to the
+     sub-class: a program may ride the base free-flow with no block). Known
+     program schemas (``reduce-anxiety``) get a proportionate shape check;
+     fields stay open-extensible.
+  9. body (below the frontmatter) is non-empty.
 
 Usage: python3 skills/dre_lint.py RECORD.md [RECORD.md ...]
 Exit 0 = all pass; exit 1 = itemized failures on stdout.
@@ -169,6 +176,76 @@ def _check_programs(programs):
     return errors
 
 
+def _check_reduce_anxiety(block):
+    """Proportionate shape check for the reduce-anxiety sub-class (occurrence log).
+
+    The method is 'log anxious feelings whenever they occur' → find the root
+    cause. Telemetry is an ``occurrences`` list; every field is optional and
+    open-extensible (mirrors the essence-facet pattern). Quantity is NEVER
+    gated — zero occurrences is a valid block (presence-not-quality).
+    """
+    errors = []
+    occurrences = block.get("occurrences")
+    if occurrences is None:
+        return errors  # optional; a block may carry no occurrences yet
+    if not isinstance(occurrences, list):
+        errors.append("program_telemetry['reduce-anxiety'].occurrences must be a list")
+        return errors
+    for i, occ in enumerate(occurrences):
+        tag = f"program_telemetry['reduce-anxiety'].occurrences[{i}]"
+        if not isinstance(occ, dict):
+            errors.append(f"{tag} must be a mapping")
+            continue
+        for field in ("intensity", "somatic", "context", "at", "note"):
+            val = occ.get(field)
+            if val is not None and (not isinstance(val, str) or not val.strip()):
+                errors.append(f"{tag}.{field} must be a non-empty string when present")
+    return errors
+
+
+# Programs with a registered sub-class schema. Unlisted programs attach a
+# free-form mapping (open-extensible); only the generic invariants apply.
+PROGRAM_TELEMETRY_VALIDATORS = {"reduce-anxiety": _check_reduce_anxiety}
+
+
+def _check_program_telemetry(program_telemetry, programs):
+    """Sub-class telemetry attachment (§ 6). Optional; never gated on presence.
+
+    Generic invariants (all programs): mapping keyed by program-id; every key is
+    listed in ``programs`` (a block can only attach to a program the entry
+    serves) and never BP#0 (implicit — it is the base, it has no sub-class
+    telemetry); each block is a mapping. Registered programs also get a
+    proportionate field-shape check.
+    """
+    errors = []
+    if program_telemetry is None:
+        return errors  # optional
+    if not isinstance(program_telemetry, dict):
+        errors.append("program_telemetry must be a mapping keyed by program-id when present")
+        return errors
+    listed = {p for p in programs if isinstance(p, str)} if isinstance(programs, list) else set()
+    for key, block in program_telemetry.items():
+        if not isinstance(key, str) or not key.strip():
+            errors.append(f"program_telemetry keys must be program-ids (non-empty strings), got: {key!r}")
+            continue
+        if key.strip().lower() in BP0_ALIASES:
+            errors.append(
+                "program_telemetry must not key BP#0 — it is implicit (the base), "
+                "it has no sub-class telemetry")
+            continue
+        if key not in listed:
+            errors.append(
+                f"program_telemetry key {key!r} is not listed in programs[] — a "
+                f"sub-class block can only attach to a program the entry serves")
+        if not isinstance(block, dict):
+            errors.append(f"program_telemetry[{key!r}] must be a mapping")
+            continue
+        validator = PROGRAM_TELEMETRY_VALIDATORS.get(key)
+        if validator is not None:
+            errors.extend(validator(block))
+    return errors
+
+
 def _check_references(references):
     errors = []
     if references is None:
@@ -230,6 +307,7 @@ def lint(path):
     errors.extend(_check_envelope(fm, rec))
     errors.extend(_check_trigger(fm.get("trigger")))
     errors.extend(_check_programs(fm.get("programs")))
+    errors.extend(_check_program_telemetry(fm.get("program_telemetry"), fm.get("programs")))
     errors.extend(_check_references(fm.get("references")))
     if not body.strip():
         errors.append(

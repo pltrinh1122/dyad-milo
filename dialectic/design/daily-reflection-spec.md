@@ -101,8 +101,24 @@ Rules:
 
 `programs: []` — the *additional* behavioral programs this entry serves. **BP#0 is implicit** (every entry
 feeds it by existing) and is never listed; a pure base reflection has `programs: []`. Contents are
-program-ids. The sub-class-telemetry **attachment mechanism is deferred** to the sub-class arc — the base
-defines only the discriminator.
+program-ids.
+
+**Sub-class-telemetry attachment (opened 2026-07-19 — ADR-0004; Operator-disposed scope).** A program
+attaches structured telemetry via an **optional** `program_telemetry` mapping keyed by program-id
+(inheritance discriminated by the `programs[]` value). It is **never required and never gated on
+quantity** — presence-not-quality (§ 2) extends to the sub-class: a listed program with no block rides the
+base free-flowing body. Discriminator integrity: every key is listed in `programs[]` and never BP#0
+(implicit — it *is* the base). Fields are open-extensible; registered programs get a proportionate
+shape-check (first: `reduce-anxiety`, § 6a). The mandatory-structured-schema alternative was rejected as
+constraint drift (would bend presence-not-quality / coercion-free).
+
+## 6a. First additional program — `reduce-anxiety`
+
+Materialized 2026-07-19 from the record that named it (`#goal-reduce-anxiety`). Method (this arc): an
+**occurrence log** — capture anxious feelings as they occur (`intensity` / `somatic` / `context`, all
+optional, open-extensible) toward a **root cause**. The antecedent/capture front of CBT, not yet
+restructuring. Enrollment 2026-07-19; earlier anxiety-themed records are **not** retro-tagged (honesty
+over appearance). Home: `dialectic/design/programs/reduce-anxiety.md`; rationale ADR-0005.
 
 ## 7. Behavioral-Program #0 — "ensure telemetry isn't starved"
 
@@ -198,8 +214,12 @@ How the codification is built (Operator-set 2026-07-18):
 
 ## 14. Out of scope / deferred
 
-- **CBT-intervention sub-class** (the § 3 "not base" fields) — next arc.
-- **`programs[]` attachment mechanism** — sub-class arc.
+- **`programs[]` attachment mechanism** — ~~sub-class arc~~ **DONE 2026-07-19** (§ 6 / ADR-0004;
+  Operator-disposed scope). Optional, non-gated `program_telemetry`.
+- **`reduce-anxiety` first program** — **DONE 2026-07-19** (§ 6a / ADR-0005), occurrence-log slice only.
+- **CBT-intervention sub-class restructuring fields** (the § 3 "not base" fields: hot-thought + belief
+  rating, evidence for/against, distortion label, behavioral action, before/after deltas) — still
+  deferred; added when a rep pulls them (the occurrence-log front shipped first).
 - **Generalization beyond the Operator** (other clients) — pinned (`DYAD.md § Pins`).
 - **Grounding-modality lock** (CBT contingent) — pinned.
 - **BP#0 pull-mechanism / starvation-detector** — build only when earned (§ 7).
