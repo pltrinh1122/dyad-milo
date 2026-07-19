@@ -66,6 +66,37 @@ def test_program_filter(tmp_path):
     assert adherence(records, program="nutrition", enrollment=ENROLL, as_of=as_of)["since_start"]["covered"] == 0
 
 
+def test_reduce_anxiety_program_measured_from_its_enrollment(tmp_path):
+    # The first additional program materialized: its adherence rides the same
+    # program-agnostic meter, with its own (later) enrollment day.
+    make_record(tmp_path, "2026-07-19", programs="['reduce-anxiety']")
+    make_record(tmp_path, "2026-07-20", programs="['reduce-anxiety']")
+    records, _ = load_records(tmp_path)
+    rep = adherence(records, program="reduce-anxiety",
+                    enrollment=dt.date(2026, 7, 19), as_of=dt.date(2026, 7, 20))
+    assert rep["since_start"] == {"covered": 2, "eligible": 2, "rate": 1.0, "lapses": 0}
+    # A base-only day (no reduce-anxiety) is a lapse for the program, not the base.
+    make_record(tmp_path, "2026-07-21")  # base entry, programs: []
+    records, _ = load_records(tmp_path)
+    rep = adherence(records, program="reduce-anxiety",
+                    enrollment=dt.date(2026, 7, 19), as_of=dt.date(2026, 7, 21))
+    assert rep["since_start"]["covered"] == 2
+    assert rep["since_start"]["eligible"] == 3
+    assert rep["since_start"]["lapses"] == 1
+
+
+def test_one_record_counts_for_multiple_programs(tmp_path):
+    # Same record serves telemetry for multiple programs: it is covered for each
+    # program its programs[] lists, and for the base.
+    make_record(tmp_path, "2026-07-19", programs="['reduce-anxiety', 'improve-sleep']")
+    records, _ = load_records(tmp_path)
+    as_of = dt.date(2026, 7, 19)
+    enroll = dt.date(2026, 7, 19)
+    assert adherence(records, program="reduce-anxiety", enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+    assert adherence(records, program="improve-sleep", enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+    assert adherence(records, program=None, enrollment=enroll, as_of=as_of)["since_start"]["covered"] == 1
+
+
 def test_bp0_program_is_base(tmp_path):
     make_record(tmp_path, "2026-07-18")
     records, _ = load_records(tmp_path)

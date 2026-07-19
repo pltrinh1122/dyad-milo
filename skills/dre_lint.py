@@ -21,7 +21,14 @@ Checks:
   7. ``references`` (optional) — each has a non-empty ``links`` list; each
      ``essence`` fragment has a non-empty ``facet`` (open-extensible) and
      ``text``, and ``partition`` (if present) is trigger-time|confirmed-after.
-  8. body (below the frontmatter) is non-empty.
+  8. ``observations`` (optional, shared sub-class telemetry, § 6) — a list of
+     mappings at the record level (NOT keyed by program), so one datum can serve
+     several programs without duplication. Each observation may tag the
+     program(s) it feeds via ``programs`` (⊆ the record's ``programs`` and never
+     BP#0). Every field is optional and open-extensible; observations are NEVER
+     required and never gated on quantity (presence-not-quality extends here — a
+     program may ride the base free-flow with no observation).
+  9. body (below the frontmatter) is non-empty.
 
 Usage: python3 skills/dre_lint.py RECORD.md [RECORD.md ...]
 Exit 0 = all pass; exit 1 = itemized failures on stdout.
@@ -169,6 +176,61 @@ def _check_programs(programs):
     return errors
 
 
+# Optional observation fields, open-extensible (a record may add its own). The
+# listed set is the vocabulary the practice reaches for; extras are allowed.
+OBSERVATION_STR_FIELDS = ("intensity", "somatic", "situation", "antecedent",
+                          "thought", "behavior", "relief", "note")
+
+
+def _check_observations(observations, programs):
+    """Shared, record-level sub-class telemetry (§ 6). Optional; never gated.
+
+    A list of observation mappings (NOT keyed by program), so one datum can feed
+    several programs. Invariants: a list of mappings; each field open-extensible
+    and non-empty when a string is given; ``at`` is a timestamp or non-empty
+    string; an observation's own ``programs`` (which program(s) it feeds) is a
+    list ⊆ the record's ``programs`` and never BP#0. Observations are NEVER
+    required and quantity is NEVER gated (presence-not-quality).
+    """
+    errors = []
+    if observations is None:
+        return errors  # optional
+    if not isinstance(observations, list):
+        errors.append("observations must be a list when present")
+        return errors
+    listed = {p for p in programs if isinstance(p, str)} if isinstance(programs, list) else set()
+    for i, obs in enumerate(observations):
+        tag = f"observations[{i}]"
+        if not isinstance(obs, dict):
+            errors.append(f"{tag} must be a mapping")
+            continue
+        for field in OBSERVATION_STR_FIELDS:
+            val = obs.get(field)
+            if val is not None and (not isinstance(val, str) or not val.strip()):
+                errors.append(f"{tag}.{field} must be a non-empty string when present")
+        at = obs.get("at")
+        if at is not None and not isinstance(at, (str, dt.datetime, dt.date)):
+            errors.append(f"{tag}.at must be a timestamp or non-empty string when present")
+        elif isinstance(at, str) and not at.strip():
+            errors.append(f"{tag}.at must be a timestamp or non-empty string when present")
+        obs_programs = obs.get("programs")
+        if obs_programs is not None:
+            if not isinstance(obs_programs, list):
+                errors.append(f"{tag}.programs must be a list of program-ids when present")
+                continue
+            for prog in obs_programs:
+                if not isinstance(prog, str) or not prog.strip():
+                    errors.append(f"{tag}.programs entries must be non-empty program-ids, got: {prog!r}")
+                elif prog.strip().lower() in BP0_ALIASES:
+                    errors.append(
+                        f"{tag}.programs must not list BP#0 — it is implicit (the base)")
+                elif prog not in listed:
+                    errors.append(
+                        f"{tag}.programs lists {prog!r}, which the record's programs[] does not "
+                        f"serve — an observation can only feed a program the record serves")
+    return errors
+
+
 def _check_references(references):
     errors = []
     if references is None:
@@ -230,6 +292,7 @@ def lint(path):
     errors.extend(_check_envelope(fm, rec))
     errors.extend(_check_trigger(fm.get("trigger")))
     errors.extend(_check_programs(fm.get("programs")))
+    errors.extend(_check_observations(fm.get("observations"), fm.get("programs")))
     errors.extend(_check_references(fm.get("references")))
     if not body.strip():
         errors.append(

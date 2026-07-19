@@ -101,8 +101,26 @@ Rules:
 
 `programs: []` — the *additional* behavioral programs this entry serves. **BP#0 is implicit** (every entry
 feeds it by existing) and is never listed; a pure base reflection has `programs: []`. Contents are
-program-ids. The sub-class-telemetry **attachment mechanism is deferred** to the sub-class arc — the base
-defines only the discriminator.
+program-ids.
+
+**Sub-class-telemetry attachment (opened 2026-07-19 — ADR-0004; Operator-disposed scope + shape).**
+Structured telemetry attaches as a **shared, record-level `observations[]`** — a list of observation
+mappings, *not* keyed by program — so **one datum can serve several programs** (acceptance criterion):
+each observation tags the program(s) it feeds via its own `programs` (⊆ the record's `programs[]`, never
+BP#0; omit = all programs the record serves). It is **never required and never gated on quantity** —
+presence-not-quality (§ 2) extends here: a listed program with no observation rides the base free-flowing
+body. Fields are open-extensible. The **keyed-per-program** and **mandatory-schema** alternatives were
+rejected (duplication; constraint drift — would bend presence-not-quality / coercion-free).
+
+## 6a. First additional program — `reduce-anxiety`
+
+Materialized 2026-07-19 from the record that named it (`#goal-reduce-anxiety`). Method (this arc): an
+**observation log** — capture anxious feelings as they occur, with metadata sufficient to surface a
+**root cause** (`at`, `intensity`, `somatic`, `situation`, `antecedent`, `thought`, `behavior`, `relief`
+— all optional, open-extensible). This is the antecedent/capture front of CBT (`thought`/`behavior` are
+*observed*, not challenged), **not** the deferred restructuring. Enrollment 2026-07-19; earlier
+anxiety-themed records are **not** retro-tagged (honesty over appearance). Home:
+`dialectic/design/programs/reduce-anxiety.md`; rationale ADR-0005.
 
 ## 7. Behavioral-Program #0 — "ensure telemetry isn't starved"
 
@@ -198,8 +216,13 @@ How the codification is built (Operator-set 2026-07-18):
 
 ## 14. Out of scope / deferred
 
-- **CBT-intervention sub-class** (the § 3 "not base" fields) — next arc.
-- **`programs[]` attachment mechanism** — sub-class arc.
+- **`programs[]` attachment mechanism** — ~~sub-class arc~~ **DONE 2026-07-19** (§ 6 / ADR-0004;
+  Operator-disposed scope + shape). Optional, non-gated, shared `observations[]` (one datum → many
+  programs).
+- **`reduce-anxiety` first program** — **DONE 2026-07-19** (§ 6a / ADR-0005), observation-log slice only.
+- **CBT-intervention sub-class restructuring fields** (the § 3 "not base" fields: hot-thought + belief
+  rating, evidence for/against, distortion label, behavioral action, before/after deltas) — still
+  deferred; added when a rep pulls them (the occurrence-log front shipped first).
 - **Generalization beyond the Operator** (other clients) — pinned (`DYAD.md § Pins`).
 - **Grounding-modality lock** (CBT contingent) — pinned.
 - **BP#0 pull-mechanism / starvation-detector** — build only when earned (§ 7).

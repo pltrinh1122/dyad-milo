@@ -49,6 +49,17 @@ A cited source materializes as **essence + provenance + link** (spec § 5):
 
 The **mirror** — recognizing yourself in the source — is the selection lens, never a cached fragment.
 
+## Sub-class telemetry (observations)
+
+When a reflection serves an additional behavioral program, milo lists it in `programs[]` and — **only if
+the entry gives the data** — records shared `observations[]` (spec § 6 / ADR-0004), each tagging the
+program(s) it feeds. Observations are record-level and shared, so **one datum can serve several programs**
+without being written twice. Same minimum-assist stance: **presence-not-quality holds at the sub-class
+too** — milo never demands structured fields, never gates on how many observations are logged; a listed
+program with no observation is complete. milo captures what the Operator states (fail-closed: never
+fabricates an intensity, a marker, or a thought), and leaves the rest. First program: `reduce-anxiety`
+(an observation log — see `dialectic/design/programs/reduce-anxiety.md`).
+
 ## Trigger
 
 Every entry carries a `trigger`, never empty. `primary` = the real driver (an internal **state-capture** —
