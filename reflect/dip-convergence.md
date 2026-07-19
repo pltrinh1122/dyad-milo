@@ -350,6 +350,11 @@ Each a hypothesis held falsifiable, n=1.
    observation can be evidence for several programs (the bruxism serves anxiety *and* sleep). Keying
    telemetry by program forces a copy per program and splits one truth into many; a shared observation,
    tagged with the programs it feeds, keeps the mirror single. Programs *read* telemetry; they don't own it.
+10. **A claimed gate is a liability until a mechanism backs it.** `tests.yml` said records were "linted
+    there" (private repo); a `d-rub` Ground falsified it — no CI, no linter reference existed, so the
+    record's schema was validated by nothing. The lesson (honesty over appearance): verify the gate by
+    execution, don't hedge on it. Closed by ADR-0006 — the private repo's `lint-records` workflow
+    dual-checks-out the canonical `dre_lint` (Operator-disposed strategy; issue #10).
 
 ## Honest scope
 

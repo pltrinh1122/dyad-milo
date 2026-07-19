@@ -1,6 +1,7 @@
 # Runs the full deterministic test suite (the TDD invariant, daily-reflection-spec § 13):
 # every code/linter ships with a test pair, and CI is where the pairs get teeth.
-# Records themselves live in the private client repo (PII) and are linted there, not here.
+# Records themselves live in the private client repo (PII) and are linted there — by that repo's
+# `lint-records` workflow, which dual-checks-out this repo's canonical dre_lint (ADR-0006) — not here.
 name: tests
 on:
   pull_request:
