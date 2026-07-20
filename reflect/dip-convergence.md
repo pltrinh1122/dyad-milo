@@ -356,6 +356,22 @@ Each a hypothesis held falsifiable, n=1.
     execution, don't hedge on it. Closed by ADR-0006 — the private repo's `lint-records` workflow
     dual-checks-out the canonical `dre_lint` (Operator-disposed strategy; issue #10).
 
+## d-re adversarial-validate — durative rub (2026-07-20, ADR-0007)
+
+`d-re` gains a final step: an **adversarial sub-agent** (separate context) runs `d-rub-with-land` on the
+just-captured record — adversarially rub (capture-fidelity · schema · bucket · honesty), then land the
+survivor to `main`, fail-closed on a break. The independent adversary is the mechanism that keeps an
+**autonomous** land consistent with **no-self-ratify** (disposer ≠ generator): human per-instance merge on
+`d-re` records becomes an independent-adversary gate, with the dyad-rt pre-push spine (advance only via
+forge-merged PR) still holding and anchors still on the reviewed-PR path. Operator-directed
+(`d-re-process-constraints`); the meta-change itself stays human-disposed at merge.
+
+**Durative rub (verdict not in — n=0):** the adversarial-validate catches capture/honesty defects a bare
+`dre_lint` misses **and** its autonomous land preserves no-self-ratify. *Refuted if* it rubber-stamps
+(never breaks a broken record), over-breaks (blocks clean records / bends into a quality gate), or an
+autonomous land advances `main` on a defect a human would have caught. Re-grade when milo's reps carry the
+proof.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

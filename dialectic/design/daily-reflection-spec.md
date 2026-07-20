@@ -147,7 +147,10 @@ policy; the grounded discriminators (essence invariant, base/sub-class boundary,
   milo invites, never nags.
 - **Acceptance value — two sides:** *Operator-side* = presence (an honest entry exists for the PT day).
   *Agent-side* = persist under the base envelope; materialize each cited reference as essence + provenance +
-  link, fail-closed. A day with no entry is a **lapse** — inferred from absence, met with compassion, no
+  link; **close with the adversarial-validate** — an independent adversarial sub-agent runs
+  `d-rub-with-land` (adversarial rub bounded to the record → land the survivor to `main`, fail-closed on a
+  break), keeping the autonomous land consistent with no-self-ratify (ADR-0007; rub-protocol). All
+  fail-closed. A day with no entry is a **lapse** — inferred from absence, met with compassion, no
   failure-marker.
 
 ## 9. Adherence + analytics
