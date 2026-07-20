@@ -114,6 +114,22 @@ escalating rungs (Ground → Read → Triangulate → Rub), Agent-determined dep
 `dialectic/rub-protocol.md`. **Wu-wei** — minimum force, with the grain. **Falsifiability** of
 the tenet itself, never dogma. **SPAOR** execution scaffold. Canonical: the form README.
 
+## Principles
+
+*Principle* — an operational invariant: a portable way-of-working. Distinct from a **value** (what
+we hold — § Craft_value) and a **mechanism** (what enforces — § Runtime): a value grounds a
+principle, a mechanism enacts it. Operational, not moral — the test: it reads as flatly as "write
+the test first." Each is held **falsifiable** (§ Contract) and is **worn-in** or not; canonical
+wording lives at each pointer, rationale in `reflect/dip-convergence.md`.
+
+- **Spine-before-form** — elicit scope/altitude before proposing form; form-ahead-of-spine is the turn-sink.
+- **No-self-ratify** — Agent surfaces, Operator disposes; Generate + Validate never collapse (§ Contract).
+- **Verify by execution** — ground a claim against reality; never assert from memory or hedge a checkable fact (`dialectic/rub-protocol.md`).
+- **Wu-wei** — minimum force, with the grain; build only what a purpose pulls on (§ Contract).
+- **Fail-closed** — on uncertainty, withhold: never fabricate (honesty), never leak (privacy).
+- **Mechanism over compliance** — enforce with a device that fires regardless of compliance, not a prose instruction (§ Runtime).
+- **Test-then-code (TDD)** — every artifact ships with its validator (`dialectic/design/daily-reflection-spec.md` § 13).
+
 ## Pins (open, deferred by ratification)
 
 - Generalization of the system to clients beyond the first.
