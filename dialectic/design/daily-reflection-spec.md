@@ -149,9 +149,10 @@ policy; the grounded discriminators (essence invariant, base/sub-class boundary,
   *Agent-side* = persist under the base envelope; materialize each cited reference as essence + provenance +
   link; **close with the adversarial-validate** — an independent adversarial sub-agent runs
   `d-rub-with-land` (adversarial rub bounded to the record → land the survivor to `main`, fail-closed on a
-  break), keeping the autonomous land consistent with no-self-ratify (ADR-0007; rub-protocol). All
-  fail-closed. A day with no entry is a **lapse** — inferred from absence, met with compassion, no
-  failure-marker.
+  break). **HITL is post-land** — the Operator validates the landed outcome on `main`, not a pre-merge PR
+  gate (a record is cheap to undo); no-self-ratify holds via the independent adversary + cheap revert +
+  that review (ADR-0007; rub-protocol). All fail-closed. A day with no entry is a **lapse** — inferred from
+  absence, met with compassion, no failure-marker.
 
 ## 9. Adherence + analytics
 

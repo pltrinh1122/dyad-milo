@@ -361,15 +361,20 @@ Each a hypothesis held falsifiable, n=1.
 `d-re` gains a final step: an **adversarial sub-agent** (separate context) runs `d-rub-with-land` on the
 just-captured record — adversarially rub (capture-fidelity · schema · bucket · honesty), then land the
 survivor to `main`, fail-closed on a break. The independent adversary is the mechanism that keeps an
-**autonomous** land consistent with **no-self-ratify** (disposer ≠ generator): human per-instance merge on
-`d-re` records becomes an independent-adversary gate, with the dyad-rt pre-push spine (advance only via
-forge-merged PR) still holding and anchors still on the reviewed-PR path. Operator-directed
-(`d-re-process-constraints`); the meta-change itself stays human-disposed at merge.
+**autonomous** land consistent with **no-self-ratify** (disposer ≠ generator): the human per-instance
+*merge* on `d-re` records is not removed but **relocated** — HITL becomes a **post-land validation of the
+outcome on `main`**, not a pre-merge PR gate. This is proportionate because a record entry is **cheap to
+undo** (`git revert` one file); the pre-land guard is the adversary, the post-land guard is Operator review
++ cheap revert (itself a candidate for later mechanization). The dyad-rt pre-push spine (advance only via
+forge-merged PR) still holds; anchors + discipline changes stay on the pre-merge reviewed-PR path.
+Operator-directed (`d-re-process-constraints`); the meta-change itself stays human-disposed at merge.
 
 **Durative rub (verdict not in — n=0):** the adversarial-validate catches capture/honesty defects a bare
-`dre_lint` misses **and** its autonomous land preserves no-self-ratify. *Refuted if* it rubber-stamps
-(never breaks a broken record), over-breaks (blocks clean records / bends into a quality gate), or an
-autonomous land advances `main` on a defect a human would have caught. Re-grade when milo's reps carry the
+`dre_lint` misses **and** its autonomous land — bounded by cheap reversibility + a post-land Operator
+review — preserves no-self-ratify. *Refuted if* it rubber-stamps (never breaks a broken record),
+over-breaks (blocks clean records / bends into a quality gate), a defect a human would catch **survives
+past the post-land review** (not merely lands briefly), or the undo of a landed defect proves **not** cheap
+(revert contested/entangled), falsifying the proportionality premise. Re-grade when milo's reps carry the
 proof.
 
 ## Honest scope
