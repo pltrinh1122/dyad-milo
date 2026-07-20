@@ -77,6 +77,13 @@ Mostly `NOT_YET_WORN` (concurrency/WIP, tooling, proactivity materialize through
 through a reviewed PR; the Agent surfaces, the Operator disposes (no-self-ratify). Enforced
 mechanically by dyad-rt (below), not by agent compliance.
 
+**Thread-mode (`d-re-mode-invariant`) — worn in:** a **`milo:practice`** thread does client-record
+capture + land only; it never implements craft/mechanism changes. A mechanism need it surfaces is
+**reported, not built** — recorded via **`d-fb`** as a PII-clear hand-over (a gh-issue) and deferred to a
+**`milo:dev`** thread, which intakes it via **`d-sense`** (Ground + scope + spine, then Operator disposes)
+before implementing. Practice reports; dev disposes and builds. Single-home:
+`dialectic/handover-protocol.md`; rationale ADR-0008.
+
 ## Runtime — operating mode (dyad-rt)
 
 Two launch modes, a per-launch Operator election:
