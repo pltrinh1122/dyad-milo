@@ -41,6 +41,25 @@ orientation act that isn't Validate work at all:
 - **`introspect:` stays separate** — examining the Agent's own cognition is not a `d-rub` move
   (no external substrate to query there).
 
+## `d-rub-with-land` — the `d-re` closing move
+
+A **compound move**: an adversarial `d-rub` bounded to a just-captured `d-re` record, followed by a land
+of the survivor. It is the **final step of every `d-re`** (re-protocol § Interaction model step 4;
+ADR-0007), run by an **adversarial sub-agent** — a *separate context* from the one that captured the
+record, so the disposer is never the generator (**no-self-ratify**, mechanized).
+
+- **Rungs it runs:** **Ground + Rub**, bounded to that one record (never the whole repo — bounded-target
+  guard). The adversary attacks, by execution: **capture-fidelity** (body verbatim, no silent edits),
+  **schema** (`dre_lint` PASS), **bucket** (`practice_day` = the `zone` day of `created`; filename agrees),
+  **honesty** (no fabricated telemetry; each `observations[]` datum traces to what the Operator wrote;
+  observation `programs ⊆` the record's), and the **durability precondition** (on `main` yet, or only the
+  branch).
+- **…-with-land — fail-closed:** **survives** → land the survivor to `main` via a forge-merged PR;
+  **breaks** → **do not land**, surface the specific finding, hold on the branch for correction. A break is
+  a capture defect to fix, never a failure-marker on the Operator (`craft_invariant`).
+- **Scope:** client-data `d-re` records only. Anchors and discipline/mechanism changes keep the
+  human-disposed reviewed-PR path — they are not `d-re` records and do not auto-land.
+
 ## Durative rubs
 
 A rub whose verdict isn't in yet — a test held across runs — lives in the **ledger**

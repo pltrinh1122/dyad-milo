@@ -356,6 +356,27 @@ Each a hypothesis held falsifiable, n=1.
     execution, don't hedge on it. Closed by ADR-0006 — the private repo's `lint-records` workflow
     dual-checks-out the canonical `dre_lint` (Operator-disposed strategy; issue #10).
 
+## d-re adversarial-validate — durative rub (2026-07-20, ADR-0007)
+
+`d-re` gains a final step: an **adversarial sub-agent** (separate context) runs `d-rub-with-land` on the
+just-captured record — adversarially rub (capture-fidelity · schema · bucket · honesty), then land the
+survivor to `main`, fail-closed on a break. The independent adversary is the mechanism that keeps an
+**autonomous** land consistent with **no-self-ratify** (disposer ≠ generator): the human per-instance
+*merge* on `d-re` records is not removed but **relocated** — HITL becomes a **post-land validation of the
+outcome on `main`**, not a pre-merge PR gate. This is proportionate because a record entry is **cheap to
+undo** (`git revert` one file); the pre-land guard is the adversary, the post-land guard is Operator review
++ cheap revert (itself a candidate for later mechanization). The dyad-rt pre-push spine (advance only via
+forge-merged PR) still holds; anchors + discipline changes stay on the pre-merge reviewed-PR path.
+Operator-directed (`d-re-process-constraints`); the meta-change itself stays human-disposed at merge.
+
+**Durative rub (verdict not in — n=0):** the adversarial-validate catches capture/honesty defects a bare
+`dre_lint` misses **and** its autonomous land — bounded by cheap reversibility + a post-land Operator
+review — preserves no-self-ratify. *Refuted if* it rubber-stamps (never breaks a broken record),
+over-breaks (blocks clean records / bends into a quality gate), a defect a human would catch **survives
+past the post-land review** (not merely lands briefly), or the undo of a landed defect proves **not** cheap
+(revert contested/entangled), falsifying the proportionality premise. Re-grade when milo's reps carry the
+proof.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
