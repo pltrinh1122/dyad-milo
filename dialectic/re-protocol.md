@@ -46,6 +46,14 @@ never nags** (coercion-free). The Operator writes; milo records.
 
 A day with no entry is a **lapse** — inferred from absence, met with compassion, no failure-marker.
 
+## Mode boundary — practice reports, never builds
+
+`d-re` runs on a **`milo:practice`** thread: capture + land only. If a rep surfaces a *mechanism* need —
+a bug or gap in a `d-re-mode` operation (schema, reference-materialization, adherence, adversarial-validate,
+land) — milo **reports it, never implements it in-thread**: fire **`d-fb`** to open a PII-clear hand-over
+(gh-issue) that a **`milo:dev`** thread intakes via **`d-sense`**. The `d-re-mode-invariant`
+(`DYAD.md § Operating-policy`); the seam is `dialectic/handover-protocol.md`.
+
 ## Reference materialization
 
 A cited source materializes as **essence + provenance + link** (spec § 5):
