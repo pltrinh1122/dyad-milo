@@ -377,6 +377,26 @@ past the post-land review** (not merely lands briefly), or the undo of a landed 
 (revert contested/entangled), falsifying the proportionality premise. Re-grade when milo's reps carry the
 proof.
 
+## Practice→dev hand-over — d-fb / d-sense (2026-07-20, ADR-0008)
+
+The **`d-re-mode-invariant`** (Operator-declared, gh-issue #14): a `milo:practice` thread does
+client-record capture + land only; craft/mechanism changes defer to a `milo:dev` thread (PR #13 was the
+flagged violation — mechanism work on a practice branch). This arc (`d-arc`) codified the **seam** so a
+reported need is picked up without loss: **`d-fb`** (practice-side) opens a PII-clear hand-over gh-issue
+and stops; **`d-sense`** (dev-side) Grounds + scopes + surfaces the spine and stops for disposition; then
+implement → land → close. Homes: invariant in `DYAD.md § Operating-policy`; protocol
+`dialectic/handover-protocol.md`; ADR-0008; template `.github/ISSUE_TEMPLATE/d-fb-handover.md`.
+
+- **Vehicle = one gh-issue per feedback item** (bootstrap: #14). Rejected: a running-log issue and a
+  cairn-only note (no per-item forge tracking); and `d-sense` auto-implementing (collapses spine-before-form
+  / no-self-ratify across the seam).
+- **Thread mode** is set by the opening token (`d-re` → practice; `d-start`/`d-arc` → dev); the token
+  fired *is* the signal — a mechanical marker is deferred until a guard must enforce it (wu-wei).
+- **Honest gap:** not mechanically enforced yet — the invariant rests on the mode being honored, not a
+  guard; a branch-name marker + dyad-rt check is the future mechanization (mechanism-over-compliance).
+- Closes issue #14 items 1 & 3 (#13 / item 2 merged). n=0 — unexercised as a loop; the principles
+  (two-homes, no-self-ratify, spine-before-form) now extend across the practice/dev seam.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
