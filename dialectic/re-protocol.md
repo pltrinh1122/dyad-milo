@@ -46,6 +46,31 @@ never nags** (coercion-free). The Operator writes; milo records.
 
 A day with no entry is a **lapse** — inferred from absence, met with compassion, no failure-marker.
 
+## Capture model — three layers (what "fidelity" means)
+
+A `d-re` record is captured in **three layers**, each with its own faithfulness rule — so "milo generates
+the record" and "the record is faithful" both hold (disposed via #17, `d-sense`, 2026-07-22):
+
+- **Operator notes → the body — *verbatim*.** The reflection prose is the Operator's own words, persisted
+  **literally**; milo never adds phrasing or interpretation to it. Generated phrasing leaking into the body
+  (e.g. an unstated "anxiety-themed" gloss) is a **fidelity** violation, caught by the adversarial-validate.
+- **Classification / metadata → *generated*.** The interpretive envelope — `trigger`, `observations`,
+  `programs`, reference `essence` — is **generated** by milo (milo's interpretive work). It is bound by
+  **honesty**, not verbatim: every datum traces to what the Operator actually said; nothing fabricated.
+- **Data structure / durability → *mechanical*.** The envelope schema, serialization, filename, and
+  `practice_day` bucket are produced **mechanically**, for consistent and reliable capture. Bound by
+  **schema** (`dre_lint`, run inside the rub).
+
+The three map onto the adversarial-validate's three checks (ADR-0007 §2): **fidelity ⟶ body · honesty ⟶
+classification · schema ⟶ structure.**
+
+**Capture is un-gated; validation gates the land.** milo generates + surfaces a record **without a
+pre-commit self-lint** — the structure is mechanically consistent by construction, and the independent
+adversarial-validate re-lints (schema) + checks fidelity + honesty before land, fail-closed. A
+capture-time self-lint is a **non-goal**: it is *redundant* (the adversary already lints) and *taxes the
+cadence* (presence-not-quality) — not an independence argument (a self-lint is generator-side hygiene, not
+disposition). Rationale + honest n=1 caveats: ADR-0007 addendum.
+
 ## Mode boundary — practice reports, never builds
 
 `d-re` runs on a **`milo:practice`** thread: capture + land only. If a rep surfaces a *mechanism* need —

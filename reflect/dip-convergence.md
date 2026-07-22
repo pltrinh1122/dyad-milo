@@ -397,6 +397,25 @@ implement → land → close. Homes: invariant in `DYAD.md § Operating-policy`;
 - Closes issue #14 items 1 & 3 (#13 / item 2 merged). n=0 — unexercised as a loop; the principles
   (two-homes, no-self-ratify, spine-before-form) now extend across the practice/dev seam.
 
+## Three-layer capture model — first lived hand-over loop (2026-07-22, #17)
+
+The **first real run of the practice→dev loop**: a `milo:practice` rep surfaced gh-issue #17 (`d-fb`) —
+under ADR-0007 capture is mechanical/un-gated and validation gates the land — and a `milo:dev` thread
+picked it up (`d-sense`): grounded it (the mechanism claims check out; the "blurs independence" rationale
+was refused as overstated), scoped it, surfaced the spine, and the Operator disposed **three matters, one
+at a time**. Result — a **three-layer capture model** that dissolves the verbatim-vs-generated tension by
+splitting it:
+
+- **body** (Operator notes) = **verbatim** ⟶ *fidelity*;
+- **classification** (`trigger`, `observations`, `programs`, essence) = **generated** ⟶ *honesty*
+  (trace-to-source);
+- **data structure** (envelope, bucket, filename) = **mechanical** ⟶ *schema* (`dre_lint`).
+
+The three map 1:1 onto ADR-0007's fidelity/honesty/schema rub checks. **No capture-time self-lint
+(non-goal)** — redundant (adversary re-lints) + taxes cadence, *not* an independence argument. Homes:
+`re-protocol.md` § Capture model + an **ADR-0007 addendum** (no new ADR — it refines the close-out).
+The loop held: report → intake → dispose → land, the practice thread never implementing. n=1.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

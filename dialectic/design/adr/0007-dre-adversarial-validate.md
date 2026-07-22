@@ -92,3 +92,29 @@ human would have caught **survives past the post-land review** (not merely lands
 gate is the backstop), or the undo of a landed defect proves **not** cheap after all (revert is contested
 / entangled), falsifying the proportionality premise. Held as a durative rub in
 `reflect/dip-convergence.md` until milo's own reps grade it (n=0 at adoption).
+
+## Addendum (2026-07-22) — three-layer capture model + no-self-lint (via #17 · d-fb → d-sense)
+
+Surfaced from a `milo:practice` rep (gh-issue #17, `d-fb`) and Operator-disposed on `d-sense` intake:
+this ADR's three rub checks are **assigned per capture layer**, making explicit what the close-out already
+implied. (Model's home: `dialectic/re-protocol.md` § Capture model.)
+
+- **fidelity ⟶ the body (Operator notes) — *verbatim*.** milo persists the reflection prose literally;
+  generated phrasing leaking into the body is a fidelity break (e.g. the 07-22 "anxiety-themed" gloss).
+- **honesty ⟶ classification/metadata — *generated*.** `trigger` / `observations` / `programs` / essence
+  are milo's interpretive generation, bound by trace-to-source (no fabrication), **not** verbatim.
+- **schema ⟶ data structure — *mechanical*.** The envelope / serialization / bucket is produced
+  mechanically for consistency; `dre_lint` (run inside the rub) owns it.
+
+**No capture-time self-lint (non-goal).** Capture is **un-gated**; validation gates the **land**. A
+pre-commit self-lint is deliberately **not** reinstated because it is *redundant* (the adversary re-lints
+before land) and *taxes the cadence* (presence-not-quality). The rationale is **redundancy + cadence — not
+independence**: a self-lint is generator-side hygiene, not disposition, so it would not blur the
+disposer≠generator independence this ADR relies on. (An earlier framing that called it an independence
+risk was withdrawn on `d-sense` as overstated.)
+
+**Honest n=1 caveats (folded from #17).** Mechanical generation is **not** clean-by-construction — it can
+introduce interpretive drift into the body; the fidelity rung is the catch, and "no phrasing beyond what
+the Operator stated" is the explicit body-fidelity check. "Reliable capture" is **n=1**. The safety
+guarantee is *no invalid record reaches `main`* (land-gated), **not** *every record valid at the instant of
+capture*.
