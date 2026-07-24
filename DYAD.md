@@ -100,18 +100,27 @@ Both gate the irreversible step; `--no-verify` is the visible Operator escape. *
 non-git destructive class (`rm -rf`, `git reset --hard`, `git clean -fd`) rests on the run host.
 Full reasoning + envelope honesty: `dialectic/design/dyad-rt.md`.
 
-## Externality (durable record) — two homes
+## Externality (durable record) — two homes, two axes
 
-Client information and dyad information are kept in separate stores:
+Client information and dyad information are kept in separate stores; the split runs along two
+axes, and only **telemetry recording** unifies (ADR-0009):
 
 - **Dyad information** — the fitness system and the craft lessons that improve it — lives in
   this **public** repo (`reflect/`), kept **clear of PII and personal context**. This
   session's convergence: `reflect/dip-convergence.md`.
-- **Client information** — the client's practice data, personal context, and PII (adherence
-  logs, thought records, personal grounding) — lives in a **separate private repo, one per
-  client** (`dyad-milo-<client>`), never here. dyad-milo retains only what generalizes to
-  improve the system; client proof is self-asserted (n=1), so client specifics are not
-  required in the public ledger.
+- **Program definition & mechanism** — PII-clear — lives in the **owning dyad's public repo**
+  (`reduce-anxiety` here; a program owned by another of the Operator's dyads in *its* repo).
+  Distributed by design, never unified.
+- **Client telemetry** — the client's lived practice data, personal context, and PII (adherence
+  logs, thought records, personal grounding) — **unifies into a single private per-client store**
+  (`dyad-milo-<client>`), recording for **all** the client's programs across every dyad, never
+  here. Only *recording* unifies; program *definition / mechanism / access* stays distributed.
+  Cross-dyad programs enroll through a store-side registry (id-uniqueness + per-program
+  enrollment). dyad-milo retains only what generalizes to improve the system; client proof is
+  self-asserted (n=1), so client specifics are not required in the public ledger.
+
+milo is the single, program-agnostic **telemetry-capture partner** across that store. *(One
+client, many programs — orthogonal to the `§ Pins` generalization to clients beyond the Operator.)*
 
 ## Contract (G0 — inherited, not ratified)
 
