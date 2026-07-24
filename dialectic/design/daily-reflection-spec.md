@@ -32,8 +32,10 @@ adherence with unaided self-recovery; graduation = practice flows from identity,
   write private-only; any public surfacing is a separate, manual, gated step that itself fails closed;
   uncertainty → withhold. *Honesty:* never fabricate; verify what you can, flag what you can't, withhold
   rather than invent.
-- **Two homes (PII boundary).** Mechanism/craft (PII-clear) → public `dyad-milo`. Lived data, PII →
-  private `dyad-milo-<client>`.
+- **Two homes, two axes (PII boundary).** Mechanism/craft **and** program definitions (PII-clear) → public
+  (the owning dyad's repo; milo's programs → `dyad-milo`). Lived telemetry + PII → a **single private
+  per-client store** `dyad-milo-<client>`, recording for **all** the client's programs across every dyad;
+  only *recording* unifies, definition/mechanism stays distributed (`DYAD.md § Externality`; ADR-0009).
 - **Wu-wei.** Minimum structure; build only what a purpose pulls on. Free-form until structure is earned.
 
 ## 3. Base-class telemetry — `ReflectionEntry`
