@@ -1,9 +1,13 @@
 ---
 doc: "dyad-milo — behavioral program: reduce-anxiety (first additional program)"
-home: "rationale in dialectic/design/adr/0005-reduce-anxiety-first-program.md; mechanism in ADR-0004"
+home: "rationale in dialectic/design/adr/0005-reduce-anxiety-first-program.md; mechanism in ADR-0004; model in ADR-0010"
 program_id: reduce-anxiety
+program: "Make anxiety legible — surface anxious feelings and their somatic markers as they occur, so a pattern and a root cause surface."
+program_telos: "Understanding — the root cause found; the precondition for later intervention."
+# program_value / program_invariant unset → inherit milo's parent slots
+#   (honesty-over-appearance / compassion-toward-lapse), ADR-0010 § 3.
 enrollment: 2026-07-19
-updated: 2026-07-19
+updated: 2026-07-26
 ---
 
 # Behavioral program — `reduce-anxiety`
@@ -12,7 +16,12 @@ The **first additional** behavioral program (beyond the implicit BP#0). Material
 from the lived record that named it (`#goal-reduce-anxiety`, `2026-07-19-01`). Listed in a record's
 `programs[]`; it attaches sub-class telemetry via shared record-level `observations[]` (spec § 6 / ADR-0004).
 
-## Goal
+A `pgm-` under milo (ADR-0010): its four-slot core is the frontmatter `program` / `program_telos`;
+`program_value` / `program_invariant` are **unset → inherited** from milo (honesty-over-appearance /
+compassion-toward-lapse), so no delegated-sub-agent divergence. Invoked `pgm-reduce-anxiety:` in
+`milo:practice`.
+
+## Goal (the `program` + `program_telos` slots, elaborated)
 
 Reduce anxiety by first making it **legible** — surfacing the anxious feelings and their somatic
 markers as they occur, so a pattern and a **root cause** can be found. The near-term telos is

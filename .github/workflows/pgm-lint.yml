@@ -1,0 +1,26 @@
+# dyad-rt forge leg — the program-definition (`pgm-`) schema gate (ADR-0010).
+# Runs pgm_lint on every program definition + its deterministic test pair on every PR,
+# so the pgm-operating-invariant (minimum two slots) is enforced by mechanism, not compliance.
+# Program definitions are PII-clear and public, so they lint here directly (no dual-checkout).
+name: pgm-lint
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml pytest
+      - name: Program definitions conform to the pgm- four-slot model (ADR-0010)
+        run: |
+          shopt -s nullglob
+          files=(dialectic/design/programs/*.md)
+          if [ ${#files[@]} -eq 0 ]; then echo "no program definitions to lint"; exit 0; fi
+          python3 skills/pgm_lint.py "${files[@]}"
+      - name: Linter's own test pair passes (No-Pure-G)
+        run: python3 -m pytest tests/test_pgm_lint.py -q

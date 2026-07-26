@@ -29,8 +29,13 @@ Operator disposes → implement (dev) → land via reviewed PR → close the iss
 Mode is set by **how the thread was opened**, and the token the Operator fires *is* the signal — no
 separate marker required:
 
-- **`d-re …`** opens a **`milo:practice`** thread — capture + land only.
-- **`d-start` / `d-arc …`** opens a **`milo:dev`** thread — craft/mechanism work.
+- **`d-start: {milo-practice | milo-dev} session`** — the session opener names its mode explicitly
+  (`d-arc …` also opens a dev thread). `d-re …` on its own opens a **`milo:practice`** thread.
+- A **`milo:practice`** thread does client-record work: **run the program's method + capture/land**. Under a
+  `pgm-<program_id>:` scope (ADR-0010), `riff` runs the program's intervention (e.g. CBT analysis,
+  elicitation) and `d-re` captures — both are client-record output, not system work. It never builds
+  craft/mechanism (that stays `milo:dev`).
+- A **`milo:dev`** thread does craft/mechanism work.
 - `d-fb` is practice-side; `d-sense` is dev-side. (A mechanically-checkable branch-name marker may be
   added later *if* a thread's mode ever needs to be enforced by a guard — not built until earned, wu-wei.)
 

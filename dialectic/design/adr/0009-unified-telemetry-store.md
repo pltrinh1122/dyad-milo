@@ -1,6 +1,11 @@
 # ADR-0009 — unified-by-client telemetry store (two homes, two axes)
 
 - **Status:** proposed (2026-07-24) — Operator-ratified disposition (gh-issue #19); awaiting PR review
+- **Note (2026-07-26, ADR-0010):** the **cross-dyad** case here is **retired**. Under the `pgm-` subclass
+  model, every program (incl. `emerging-identity`) is a milo `pgm-` in the one store, so there is no
+  "program owned by another dyad": the store unifies milo's own programs, the registry's cross-dyad
+  machinery collapses to a plain in-milo program registry (id-uniqueness + per-program enrollment still
+  earn their keep), and `dyad-pltrinh1122` needn't be born. The two-axes § Externality framing stands.
 - **Drift-dimension:** **constraint** (amends the documented `§ Externality` *one-private-record-per-client*
   convention) + **coverage** (a cross-dyad enrollment mechanism no doc covers). Surfaced from a
   `milo:practice` thread via `d-fb` (#19), intaked via `d-sense` (Ground + scope + spine), Operator-disposed.
