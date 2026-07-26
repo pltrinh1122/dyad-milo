@@ -105,6 +105,17 @@ Rules:
 feeds it by existing) and is never listed; a pure base reflection has `programs: []`. Contents are
 program-ids.
 
+**What a program *is* — the `pgm-` four-slot subclass (ADR-0010).** A program is a **subclass of the dyad**:
+a four-slot mini-craft — `program`, `program_telos`, `program_value`, `program_invariant` (the dyad's craft
+block **minus identity**), plus operational fields (`enrollment`, `observations[]`, adherence). The
+**`pgm-operating-invariant`** requires a minimum of two slots at init — `program` + `program_telos`;
+value/invariant are optional (**unset → inherit** milo's parent slots; **set → own**, and may contradict,
+isolated by delegating execution to a scoped sub-agent). Methods (`riff`, `d-re`, …) are inherited unless
+overridden. Definitions live PII-clear in `dialectic/design/programs/<program_id>.md`, gated by
+`skills/pgm_lint.py`. Invoked `pgm-<program_id>: <interaction>` in `milo:practice` (§ handover-protocol);
+under that scope `d-re` captures and `riff` runs the program's method. **Identity is the program/dyad
+boundary** — a program owns none; needing one is the deferred "going solo."
+
 **Sub-class-telemetry attachment (opened 2026-07-19 — ADR-0004; Operator-disposed scope + shape).**
 Structured telemetry attaches as a **shared, record-level `observations[]`** — a list of observation
 mappings, *not* keyed by program — so **one datum can serve several programs** (acceptance criterion):

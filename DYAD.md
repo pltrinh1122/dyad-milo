@@ -35,7 +35,14 @@
 - **lapse** — a break in practice; a feature of being human.
 - **self-recovery** — resuming practice after a lapse, unaided.
 - **mastery / graduation** — self-restarting practice; the Operator no longer *needs* the
-  dyad (may still *use* it).
+  dyad (may still *use* it). *(Distinct from a program's promotion — see `program`.)*
+- **program** *(`pgm-<id>`)* — a **subclass of the dyad**: a four-slot mini-craft (`program`,
+  `program_telos`, `program_value`, `program_invariant`) — the craft block **minus identity**. Inits with
+  the two required slots (`pgm-operating-invariant`); inherits milo's value/invariant *and* methods unless
+  overridden; executes **delegated to a scoped sub-agent**, so a divergent (even contradictory)
+  value/invariant is isolated there, never touching milo's. **Identity — birth-hash, own agent, own
+  Contract — is the program/dyad boundary**; a program owns none. Invoked `pgm-<id>:` in `milo:practice`.
+  Home: ADR-0010; defs `dialectic/design/programs/`.
 
 ## Problem
 
