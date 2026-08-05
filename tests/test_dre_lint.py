@@ -284,3 +284,107 @@ def test_observation_empty_field_fails(tmp_path):
     fm = SUBCLASS_FM.replace("intensity: high", 'intensity: ""')
     errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
     assert any("intensity" in e for e in errors)
+
+
+# --- capture-fidelity: unquoted scalars truncated by an inline comment -------
+#
+# An unquoted (plain) YAML scalar containing " #" starts a comment: the value is
+# silently truncated on parse, so the on-disk text and the parsed value diverge
+# with nothing to see it. Every check above runs post-parse, where the loss is
+# already invisible — so these gate the RAW source (issue #26, ADR-0012).
+
+def test_truncating_inline_comment_in_proximate_fails(tmp_path):
+    fm = VALID_FM.replace(
+        "proximate: a news feed surfaced an article",
+        "proximate: continuing the identity thread (2026-08-05 entries #1-#4).")
+    errors = lint(write_record(tmp_path, fm=fm))
+    assert any("trigger.proximate" in e and "quote" in e for e in errors)
+
+
+def test_quoted_scalar_with_hash_passes(tmp_path):
+    fm = VALID_FM.replace(
+        "proximate: a news feed surfaced an article",
+        'proximate: "continuing the identity thread (2026-08-05 entries #1-#4)."')
+    assert lint(write_record(tmp_path, fm=fm)) == []
+
+
+def test_hash_without_preceding_space_passes(tmp_path):
+    """`pgm#1-tag` is not a comment start — the scalar survives intact."""
+    fm = VALID_FM.replace(
+        "proximate: a news feed surfaced an article",
+        "proximate: tagged pgm#1-token")
+    assert lint(write_record(tmp_path, fm=fm)) == []
+
+
+def test_full_line_comment_passes(tmp_path):
+    """A whole-line comment loses nothing — it must stay legal."""
+    fm = VALID_FM.replace(
+        "trigger:\n", "# a genuine full-line comment\ntrigger:\n")
+    assert lint(write_record(tmp_path, fm=fm)) == []
+
+
+def test_leading_hash_total_loss_fails(tmp_path):
+    """A scalar starting with '#' is consumed entirely — the field reads as absent."""
+    fm = VALID_FM.replace(
+        "proximate: a news feed surfaced an article",
+        "proximate: #1-#4 gone entirely")
+    errors = lint(write_record(tmp_path, fm=fm))
+    assert any("trigger.proximate" in e and "quote" in e for e in errors)
+
+
+def test_truncation_in_primary_fails(tmp_path):
+    fm = MINIMAL_FM.replace(
+        "primary: a spontaneous state-capture (what I was feeling / doing / thinking)",
+        "primary: state-capture #1 of the morning")
+    errors = lint(write_record(tmp_path, fm=fm, name="2026-07-18-02.md"))
+    assert any("trigger.primary" in e and "quote" in e for e in errors)
+
+
+def test_truncation_in_observation_field_fails(tmp_path):
+    """The failure mode is not field-specific — it reaches sub-class telemetry."""
+    fm = SUBCLASS_FM.replace(
+        "situation: just woke up", "situation: just woke up #still-groggy")
+    errors = lint(write_record(tmp_path, fm=fm, name="2026-07-19-01.md"))
+    assert any("observations[0].situation" in e and "quote" in e for e in errors)
+
+
+def test_truncation_in_reference_essence_fails(tmp_path):
+    fm = VALID_FM.replace(
+        "provenance: supporting context, held separate from essence",
+        "provenance: supporting context #2 in the thread")
+    errors = lint(write_record(tmp_path, fm=fm))
+    assert any("references[0].provenance" in e and "quote" in e for e in errors)
+
+
+def test_truncation_in_sequence_entry_fails(tmp_path):
+    fm = VALID_FM.replace(
+        "programs: []", "programs:\n  - reduce-anxiety #primary\n")
+    errors = lint(write_record(tmp_path, fm=fm))
+    assert any("programs[0]" in e and "quote" in e for e in errors)
+
+
+def test_truncated_mapping_key_already_fails_loudly(tmp_path):
+    """Boundary: a truncated KEY is a scanner error, so it never lands silently.
+
+    Documents why the gate walks values only (proportionality, ADR-0002).
+    """
+    fm = VALID_FM.replace("programs: []", "programs: []\nnote me #here: value")
+    errors = lint(write_record(tmp_path, fm=fm))
+    assert any("does not parse as YAML" in e for e in errors)
+
+
+def test_block_scalar_with_hash_passes(tmp_path):
+    """Inside a literal block, '#' is content — nothing is lost, nothing to flag."""
+    fm = VALID_FM.replace(
+        "proximate: a news feed surfaced an article",
+        "proximate: |\n    continuing the thread (entries #1-#4).")
+    assert lint(write_record(tmp_path, fm=fm)) == []
+
+
+def test_all_existing_fixtures_stay_clean(tmp_path):
+    """The new gate must not retro-fail the records the schema already accepts."""
+    for fm, name in ((VALID_FM, "2026-07-18-01.md"),
+                     (MINIMAL_FM, "2026-07-18-02.md"),
+                     (SUBCLASS_FM, "2026-07-19-01.md"),
+                     (MULTIPROGRAM_FM, "2026-07-19-02.md")):
+        assert lint(write_record(tmp_path, fm=fm, name=name)) == []
