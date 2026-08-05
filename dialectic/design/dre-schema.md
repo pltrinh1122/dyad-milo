@@ -47,3 +47,9 @@ present) a list of mappings, each string field non-empty when given and open-ext
 observation's own `programs` ⊆ the record's `programs` and never BP#0 — **never required, never gated on
 quantity** (presence-not-quality extends to the sub-class); the body is non-empty (its length is never
 checked). Filenames: `reflections/YYYY-MM-DD-NN.md`.
+
+**Capture-fidelity** (ADR-0012): a value carrying ` #` **must be quoted**. Unquoted, YAML ends the scalar
+at the `#` and reads the rest of the line as a comment — the parsed value silently diverges from the text on
+disk (`entries #1-#4).` → `entries`), and a value *starting* with `#` is lost entirely, reading as a field
+never filled in. `dre_lint` checks this against the **raw source**, so **inline trailing comments are not
+legal** in a record's frontmatter (full-line comments are). Quote anything with a `#`.

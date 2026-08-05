@@ -29,6 +29,10 @@ Checks:
      required and never gated on quantity (presence-not-quality extends here — a
      program may ride the base free-flow with no observation).
   9. body (below the frontmatter) is non-empty.
+ 10. capture-fidelity — no plain (unquoted) scalar is truncated by an inline
+     comment start (` #`), which would silently diverge the parsed value from
+     the text on disk. Read from the RAW source; the other checks are post-parse,
+     where the loss is already invisible (issue #26, ADR-0012).
 
 Usage: python3 skills/dre_lint.py RECORD.md [RECORD.md ...]
 Exit 0 = all pass; exit 1 = itemized failures on stdout.
@@ -231,6 +235,56 @@ def _check_observations(observations, programs):
     return errors
 
 
+def _walk_plain_scalars(node, path, lines, errors):
+    """Flag plain scalars whose value is cut short by an inline comment start.
+
+    A plain (unquoted) YAML scalar ends at the first ` #`, so the rest of the
+    line becomes a comment and the parsed value silently diverges from the text
+    on disk. Every other check here runs post-parse, where that loss is already
+    invisible — this one reads the RAW source, via the node's source marks.
+
+    The test is that the line-tail *begins* with ``#`` (after whitespace), not
+    merely contains one: that is exactly where YAML ends a plain scalar, so it
+    catches truncation without false-positiving on a later quoted ``#`` in the
+    same flow mapping. Quoted and block scalars carry a style and are skipped —
+    they lose nothing. Keys are not walked: a truncated key is a scanner error,
+    so it can never land silently.
+    """
+    if isinstance(node, yaml.ScalarNode):
+        if node.style is None:  # plain (unquoted) only
+            end = node.end_mark
+            tail = lines[end.line][end.column:] if end.line < len(lines) else ""
+            if tail.lstrip().startswith("#"):
+                errors.append(
+                    f"{path}: the value is truncated at an inline comment — YAML ends a "
+                    f"plain scalar at ' #', so what parsed ({node.value!r}) is not what is "
+                    f"on disk; quote the value to keep the capture faithful")
+    elif isinstance(node, yaml.MappingNode):
+        for key, value in node.value:
+            name = getattr(key, "value", "?")
+            _walk_plain_scalars(value, f"{path}.{name}" if path else name, lines, errors)
+    elif isinstance(node, yaml.SequenceNode):
+        for i, item in enumerate(node.value):
+            _walk_plain_scalars(item, f"{path}[{i}]", lines, errors)
+    return errors
+
+
+def _check_capture_fidelity(fm_text):
+    """Capture-fidelity: the parsed frontmatter must match its on-disk text.
+
+    Honesty is fail-closed (spec § 2): a record that silently drops what the
+    Operator wrote misreports the practice, and every downstream consumer
+    inherits the loss. Issue #26 / ADR-0012.
+    """
+    try:
+        root = yaml.compose(fm_text, Loader=yaml.SafeLoader)
+    except yaml.YAMLError:
+        return []  # a parse failure is already reported loudly by the caller
+    if root is None:
+        return []
+    return _walk_plain_scalars(root, "", fm_text.split("\n"), [])
+
+
 def _check_references(references):
     errors = []
     if references is None:
@@ -289,6 +343,7 @@ def lint(path):
         return ["frontmatter is not a YAML mapping"]
 
     errors = []
+    errors.extend(_check_capture_fidelity(fm_text))
     errors.extend(_check_envelope(fm, rec))
     errors.extend(_check_trigger(fm.get("trigger")))
     errors.extend(_check_programs(fm.get("programs")))

@@ -452,6 +452,35 @@ this section.**
   discharging the mechanism's n=1 → n≥1-loop, distinct from the craft's E0 below).
 - The deferred **promotion term/trigger** ("going solo").
 
+## Capture-fidelity gated at the source — lesson #10 recurs (2026-08-05, #26, ADR-0012)
+
+The **second lived hand-over loop**, and the first where the `d-sense` Ground *widened* the report rather
+than confirming it. A `milo:practice` adversarial-validate surfaced #26: an unquoted YAML scalar containing
+` #` is truncated at the comment, and **8 records had passed `dre_lint` and landed** carrying silently
+corrupted `trigger.proximate` values.
+
+Grounding by execution found two things the report had not:
+
+- **The leading-`#` form is the same defect and the worse one.** Mid-value it truncates; at the *start* it
+  consumes the value entirely → `None`, which on any optional field is indistinguishable from a field the
+  Operator never filled in. Corruption that reads as honest absence.
+- **The gap is structural, not local.** `pgm_lint` and `readme_lint` share the same
+  `split_frontmatter` + `safe_load` idiom and the same blind spot. Public artifacts scan clean, so it is
+  **latent**; the Operator scoped the fix to `dre_lint` (wu-wei) with the latency recorded in the ADR.
+
+11. **A validator that reads only the parsed form can never gate fidelity of the source.** Every
+    `dre_lint` check ran post-parse, where the loss is already invisible — a truncated string satisfies
+    "non-empty string" exactly as well as a faithful one. The gate could not see the thing it was
+    claiming to check. This is **craft lesson #10 recurring on a new surface** (*a claimed gate is a
+    liability until a mechanism backs it*): ADR-0007 named **capture-fidelity** as a rung, and `dre_lint`
+    carried part of that claim structurally unable to honour it. The portable form: **wherever a claim is
+    about what was *written*, the check has to reach the raw text** — parsing is already an interpretation,
+    and validating the interpretation is not validating the record. Closed by reading the parser's own
+    source marks (ADR-0012), fail-closed at the cost of inline trailing comments.
+
+The loop held again: practice reported and repaired only its own data, dev grounded → scoped → surfaced the
+spine, the Operator disposed three matters (scope · mechanism · ADR) before any code. n=2.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
