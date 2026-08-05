@@ -416,6 +416,42 @@ The three map 1:1 onto ADR-0007's fidelity/honesty/schema rub checks. **No captu
 `re-protocol.md` § Capture model + an **ADR-0007 addendum** (no new ADR — it refines the close-out).
 The loop held: report → intake → dispose → land, the practice thread never implementing. n=1.
 
+## Program abstraction arc — unified store → `pgm-` subclass → delegation (2026-07-24 → 27)
+
+The arc that answered the session goal — *make `dyad-milo` central for all the Operator's programs[]* — in
+three disposed, merged steps (each `d-fb` → `d-sense` → `d-arc`, no-self-ratify throughout). **Resume point:
+this section.**
+
+- **Unified telemetry store (#19 → PR #20; private PR #10).** `§ Externality` re-cut to **two homes, two
+  axes**: only telemetry *recording* unifies (one private per-client store, all programs across every dyad);
+  program *definition/mechanism* stays distributed, public. ADR-0009. Private repo README redefined ("private
+  client record" → "the Operator's unified telemetry store").
+- **`pgm-` subclass model (#21 → PR #22).** The riff-arc **superseded** #21's original "program→dyad when it
+  needs its own value/invariant" criterion. A program is a **subclass of the dyad**: four-slot mini-craft
+  (`program`, `program_telos`, `program_value`, `program_invariant`) **minus identity**; `pgm-operating-invariant`
+  = min two slots (`program` + `program_telos`); value/invariant **unset → inherit** milo / **set → own**;
+  methods inherited unless overridden; **identity is the program/dyad boundary** (promotion "going solo"
+  deferred). CI-enforced by `skills/pgm_lint.py`. ADR-0010. Invocation grammar: `d-start: {mode} session` →
+  `pgm-<id>: <intent>` → `d-re` (capture) / `riff` (method).
+- **Delegation mechanism (#23 → PR #24).** The isolation ADR-0010 leaned on: program execution **delegated
+  to a scoped sub-agent** under resolved slots while milo-main keeps the parent slots — a divergent/contradictory
+  `program_invariant` is isolated in the delegate. Milo-native minimal imperative (**Slots·Interaction·Escalate**,
+  not leo's 5-facet borrow). `dialectic/delegation-protocol.md`; ADR-0011. **Grounded n=1 by execution:** an
+  `emerging-identity` delegate ran under its own divergent slots and confirmed isolation; a `reduce-anxiety`
+  delegate under inherited. `emerging-identity` is the **first `pgm-` with set slots** (being-over-having /
+  never-outsource-worth).
+
+**State at reboot (2026-07-27):** board **clear** (no open issues/PRs); both repos **clean + pushed**
+(public `main` @ PR #24, private `main` @ PR #10). The `pgm-` model now has both halves — abstraction
+(ADR-0010) + execution (ADR-0011) — with one inherited and one divergent program live.
+
+**Open threads (not board items) — candidates to resume:**
+- **Hard-sandbox mechanization** — the honest gap in ADR-0011: hermeticity is prompt-enforced, not
+  sandbox-enforced (a delegate can read milo's anchor). Build a real fence only if the boundary is crossed.
+- **Enroll `emerging-identity`** with its first lived record — would give the model a lived rep (begins
+  discharging the mechanism's n=1 → n≥1-loop, distinct from the craft's E0 below).
+- The deferred **promotion term/trigger** ("going solo").
+
 ## Capture-fidelity gated at the source — lesson #10 recurs (2026-08-05, #26, ADR-0012)
 
 The **second lived hand-over loop**, and the first where the `d-sense` Ground *widened* the report rather
@@ -450,4 +486,6 @@ spine, the Operator disposed three matters (scope · mechanism · ADR) before an
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
 bounds are hypotheses whose first practice began 2026-07-18 (daily-reflection, see above) and is
 mid-flight — no lived cycle survived yet. `craft_value`/`craft_invariant` were elected
-and Operator-framed during the bootstrap, not yet forged under a real breach.
+and Operator-framed during the bootstrap, not yet forged under a real breach. *(The 2026-07-24→27
+program-abstraction arc is **mechanism**, exercised to n=1; it does not discharge the craft's E0 — that
+needs a lived practice cycle.)*
