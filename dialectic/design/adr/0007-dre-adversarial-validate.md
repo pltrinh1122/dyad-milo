@@ -118,3 +118,40 @@ introduce interpretive drift into the body; the fidelity rung is the catch, and 
 the Operator stated" is the explicit body-fidelity check. "Reliable capture" is **n=1**. The safety
 guarantee is *no invalid record reaches `main`* (land-gated), **not** *every record valid at the instant of
 capture*.
+
+## Addendum (2026-08-06) — the honesty rule gains meaning-preservation (via #32 · d-fb → d-sense)
+
+**Trace-to-source proved too weak.** Four consecutive records were held by `d-rub-with-land` for one
+class: generated fields silently normalized the Operator's language while the body stayed byte-verbatim.
+Grounding found the rule as written did not forbid it — `the chest` *does* trace to `my chest`, and
+nothing was fabricated. The rule was **under-specified, not un-enforced**.
+
+**Disposed (Operator, 2026-08-06):** *faithful capture covers only the Operator's own prompt/input;
+generated fields may enrich prose through spelling, grammar, and aesthetics **without altering meaning**.*
+
+The honesty rule for the generated layer is therefore **trace-to-source + meaning-preservation**, with a
+**closed** list of sanctioned transforms (single home: `re-protocol.md` § Capture model). The cut is on
+**meaning**, not on surface form — which is why it is narrower and more principled than a
+"preserve every marking" rule would have been.
+
+**Consequence — half the reporting evidence is retired.** Applying the disposition to #32's four
+instances:
+
+| instance | verdict under the disposed rule |
+|---|---|
+| `vs.` → `versus` | **sanctioned** — abbreviation expansion, meaning intact |
+| `this conclusions` → `this conclusion` | **sanctioned** — grammar correction |
+| `my head/chest/gut` → `the head/chest/gut` | **violation** — possession is meaning-bearing |
+| `"llm"` → `llm` | **violation** — a hedging mark dropped changes the claim |
+
+Two of the four were never violations. This is recorded rather than quietly dropped: #32 was filed on the
+strength of *"4 consecutive holds, same class,"* and the disposed rule says the class is **two**, not four
+— the pattern is real but half its evidence dissolves under the rule that resolves it. The prevention
+value is unchanged; the frequency claim is weaker than filed.
+
+**Enforcement stays with the adversary.** "Did meaning change?" is not mechanically decidable in general —
+only specific meaning-bearing markers are. So the honesty layer keeps its ADR-0007 home (the adversarial
+sub-agent's judgment), consistent with ADR-0002's Builder-vs-Enforcer line. Whether to add a **mechanical
+backstop** for the two known markers — and whether that belongs in `dre_lint`, which would make the schema
+linter body-aware for the first time and cross the three-layer boundary — remains **open** (#32
+disposition 3), deliberately not self-ratified here.

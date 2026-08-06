@@ -56,7 +56,21 @@ the record" and "the record is faithful" both hold (disposed via #17, `d-sense`,
   (e.g. an unstated "anxiety-themed" gloss) is a **fidelity** violation, caught by the adversarial-validate.
 - **Classification / metadata → *generated*.** The interpretive envelope — `trigger`, `observations`,
   `programs`, reference `essence` — is **generated** by milo (milo's interpretive work). It is bound by
-  **honesty**, not verbatim: every datum traces to what the Operator actually said; nothing fabricated.
+  **honesty**, not verbatim: every datum traces to what the Operator actually said; nothing fabricated —
+  **and nothing whose meaning differs from what he said** (disposed 2026-08-06 via #32; trace-to-source
+  alone proved too weak, since a normalized restatement still *traces* while asserting something else).
+
+  **Sanctioned transforms — prose may be enriched, meaning may not change.** A generated field may
+  correct spelling and grammar, adjust aesthetics and register, expand abbreviations (`vs.` → `versus`),
+  and convert first→third person (mandatory). The list is **closed, not illustrative**: a transform that
+  alters meaning is a violation by default, whatever its size. Two recurring cases are meaning-bearing
+  rather than aesthetic, and stay violations:
+  - **possession** — `my head` → `the head` changes *whose*, turning a first-person account of the
+    Operator's own cognition into generic description. Third-person conversion **preserves** possession
+    (`his head`); erasure is not a conversion.
+  - **hedging marks** — dropping the Operator's scare quotes (`"llm"` → `llm`) converts a term he
+    explicitly marked as borrowed or metaphorical into flat assertion, changing what the record says he
+    claimed.
 - **Data structure / durability → *mechanical*.** The envelope schema, serialization, filename, and
   `practice_day` bucket are produced **mechanically**, for consistent and reliable capture. Bound by
   **schema** (`dre_lint`, run inside the rub).

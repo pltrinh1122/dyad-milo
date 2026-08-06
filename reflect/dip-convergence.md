@@ -509,6 +509,33 @@ Two findings the `d-sense` Ground produced that the report did not have:
     with a hash of its own source (ADR-0013) — reporting, not enforcement; the enforcement half
     (canonical-source resolution) stays open.
 
+## Honesty gains meaning-preservation — the rule was under-specified (2026-08-06, #32, ADR-0007 addendum)
+
+Four consecutive records held by `d-rub-with-land` for one class: generated fields normalizing the
+Operator's language while the body stayed byte-verbatim. The `d-sense` Ground found the report's own
+framing wrong in two ways, and both mattered:
+
+- **It was not a validator gap.** #32 filed itself as "the same shape as ADR-0012." But ADR-0012 sat in
+  the **mechanical/schema** layer — `dre_lint`'s own turf — while this sits in the **generated/honesty**
+  layer, which the three-layer model assigns to the adversary. Same-shape framing would have put a
+  voice-fidelity rule inside the schema linter.
+- **The rule was not being violated — it was under-specified.** All four instances *satisfied*
+  trace-to-source: `the chest` does trace to `my chest`, and nothing was fabricated. A rule can be fully
+  obeyed and still permit the thing it exists to prevent.
+
+Operator disposition: *faithful capture covers only the Operator's input; generated fields may enrich
+prose through spelling/grammar/aesthetics **without altering meaning**.* The cut lands on **meaning**, not
+on surface markings — narrower and better than the "preserve every marking" rule the Agent had proposed,
+which would have forbidden `vs.` → `versus`.
+
+13. **A rule obeyed can still fail; check what it permits, not just whether it held.** The four holds were
+    detected 4/4 by the adversary and still recurred 4/4 — detection was never the failure. Asking *"is the
+    rule being followed?"* returned yes every time; only *"what does the rule allow?"* found the defect.
+    Corollary, recorded because it cost something: applying the disposed rule **retires two of the four
+    instances** (`vs.`→`versus` and a grammar fix were never violations). The pattern is real and its
+    frequency claim was half air — the evidence that motivates a fix and the rule that resolves it can
+    disagree, and the honest move is to say so rather than let the filing stand unamended.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
