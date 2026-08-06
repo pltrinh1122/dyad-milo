@@ -33,11 +33,23 @@ Exit 0 = all pass; exit 1 = itemized failures on stdout; exit 2 = usage.
 """
 
 import datetime as dt
+import hashlib
 import re
 import sys
 from pathlib import Path
 
 import yaml
+
+
+def source_stamp():
+    """Short content hash of this validator's own source — see issue #33/ADR-0013.
+
+    Deliberately duplicated across the three linters rather than shared: they
+    already each carry their own ``split_frontmatter``, and whether to factor
+    out a common module is the open question in issue #31. Four lines of
+    duplication is the cheaper side of that trade until it is disposed.
+    """
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REQUIRED_SLOTS = ("program", "program_telos")   # the pgm-operating-invariant
@@ -125,16 +137,17 @@ def main(argv):
     if not paths:
         print("usage: pgm_lint.py PROGRAM.md [PROGRAM.md ...]")
         return 2
+    stamp = source_stamp()
     total = 0
     for path in paths:
         errors = lint(path)
         if errors:
             total += len(errors)
-            print(f"[PGM-LINT] FAIL: {path} — {len(errors)} violation(s):")
+            print(f"[PGM-LINT] FAIL: {path} (pgm_lint@{stamp}) — {len(errors)} violation(s):")
             for err in errors:
                 print(f"  - {err}")
         else:
-            print(f"[PGM-LINT] PASS: {path}")
+            print(f"[PGM-LINT] PASS: {path} (pgm_lint@{stamp})")
     return 1 if total else 0
 
 

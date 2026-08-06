@@ -39,12 +39,29 @@ Exit 0 = all pass; exit 1 = itemized failures on stdout.
 """
 
 import datetime as dt
+import hashlib
 import re
 import sys
 from pathlib import Path
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import yaml
+
+
+def source_stamp():
+    """Short content hash of this validator's own source.
+
+    A gate claim is only as good as the tool that made it, and a superseded
+    linter reports PASS indistinguishably from the canonical one — a 17-day-stale
+    checkout once ran a `dre_lint` with no capture-fidelity gate while reporting
+    clean. Stamping the output with the validator's own content hash makes a
+    stale run **self-identifying**, so nothing depends on remembering to check
+    (issue #33, ADR-0013).
+
+    Content, not commit distance: of the 21 commits in that stale window, only
+    one touched this file — distance is a 95%-noise proxy for what actually ran.
+    """
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 FILENAME_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})(?:-\d+)?$")
@@ -360,16 +377,17 @@ def main(argv):
     if not paths:
         print("usage: dre_lint.py RECORD.md [RECORD.md ...]")
         return 2
+    stamp = source_stamp()
     total = 0
     for path in paths:
         errors = lint(path)
         if errors:
             total += len(errors)
-            print(f"[DRE-LINT] FAIL: {path} — {len(errors)} violation(s):")
+            print(f"[DRE-LINT] FAIL: {path} (dre_lint@{stamp}) — {len(errors)} violation(s):")
             for err in errors:
                 print(f"  - {err}")
         else:
-            print(f"[DRE-LINT] PASS: {path}")
+            print(f"[DRE-LINT] PASS: {path} (dre_lint@{stamp})")
     return 1 if total else 0
 
 

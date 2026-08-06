@@ -388,3 +388,49 @@ def test_all_existing_fixtures_stay_clean(tmp_path):
                      (SUBCLASS_FM, "2026-07-19-01.md"),
                      (MULTIPROGRAM_FM, "2026-07-19-02.md")):
         assert lint(write_record(tmp_path, fm=fm, name=name)) == []
+
+
+# --- provenance: a PASS must say which validator produced it ------------------
+#
+# A gate claim is only as good as the tool that made it. A superseded linter
+# reports PASS indistinguishably from the canonical one, so "dre_lint PASS" was
+# unattributable — a 17-day-stale checkout ran a validator with no capture-
+# fidelity gate while reporting clean (issue #33, ADR-0013).
+
+import hashlib
+import re as _re
+from pathlib import Path as _Path
+
+from skills import dre_lint
+
+
+def test_source_stamp_is_hash_of_own_source():
+    src = _Path(dre_lint.__file__).read_bytes()
+    assert dre_lint.source_stamp() == hashlib.sha256(src).hexdigest()[:12]
+
+
+def test_source_stamp_shape():
+    assert _re.fullmatch(r"[0-9a-f]{12}", dre_lint.source_stamp())
+
+
+def test_pass_output_carries_the_stamp(tmp_path, capsys):
+    rec = write_record(tmp_path)
+    dre_lint.main(["dre_lint.py", str(rec)])
+    out = capsys.readouterr().out
+    assert "PASS" in out
+    assert f"dre_lint@{dre_lint.source_stamp()}" in out
+
+
+def test_fail_output_carries_the_stamp(tmp_path, capsys):
+    rec = write_record(tmp_path, body="\n")
+    dre_lint.main(["dre_lint.py", str(rec)])
+    out = capsys.readouterr().out
+    assert "FAIL" in out
+    assert f"dre_lint@{dre_lint.source_stamp()}" in out
+
+
+def test_stamp_changes_when_source_changes(tmp_path):
+    """A superseded validator must be distinguishable, which is the whole point."""
+    src = _Path(dre_lint.__file__).read_bytes()
+    assert (hashlib.sha256(src).hexdigest()[:12]
+            != hashlib.sha256(src + b"\n# edit\n").hexdigest()[:12])

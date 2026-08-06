@@ -169,3 +169,29 @@ methods: {riff: elicitation-mode}
 ---
 """
     assert lint(write_pgm(tmp_path, fm=fm, name="p.md")) == []
+
+
+# --- provenance: a PASS must say which validator produced it (issue #33) ------
+
+import hashlib
+import re as _re
+from pathlib import Path as _Path
+
+from skills import pgm_lint
+
+
+def test_source_stamp_is_hash_of_own_source():
+    src = _Path(pgm_lint.__file__).read_bytes()
+    assert pgm_lint.source_stamp() == hashlib.sha256(src).hexdigest()[:12]
+
+
+def test_source_stamp_shape():
+    assert _re.fullmatch(r"[0-9a-f]{12}", pgm_lint.source_stamp())
+
+
+def test_pass_output_carries_the_stamp(tmp_path, capsys):
+    prog = tmp_path / "inherits.md"
+    prog.write_text(INHERIT_FM + "\nA program definition body.\n")
+    pgm_lint.main(["pgm_lint.py", str(prog)])
+    out = capsys.readouterr().out
+    assert f"pgm_lint@{pgm_lint.source_stamp()}" in out
