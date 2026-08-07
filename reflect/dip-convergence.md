@@ -481,6 +481,61 @@ Grounding by execution found two things the report had not:
 The loop held again: practice reported and repaired only its own data, dev grounded → scoped → surfaced the
 spine, the Operator disposed three matters (scope · mechanism · ADR) before any code. n=2.
 
+## Validators self-identify — lesson #10, third surface (2026-08-06, #33, ADR-0013)
+
+A `milo:practice` thread ran ~17 days on a checkout 21 commits behind `main`, executing a
+`dre_lint` with **zero** occurrences of the ADR-0012 gate while reporting "PASS". Nothing
+under-gated landed — the adversary read the linter from `origin/main`, and ADR-0006's CI
+dual-checkout held — but **that correctness was prompt wording, not mechanism**.
+
+Two findings the `d-sense` Ground produced that the report did not have:
+
+- **The proposed signal was wrong.** #33 suggested surfacing "N commits behind." Of the 21
+  commits, **exactly 1 touched the validator** — 95% noise. And the converse appeared the same
+  session: this repo's own branch reported "behind main" while `dre_lint` was byte-identical to
+  canonical. Distance is noisy when harmless and silent when a 0-behind branch has diverged; a
+  signal that cries wolf 20 times in 21 is a new hiding place, not a fix. The right signal is the
+  **content identity of what executed**.
+- **The defect was mis-stated as a weak gate.** Both authoritative gates held. What failed was
+  *claim precision* — an advisory local check narrated as a gate result.
+
+12. **An ungrounded state claim is itself an unbacked gate.** Craft lesson #10 on its third
+    surface in one session: ADR-0012 (`dre_lint` structurally blind to what it validated), #29
+    (dyad-rt's hooks non-executable, so no guard ever fired), and this. Each was a claim with no
+    device behind it, and **each was caught by an Operator `d-rub`, never by a mechanism** — as
+    was a board-state claim of "four open issues" that was actually six. Vigilance was doing the
+    work a mechanism should. The portable form: **a gate claim must carry which gate ran**, or it
+    is an assertion wearing a gate's clothes. Closed for validators by stamping each one's output
+    with a hash of its own source (ADR-0013) — reporting, not enforcement; the enforcement half
+    (canonical-source resolution) stays open.
+
+## Honesty gains meaning-preservation — the rule was under-specified (2026-08-06, #32, ADR-0007 addendum)
+
+Four consecutive records held by `d-rub-with-land` for one class: generated fields normalizing the
+Operator's language while the body stayed byte-verbatim. The `d-sense` Ground found the report's own
+framing wrong in two ways, and both mattered:
+
+- **It was not a validator gap.** #32 filed itself as "the same shape as ADR-0012." But ADR-0012 sat in
+  the **mechanical/schema** layer — `dre_lint`'s own turf — while this sits in the **generated/honesty**
+  layer, which the three-layer model assigns to the adversary. Same-shape framing would have put a
+  voice-fidelity rule inside the schema linter.
+- **The rule was not being violated — it was under-specified.** All four instances *satisfied*
+  trace-to-source: `the chest` does trace to `my chest`, and nothing was fabricated. A rule can be fully
+  obeyed and still permit the thing it exists to prevent.
+
+Operator disposition: *faithful capture covers only the Operator's input; generated fields may enrich
+prose through spelling/grammar/aesthetics **without altering meaning**.* The cut lands on **meaning**, not
+on surface markings — narrower and better than the "preserve every marking" rule the Agent had proposed,
+which would have forbidden `vs.` → `versus`.
+
+13. **A rule obeyed can still fail; check what it permits, not just whether it held.** The four holds were
+    detected 4/4 by the adversary and still recurred 4/4 — detection was never the failure. Asking *"is the
+    rule being followed?"* returned yes every time; only *"what does the rule allow?"* found the defect.
+    Corollary, recorded because it cost something: applying the disposed rule **retires two of the four
+    instances** (`vs.`→`versus` and a grammar fix were never violations). The pattern is real and its
+    frequency claim was half air — the evidence that motivates a fix and the rule that resolves it can
+    disagree, and the honest move is to say so rather than let the filing stand unamended.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

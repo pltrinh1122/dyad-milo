@@ -118,3 +118,27 @@ def test_missing_frontmatter_block_fails(tmp_path):
     readme.write_text("# Just a plain readme\n")
     errors = lint(readme)
     assert any("frontmatter" in e for e in errors)
+
+
+# --- provenance: a PASS must say which validator produced it (issue #33) ------
+
+import hashlib
+import re as _re
+from pathlib import Path as _Path
+
+from skills import readme_lint
+
+
+def test_source_stamp_is_hash_of_own_source():
+    src = _Path(readme_lint.__file__).read_bytes()
+    assert readme_lint.source_stamp() == hashlib.sha256(src).hexdigest()[:12]
+
+
+def test_source_stamp_shape():
+    assert _re.fullmatch(r"[0-9a-f]{12}", readme_lint.source_stamp())
+
+
+def test_pass_output_carries_the_stamp(capsys):
+    readme_lint.main(["readme_lint.py", str(REPO_ROOT / "README.md")])
+    out = capsys.readouterr().out
+    assert f"readme_lint@{readme_lint.source_stamp()}" in out

@@ -23,11 +23,20 @@ Usage: python3 skills/readme_lint.py [path/to/README.md]
 Exit 0 = pass; exit 1 = itemized failures on stdout.
 """
 
+import hashlib
 import re
 import sys
 from pathlib import Path
 
 import yaml
+
+
+def source_stamp():
+    """Short content hash of this validator's own source — see issue #33/ADR-0013.
+
+    Duplicated per-linter by design; see the note in ``pgm_lint.source_stamp``.
+    """
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
 
 REQUIRED_FIELDS = [
     "doc", "kind", "genre", "rule", "belief", "grade", "coverage",
@@ -141,13 +150,15 @@ def lint(path):
 
 def main(argv):
     path = argv[1] if len(argv) > 1 else "README.md"
+    stamp = source_stamp()
     errors = lint(path)
     if errors:
-        print(f"[README-LINT] FAIL: {path} — {len(errors)} violation(s):")
+        print(f"[README-LINT] FAIL: {path} (readme_lint@{stamp}) — {len(errors)} violation(s):")
         for e in errors:
             print(f"  - {e}")
         return 1
-    print(f"[README-LINT] PASS: {path} conforms to the falsifiable-manifesto form.")
+    print(f"[README-LINT] PASS: {path} (readme_lint@{stamp}) "
+          "conforms to the falsifiable-manifesto form.")
     return 0
 
 
