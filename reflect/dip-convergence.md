@@ -536,6 +536,33 @@ which would have forbidden `vs.` → `versus`.
     frequency claim was half air — the evidence that motivates a fix and the rule that resolves it can
     disagree, and the honest move is to say so rather than let the filing stand unamended.
 
+## Construction over validation — a gate's own premise questioned (2026-08-07, ADR-0016)
+
+An Operator riff asked when records should move to structured invocation. Decomposing it answered
+it: the proposal carried **structured invocation** and **structured storage**, with completely
+different cost curves. Invocation was already earned; storage is not, and its cost is the
+constitution — `d-rub-with-land` reads a file, HITL is a forge merge, ADR-0006's CI checks out a
+repo, the approval lifecycle keys off commit identity. A database has no diff, no PR, no signed
+merge. When query pressure does arrive, the answer is a **derived** database rebuilt from files,
+not a migration.
+
+14. **A defect class you can make impossible beats one you gate — and the gate rarely says so.**
+    ADR-0012 gates ` #` truncation in `d-re` records. The riff found that ADR-0012 *exists only
+    because records are hand-serialized*: a serializer quotes the value automatically, so the
+    defect is an artifact of **how the artifact is produced**, not of its schema. Five of
+    `dre_lint`'s ten checks stop being failable under construction — the bucket and filename become
+    **computed rather than checked**. The portable form: when a gate keeps firing, ask what
+    *produces* the thing it gates, because a validator can only ever be as good as the process it
+    is compensating for. The guard that must travel with it: **the constructor does not retire the
+    validator.** One is generator-side, the other validator-side, and collapsing them because the
+    generator is correct is precisely the Generate/Validate collapse the Contract forbids — the
+    hand-edit path never goes away.
+
+Also recorded, because it nearly went the wrong way: the *modifier* half looked like a symmetric
+win and isn't. A naive parse→modify→dump of one field rewrote 27 of 16 frontmatter lines. No value
+changed and the record still linted — **safe but illegible** — which is disqualifying when the
+review path that gates every land runs on the diff. Deferred to its own PR on Operator disposition.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
