@@ -23,7 +23,14 @@ from pathlib import Path
 
 import yaml
 
-from skills.dre_lint import _as_date, split_frontmatter
+# Invoked as a script, only `skills/` is on sys.path and the package import
+# below fails — so the documented `python3 skills/dre_adherence.py RECORDS_DIR`
+# (docstring above; `programs/reduce-anxiety.md`) had never actually run. Fixed
+# alongside dre_update, which hit the identical defect (ADR-0017).
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from skills.dre_lint import _as_date, split_frontmatter  # noqa: E402
 
 DEFAULT_ENROLLMENT = dt.date(2026, 7, 18)
 BP0_ALIASES = {"bp#0", "bp0", "behavioral-program #0", "behavioral-program-0",

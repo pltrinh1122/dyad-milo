@@ -123,3 +123,18 @@ def test_rolling_windows(tmp_path):
     # since-start eligible = 18 Jul .. 20 Aug inclusive = 34 days
     assert rep["since_start"]["eligible"] == 34
     assert rep["since_start"]["covered"] == 1
+
+
+def test_runs_as_a_script(tmp_path):
+    """The invocation its own docstring and programs/reduce-anxiety.md document.
+
+    It had never worked: the `skills` package import fails when the module is
+    run as a script (ADR-0017).
+    """
+    import subprocess
+    import sys as _sys
+    from pathlib import Path as _Path
+    repo = _Path(__file__).resolve().parent.parent
+    res = subprocess.run([_sys.executable, str(repo / "skills" / "dre_adherence.py"),
+                          str(tmp_path)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
