@@ -1,6 +1,7 @@
 # ADR-0003 — adherence analytics shape
 
-- **Status:** accepted (2026-07-18)
+- **Status:** proposed (2026-07-18)
+- **Urgency:** high — self-ratified in the creating commit — never independently reviewed
 - **Drift-dimension:** none (within spec §§ 9, 13) — recorded as a key build decision.
 
 ## Context
@@ -29,3 +30,9 @@ party deps beyond the repo's existing `pyyaml`):
 - The tool is run against the private repo path; the public repo holds only the tool + tests
   with synthetic fixtures (no PII).
 - `--as-of DATE` is supported so windows are reproducible/testable without a real clock.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The analytics shape has carried every adherence question asked of it, and `dre_adherence` remained program-agnostic through the `programs[]` and `pgm-` arcs without amendment — the strongest available evidence that the shape generalised correctly.

@@ -1,7 +1,7 @@
-# ADR-0015 — canonical-source resolution for gate invocations (DECISION OPEN)
+# ADR-0015 — canonical-source resolution for gate invocations
 
-- **Status:** **proposed — decision NOT made.** The escalation artifact for a deferred
-  drift-boundary decision (spec § 13), not a record of a disposal.
+- **Status:** proposed (2026-08-08)
+- **Urgency:** medium — decision disposed 2026-08-08 (option D); ratification confirms a fresh call
 - **Drift-dimension:** coverage — no mechanism resolves *which* validator an authoritative
   invocation should run. A **constraint edge** appears only in options that would make a gate claim
   refuse rather than warn.
@@ -113,7 +113,7 @@ dyad-rt hooks) and on #33's own account of the sub-agent prompts, which I could 
 invocation path differs materially from what that account describes, option C's and D's wiring
 points may be wrong even though the trade-offs stand.
 
-## Agent leaning (not a disposal)
+## Agent lean
 
 **D, scoped to authoritative invocations**, with A as the defensible wu-wei fallback.
 
@@ -129,9 +129,24 @@ linters (#31). That is a legitimate disposal, not a dodge.
 I would not choose B or C: B cannot separate development from authoritative use, and C's hook
 points don't line up with the moment a gate claim is made.
 
-## Consequences of leaving this open
+## Disposition
 
-ADR-0013's stamp stands, and ADR-0006's CI path remains mechanized — **the authoritative land path
-is not exposed** while this is undisposed. What stays unmechanized is the interactive path, where
-correctness continues to rest on prompt wording and habit. Recorded here so that dependency is
-tracked rather than resident in a closed PR description.
+**Operator-disposed 2026-08-08: option D**, scoped to authoritative invocations — a gate
+invocation resolves its validator from `origin/main`; development invocations keep the working-tree
+copy and are marked non-canonical by ADR-0013's stamp.
+
+**Fail-closed is part of the disposal:** if canonical cannot be resolved, the gate claim is
+*refused*, never silently satisfied from the local copy — a silent fallback would reproduce the
+defect while appearing to fix it.
+
+**The open design question it inherits:** `mode` is a data flow nothing carries today. The DFD
+framing surfaced it — process 1 consumes an input that does not exist. The safe default is
+**authoritative**: an undeclared invocation resolves canonical, and development is the explicit
+opt-in, mirroring dyad-rt's `--no-verify` (the safe path free, the unsafe one a deliberate act).
+Not built; this ADR records the shape.
+
+## Consequences of the shape chosen
+
+ADR-0013's stamp stands and ADR-0006's CI path remains mechanized, so **the authoritative land path
+was never exposed** while this sat open. Until D is built, the interactive path still rests on
+prompt wording and habit — which is the dependency the disposal removes, not one it accepts.

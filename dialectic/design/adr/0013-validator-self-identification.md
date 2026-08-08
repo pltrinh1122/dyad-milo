@@ -1,6 +1,7 @@
 # ADR-0013 — validators self-identify (a gate claim carries which gate ran)
 
-- **Status:** proposed (2026-08-06) — Operator-disposed (`d-land: 33`); awaiting PR review
+- **Status:** proposed (2026-08-06)
+- **Urgency:** low — coverage, Operator-disposed 2026-08-06; ratification is near-formality
 - **Drift-dimension:** coverage (spec § 12) — no mechanism made validator identity visible.
   Not constraint: `§ Principles` already binds gate claims via *verify by execution*; only
   enforcement was missing. Closes issue #33.
@@ -86,3 +87,9 @@ holding: **an ungrounded state claim is itself an unbacked gate.** Every instanc
 stale toolchain, the dead hooks, and a board-state claim of "four open issues" when there were
 six — was caught by an Operator `d-rub`, never by a mechanism. This ADR converts one of those
 from vigilance into a device.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** Content identity rather than commit distance was the right signal — grounded at the time by 20 of 21 commits leaving the validator byte-identical. The stamp reports rather than enforces, and the enforcement half is tracked as ADR-0015.

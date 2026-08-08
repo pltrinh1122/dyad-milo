@@ -1,6 +1,7 @@
 # ADR-0011 — the `pgm-` sub-agent delegation mechanism
 
-- **Status:** proposed (2026-07-26) — Operator-disposed (`d-sense`, gh-issue #23); awaiting PR review
+- **Status:** proposed (2026-07-26)
+- **Urgency:** medium — coverage; builds the mechanism ADR-0010 deferred
 - **Drift-dimension:** **coverage** — builds the mechanism ADR-0010 § 4 deferred (program execution
   delegated to a scoped sub-agent). No anchor change (`§ Lexicon` already carries "executes delegated to a
   scoped sub-agent"; wu-wei).
@@ -77,3 +78,9 @@ wu-wei). For now the contract carries `delegation-hermetic` as a stated invarian
 - **Deferred:** the hard-sandbox mechanization (honest gap); the promotion ("going solo"); a repeated-loop
   grade (n=1 here).
 - Grade **n=1** — first exercised this arc; unproven as a repeated loop.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify, with the honest gap stated in the ADR.** Delegation was grounded n=1 by execution. Hermeticity remains **prompt-enforced, not sandbox-enforced** — a delegate can read milo's anchor — and that is named in the ADR rather than papered over. Ratifying accepts a mechanism whose fence is not yet real.

@@ -1,6 +1,7 @@
 # ADR-0008 — practice→dev hand-over (d-fb / d-sense) + the d-re-mode-invariant
 
-- **Status:** proposed (2026-07-20) — Operator-declared invariant + `d-arc` goal; awaiting PR review
+- **Status:** proposed (2026-07-20)
+- **Urgency:** high — constraint — governs where craft/mechanism changes may be authored
 - **Drift-dimension:** **constraint** — governs *where* craft/mechanism changes may be authored (a mode
   boundary), plus **coverage** (two new interface tokens + a protocol). The invariant is Operator-declared
   (gh-issue #14); this ADR is the codification/escalation artifact (§ 13).
@@ -46,3 +47,9 @@ implementation).
 - **Not mechanically enforced yet** (honest gap): the invariant rests on the mode being honored, not on a
   guard. A branch-name marker + a dyad-rt check is the future mechanization (mechanism-over-compliance) —
   built only if the boundary is crossed in practice.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The practice→dev seam has carried four hand-overs (#17, #26, #32, #33) without loss. Its known gap — no vehicle for a *dev*-surfaced need — is tracked separately as issue #28 and is an absence in the protocol, not an error in this decision.

@@ -1,6 +1,7 @@
 # ADR-0005 — reduce-anxiety: the first additional behavioral program
 
-- **Status:** proposed (2026-07-19) — Operator-disposed scope; awaiting PR review
+- **Status:** proposed (2026-07-19)
+- **Urgency:** medium — coverage; the first program, exercised
 - **Drift-dimension:** coverage — the first program materialized beyond the implicit BP#0.
   Surfaced at `d-start`, scope Operator-disposed; disposed at merge (no-self-ratify).
 
@@ -45,3 +46,9 @@ from an empty discriminator into its first materialization (mechanism: ADR-0004)
 - Adherence for `reduce-anxiety` is a **separate meter** from the base (BP#0). A base-only day
   (an entry with no `reduce-anxiety`) is a lapse *for the program*, not for the base — met with
   compassion, no failure-marker (`craft_invariant`).
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The first program materialised and is still enrolled. Note its documented invocation `python3 skills/dre_adherence.py …` was **broken from the start** and is fixed in ADR-0017 — a defect in the tooling it points at, not in this decision.

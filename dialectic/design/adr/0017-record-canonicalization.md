@@ -1,7 +1,7 @@
 # ADR-0017 — records are canonically serialized (the modifier)
 
-- **Status:** proposed (2026-08-08) — Operator-disposed (*"no surgical text edit; move forward
-  with wholesale canonicalization"*); awaiting PR review
+- **Status:** proposed (2026-08-08)
+- **Urgency:** low — coverage, Operator-disposed 2026-08-08; amends ADR-0001's serialization only
 - **Drift-dimension:** coverage for the modifier; **amends ADR-0001** — the representation is
   unchanged (YAML frontmatter + verbatim body), but its *serialization* is now normative rather
   than free.
@@ -96,3 +96,7 @@ the *script*, so the documented entry point was untested surface. Both modules n
 tests exercising the real invocation. This is craft lesson #10 again — *a claimed gate is a
 liability until a mechanism backs it* — on a **usage claim** rather than a gate: a documented
 command with no test is a claim with nothing behind it.
+
+## Agent lean
+
+**Ratify.** Canonicalization was grounded before it was built (2 changed lines against 27) and is asserted value-preserving rather than assumed. Its cost is real and lands on the Operator: 25 private records need a one-time pass this repo cannot run.

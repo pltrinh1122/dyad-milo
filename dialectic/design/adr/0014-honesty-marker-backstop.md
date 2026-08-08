@@ -1,8 +1,7 @@
-# ADR-0014 — mechanical backstop for meaning-bearing markers (DECISION OPEN)
+# ADR-0014 — mechanical backstop for meaning-bearing markers
 
-- **Status:** **proposed — decision NOT made.** This ADR is the escalation artifact, not a record
-  of a disposal (spec § 13: *"a decision an ADR finds crosses into drift is escalated (HITL), not
-  self-ratified — the ADR is the escalation artifact"*).
+- **Status:** proposed (2026-08-08)
+- **Urgency:** medium — decision disposed 2026-08-08 (option C); ratification confirms a fresh call
 - **Drift-dimension:** coverage, with a **constraint edge** — option B would move a rule across the
   three-layer capture model's boundary, which is an invariant of ADR-0007's model.
 - **Origin:** issue #32 disposition 3, deferred at `d-sense` and again at `d-land`.
@@ -91,7 +90,7 @@ the real corpus on the private side, reporting only counts (records scanned, fla
 judged false). If the decision turns on false-positive rate — and under option B it should — that
 measurement is the missing input, and it is cheap.
 
-## Agent leaning (not a disposal)
+## Agent lean
 
 **C**, and this **revises the leaning recorded at `d-sense`**, which framed the choice as
 linter-versus-adversary with the linter holding the CI advantage. That framing missed the
@@ -104,9 +103,20 @@ instrument rather than a new guarantee. If the Operator's priority is an indepen
 fires regardless — the #29/#30/#33 property — only B delivers it, and then the false-positive rate
 must be measured first.
 
-## Consequences of leaving this open
+## Disposition
 
-The addendum's rule stands and is enforced by the adversary either way; **nothing is unguarded
-while this is undisposed.** What is deferred is whether that enforcement gains a mechanical
-instrument. Recorded here so the deferral is tracked rather than resident in a closed PR
-description — the failure mode issue #28 exists to name.
+**Operator-disposed 2026-08-08: option C** — a separate honesty-layer validator, invoked by the
+adversary during `d-rub-with-land`, rather than folded into `dre_lint`.
+
+The three-layer boundary holds: the schema linter does not become body-aware, and the heuristic's
+flags land in front of **judgment**, which can dismiss a false positive where a blocking CI gate
+cannot. The check itself is **not built** — this ADR records the shape, and building it is a
+separate disposed step.
+
+## Consequences of the shape chosen
+
+The addendum's rule stands and is enforced by the adversary regardless; **nothing was unguarded
+while this sat open.** Option C makes the honesty layer's existing mechanism sharper rather than
+adding an independent one — the honest limit, kept in view: a land that skips the rub skips the
+check. The 3-synthetic-case evidence limit above also stands; measuring a real false-positive rate
+against the private corpus (counts only, no PII) remains the cheap way to close it.

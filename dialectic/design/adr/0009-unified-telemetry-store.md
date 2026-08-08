@@ -1,6 +1,7 @@
 # ADR-0009 — unified-by-client telemetry store (two homes, two axes)
 
-- **Status:** proposed (2026-07-24) — Operator-ratified disposition (gh-issue #19); awaiting PR review
+- **Status:** proposed (2026-07-24)
+- **Urgency:** high — constraint — amends the documented § Externality boundary
 - **Note (2026-07-26, ADR-0010):** the **cross-dyad** case here is **retired**. Under the `pgm-` subclass
   model, every program (incl. `emerging-identity`) is a milo `pgm-` in the one store, so there is no
   "program owned by another dyad": the store unifies milo's own programs, the registry's cross-dyad
@@ -116,3 +117,9 @@ does now.
   **clients**). This arc is **one client, many programs/dyads** — orthogonal; the pin is untouched.
 - Rejected alternatives are pinned here against silent re-introduction (id-uniqueness and enrollment-home
   are real requirements the registry owns).
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The two-axis split (telemetry recording unifies; program definition stays distributed) survived the `pgm-` subclass arc, which retired its cross-dyad case by superseding rather than contradicting it. The ADR already carries that note.

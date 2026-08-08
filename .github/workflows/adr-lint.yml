@@ -1,0 +1,26 @@
+# Gates the ADR set's own form (ADR-0018). The trail is spec § 13's "reviewable trail of the
+# sensitive decisions" — an audit found 9 of 15 entries misreporting their state and 3 marked
+# `accepted` by the Agent in the commit that created them. This is the mechanism behind that.
+#
+# fetch-depth: 0 is load-bearing, not hygiene. The `accepted` check reads git history to verify
+# the accept-commit differs from the create-commit and landed via a separate merge. Under the
+# default shallow checkout that history is absent, and adr_lint is fail-closed — it would refuse
+# rather than pass, turning every ratified ADR red.
+name: adr-lint
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install pyyaml
+      - name: ADR form + ratification provenance
+        run: python3 skills/adr_lint.py dialectic/design/adr/*.md
