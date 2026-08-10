@@ -563,6 +563,27 @@ win and isn't. A naive parse→modify→dump of one field rewrote 27 of 16 front
 changed and the record still linted — **safe but illegible** — which is disqualifying when the
 review path that gates every land runs on the diff. Deferred to its own PR on Operator disposition.
 
+## Canonicalization, and a usage claim that never ran (2026-08-08, ADR-0017)
+
+The modifier half of the constructor arc. The naive shape looked symmetric with the constructor
+and wasn't: a one-field update rewrote **27 of 16** frontmatter lines. Checked rather than assumed
+— **no value changed** and it **still linted**, i.e. *safe but illegible*, which is disqualifying
+when the review path that gates every land reads the diff. Operator disposed **wholesale
+canonicalization** over a surgical edit; grounded first, the same edit from canonical form changes
+**2 lines**, and serialization is idempotent so the property doesn't decay.
+
+15. **A documented command with no test is a claim with nothing behind it.** Building the modifier
+    surfaced that `dre_adherence.py` had **never been runnable as a script** — the package import
+    resolves under pytest (repo root on `sys.path`) but not under `python3 skills/…`. Its own
+    docstring and `programs/reduce-anxiety.md` both document that exact invocation. **The tool that
+    measures the craft's own telos metric — adherence — could not be run the way its documentation
+    says.** Craft lesson #10 on a *usage* claim rather than a gate, and the seventh instance this
+    session. The mechanism gap was in the test shape, not the tests' rigour: the suite exercised
+    the **importable surface** and never the **documented entry point**, so the claim sat in a
+    blind spot no amount of unit coverage would reach. Closed by subprocess tests on both modules.
+    The portable form: **test the interface you document, not the one that is convenient to
+    import** — an entry point is part of the contract, and an untested one is a promise.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four
