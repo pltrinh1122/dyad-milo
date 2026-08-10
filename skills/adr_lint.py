@@ -89,10 +89,23 @@ def _git(*args):
     return out.stdout.strip() if out.returncode == 0 else None
 
 
-def _landing_merge(sha):
-    """The merge commit that brought ``sha`` onto main, or None."""
-    out = _git("log", "--merges", "--ancestry-path", "--format=%H",
-               f"{sha}..origin/main")
+def _main_ref():
+    """The ref standing for ``main``, or None if none resolves.
+
+    Checkouts differ in which refs they create — a CI job may land in detached
+    HEAD with no remote-tracking branch. Resolving defensively and **reporting**
+    when none is found is the difference between a check that ran and a check
+    that silently didn't (craft lesson #10).
+    """
+    for ref in ("origin/main", "refs/remotes/origin/main", "main"):
+        if _git("rev-parse", "--verify", "-q", ref) is not None:
+            return ref
+    return None
+
+
+def _landing_merge(sha, main_ref):
+    """The merge commit that brought ``sha`` onto main, or None if not merged."""
+    out = _git("log", "--merges", "--ancestry-path", "--format=%H", f"{sha}..{main_ref}")
     if out is None:
         return None
     merges = [line for line in out.splitlines() if line.strip()]
@@ -120,7 +133,16 @@ def check_accept_provenance(path):
         return [f"accepted was set by the same commit that created the ADR "
                 f"({accept_sha[:7]}) — that is self-ratification, not review "
                 f"(ADR-0018)"]
-    create_merge, accept_merge = _landing_merge(create_sha), _landing_merge(accept_sha)
+    main_ref = _main_ref()
+    if main_ref is None:
+        # Silently skipping here would leave a gate that reports PASS without
+        # having run — the defect this whole ADR set is about. Say so instead.
+        errors.append(
+            "accepted: cannot resolve a `main` ref, so the separate-PR check could "
+            "not run — refusing to pass it silently (CI must fetch origin/main)")
+        return errors
+    create_merge = _landing_merge(create_sha, main_ref)
+    accept_merge = _landing_merge(accept_sha, main_ref)
     if create_merge and accept_merge and create_merge == accept_merge:
         errors.append(
             f"accepted landed in the same PR as the ADR itself (merge "

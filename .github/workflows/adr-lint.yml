@@ -22,5 +22,7 @@ jobs:
         with:
           python-version: "3.x"
       - run: pip install pyyaml
+      - name: Ensure the main ref is present (check 5 needs it; fail-closed without)
+        run: git fetch origin main:refs/remotes/origin/main --force || true
       - name: ADR form + ratification provenance
         run: python3 skills/adr_lint.py dialectic/design/adr/*.md

@@ -190,3 +190,37 @@ def test_runs_as_a_script(tmp_path):
     res = subprocess.run([_sys.executable, str(repo / "skills" / "adr_lint.py"),
                           str(write(tmp_path))], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
+
+
+# --- the check must not silently skip -------------------------------------
+#
+# Found by probing a CI-like checkout before it bit: when no `main` ref
+# resolved, the separate-PR half of check 5 returned None on both sides and
+# quietly did nothing — a gate reporting PASS without having run, which is the
+# exact defect ADR-0018 exists to prevent. It now refuses instead.
+
+def test_accepted_without_a_main_ref_refuses_rather_than_skipping(tmp_path, monkeypatch):
+    run = git_repo(tmp_path)
+    subprocess.run(("git", "branch", "-m", "trunk"), cwd=tmp_path, check=True,
+                   capture_output=True)
+    adr = write(tmp_path)
+    run("add", "-A")
+    run("commit", "-q", "-m", "add ADR as proposed")
+    adr.write_text(ACCEPTED, encoding="utf-8")
+    run("add", "-A")
+    run("commit", "-q", "-m", "review pass: ratify")
+    monkeypatch.chdir(tmp_path)
+    errors = lint(adr.name)
+    assert any("cannot resolve a `main` ref" in e for e in errors)
+
+
+def test_main_ref_resolution_prefers_origin_then_local(tmp_path, monkeypatch):
+    git_repo(tmp_path)
+    monkeypatch.chdir(tmp_path)
+    from skills.adr_lint import _main_ref
+    assert _main_ref() is None          # no commits yet — nothing resolves
+    (tmp_path / "f").write_text("x")
+    subprocess.run(("git", "add", "-A"), cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run(("git", "commit", "-qm", "c"), cwd=tmp_path, check=True,
+                   capture_output=True)
+    assert _main_ref() == "main"        # falls back to the local branch
