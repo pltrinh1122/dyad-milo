@@ -1,6 +1,7 @@
 # ADR-0006 — private-record linting via CI-time dual-checkout
 
-- **Status:** proposed (2026-07-19) — Operator-disposed strategy; awaiting PR review
+- **Status:** proposed (2026-07-19)
+- **Urgency:** low — infra realizing an existing intent; proven by its CI running
 - **Drift-dimension:** none (infra; realizes spec § 13's validator intent) — recorded as a key
   build decision. Closes the gap tracked in issue #10.
 
@@ -44,3 +45,9 @@ python3 .dyad-milo-public/skills/dre_lint.py reflections/*.md
   Python test pair in the public repo.
 - The public `dyad-milo` `tests.yml` job is unchanged (synthetic fixtures only, by design —
   ADR-0003); record-linting is the private repo's job.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The dual-checkout closed a claimed gate that had nothing behind it (craft lesson #10) and has run since. Its recorded trade-off — tracking `main` means a linter change can turn private CI red with no private change — is the *intended* drift signal, and ADR-0012 exercised exactly that path.

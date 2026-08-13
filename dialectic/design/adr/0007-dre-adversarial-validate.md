@@ -1,7 +1,7 @@
 # ADR-0007 — d-re closes with an adversarial-validate (`d-rub-with-land`)
 
-- **Status:** proposed (2026-07-20) — Operator-directed (`d-re-process-constraints`); **awaiting PR
-  review. This meta-change is human-disposed at merge — it must not self-ratify.**
+- **Status:** proposed (2026-07-20)
+- **Urgency:** high — constraint — relocates HITL and touches no-self-ratify itself
 - **Drift-dimension:** constraint — changes how `main` advances on `d-re` records: the adversarial-validate
   lands autonomously, and **HITL relocates from a pre-land PR-gate to a post-land validation on `main`** —
   the Operator reviews the *landed outcome*, not the PR. HITL is **not removed, it moves downstream**.
@@ -155,3 +155,9 @@ sub-agent's judgment), consistent with ADR-0002's Builder-vs-Enforcer line. Whet
 backstop** for the two known markers — and whether that belongs in `dre_lint`, which would make the schema
 linter body-aware for the first time and cross the three-layer boundary — remains **open** (#32
 disposition 3), deliberately not self-ratified here.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify, with its own caveats intact.** The adversarial-validate has now caught the #32 class **4 times in 4 opportunities** — the strongest lived evidence in the set. Its honest n=1 caveats still stand, and the 2026-08-06 addendum tightened the honesty rule it defines rather than replacing it.

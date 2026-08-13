@@ -1,6 +1,7 @@
 # ADR-0016 — a constructor for `d-re` records (construction over validation)
 
-- **Status:** proposed (2026-08-07) — Operator-disposed (`d-sense`, two-PR split); awaiting PR review
+- **Status:** proposed (2026-08-07)
+- **Urgency:** low — coverage, Operator-disposed 2026-08-07; new tooling, no invariant moved
 - **Drift-dimension:** coverage — new tooling on the capture path; no invariant moves. ADR-0001's
   representation is unchanged, ADR-0007's un-gated-capture non-goal is respected, and `dre_lint`
   keeps its role.
@@ -96,3 +97,7 @@ existing client records and re-opens ADR-0001. Not disposed here.
   parametrized #26 regression over five `#`-bearing values, DST-correct bucket computation across
   the UTC boundary, filename sequencing, and verbatim-body preservation of a literal `---`. The
   integration proof is that constructed records are run through the **canonical `dre_lint`**.
+
+## Agent lean
+
+**Ratify.** The constructor's claim was verified end-to-end: the exact #26 value is auto-quoted by construction, and five `dre_lint` checks become unfailable. The guard that matters — `dre_lint` is not retired, because the hand-edit path never goes away — is stated in the ADR and enforced by the tests.

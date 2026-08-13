@@ -1,6 +1,7 @@
 # ADR-0012 — capture-fidelity gated at the raw source (inline-comment truncation)
 
-- **Status:** proposed (2026-08-05) — Operator-disposed scope; awaiting PR review
+- **Status:** proposed (2026-08-05)
+- **Urgency:** low — coverage, Operator-disposed 2026-08-05; ratification is near-formality
 - **Drift-dimension:** coverage (a validator gap, spec § 12) **with a constraint edge** — the
   fail-closed *honesty* invariant (§ 2). Closes issue #26.
 
@@ -88,3 +89,9 @@ carrying part of that claim and could not honour it, because a post-parse valida
 blind to a parse-time loss. Eight landed records is the proof. The lesson generalizes past this
 defect: **a validator that reads only the parsed form can never gate fidelity of the source** —
 wherever a claim is about what is *written*, the check has to reach the raw text.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify, noting what ADR-0016 revealed about it.** The gate is correct and load-bearing for hand-edited records. But the constructor showed this ADR exists *because* records were hand-serialized — the defect is an artifact of production, not of schema. That does not weaken it; it narrows what it is load-bearing for.

@@ -1,6 +1,7 @@
 # ADR-0001 — d-re record representation
 
-- **Status:** accepted (2026-07-18)
+- **Status:** proposed (2026-07-18)
+- **Urgency:** high — self-ratified in the creating commit — the record asserts a review that never happened
 - **Drift-dimension:** coverage (representation of spec § 5) — within bounds; recorded for PR review.
 
 ## Context
@@ -30,3 +31,9 @@ Single-source: the linter validates the frontmatter; nothing to keep in sync.
   no body/frontmatter drift.
 - The body stays free-flowing; presence-not-quality lives there (the linter never gates on body
   length).
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** Single-source frontmatter has held for three weeks and the drift it was chosen to prevent (body/frontmatter divergence) has not appeared. Its cost — verbose frontmatter for reference-heavy entries — was accepted explicitly and has not bitten. ADR-0017 amends its serialization without disturbing the representation.

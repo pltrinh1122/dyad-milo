@@ -1,6 +1,7 @@
 # ADR-0010 — the `pgm-` program abstraction: a four-slot subclass of the dyad
 
-- **Status:** proposed (2026-07-26) — Operator-authored via a riff-arc (`d-sense #21`); awaiting PR review
+- **Status:** proposed (2026-07-26)
+- **Urgency:** medium — coverage with a constraint edge; defines the program abstraction
 - **Drift-dimension:** **coverage** (defines the `program` abstraction the spec left thin) + **constraint**
   (a scope ceiling on `program`) + **goal-adjacent** (redefines what a program *is*). Every slot of this
   model was Operator-dictated on a `milo:dev` thread; milo:dev works the form (no-self-ratify holds).
@@ -110,3 +111,9 @@ enforces: required `program` + `program_telos`; `program_value`/`program_invaria
   delegation imperative** (`dyad-leo` `delegation-imperative-complete`) is a ready thing to borrow;
   `emerging-identity`'s own disposition (program-with-set-slots vs a future dyad).
 - **Grade n=0** — the model is unexercised; no `pgm-` has yet run under a delegated sub-agent.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** The subclass model produced a standalone craft lesson and was exercised to n=1 by execution, with one inherited and one divergent program live. Its deferred promotion trigger is recorded as deferred, not missing.

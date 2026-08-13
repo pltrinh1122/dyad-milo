@@ -584,6 +584,40 @@ canonicalization** over a surgical edit; grounded first, the same edit from cano
     The portable form: **test the interface you document, not the one that is convenient to
     import** — an entry point is part of the contract, and an untested one is a promise.
 
+## The trail was misreporting itself — ADR lifecycle (2026-08-08, ADR-0018)
+
+Asked which ADRs needed disposition, the artifact built to answer that could not: **9 of 15** read
+`awaiting PR review` while living on `main`, and **3 claimed `accepted` having been marked so by the
+Agent in the very commit that created them** (`2769ed8`) — a self-ratification undetected for three
+weeks, in spec § 13's *"reviewable trail of the sensitive decisions."* The three claiming review
+were the worst rows, not the safe ones.
+
+Two design moves came out of it, both from the Operator refusing a proposal of mine:
+
+- **No third state.** I wanted `landed` between `proposed` and `accepted`. The Operator asked why —
+  and the answer is that merge state is **derivable from git**, so storing it duplicates a fact the
+  substrate already holds, in a place that drifts. That duplication *was* the defect. A third state
+  would have been a second hand-maintained copy: treating the symptom by extending the cause.
+- **No bundling.** Then the Operator proposed folding canonicalization into the approval pass for
+  efficiency, and changed their mind on the argument: **the agent lean has to exist before the
+  review, not arrive with it.** Otherwise one merge both authors the recommendation and enacts the
+  ratification — `2769ed8`'s shape at set scale, inside the mechanism built to prevent it.
+
+16. **Never persist what the substrate can derive.** `verify by execution` already says *don't
+    assert what you can check*; this is its storage twin. It explains, at once, nearly every defect
+    this session caught: nine stale ADR statuses (a hand-copy of git's merge state), a board claim
+    of "four open issues" that was six, a 17-day-stale toolchain (a held belief about which linter
+    was running), and — read the other way — why **ADR-0013's fix works**: stop asserting which
+    validator ran, read the hash from the artifact. Every instance a `d-rub` caught was a stored
+    copy of a derivable fact, quietly diverging from its source. The corollary for records: a field
+    that must be hand-updated is a defect waiting for a witness. Closed for ADRs by `adr_lint`,
+    which reads both git-derived facts rather than trusting a stored copy — and whose check 5,
+    against real history, reports `2769ed8` by name.
+
+Also recorded: one slot kept carrying two axes — labels (provenance vs disposition-state), status
+(review-outcome vs merge-state), and the proposal to move records to SQL (invocation vs storage).
+Separating the axes resolved all three. It has become this dyad's most reliable move.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

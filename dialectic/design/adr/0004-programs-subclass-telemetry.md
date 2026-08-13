@@ -1,6 +1,7 @@
 # ADR-0004 — shared observation telemetry (programs[] sub-class attachment)
 
-- **Status:** proposed (2026-07-19) — Operator-disposed scope + shape; awaiting PR review
+- **Status:** proposed (2026-07-19)
+- **Urgency:** medium — coverage, exercised for three weeks without friction
 - **Drift-dimension:** coverage — opens the mechanism spec §§ 6/14 explicitly **defer**
   ("the sub-class arc"). Surfaced at `d-start`; the Operator disposed the fuller scope
   ("also design the sub-class telemetry") and, against two acceptance criteria (below), the
@@ -73,3 +74,9 @@ Invariants (enforced by `dre_lint._check_observations`, proportionate — ADR-00
   as rejected (duplication; constraint drift) so a later edit does not silently re-introduce them.
 - The fuller CBT-intervention **restructuring** fields (spec § 3) remain deferred — added only when
   a rep pulls them (see ADR-0005). `observations[]` carries the capture front now.
+
+## Agent lean
+
+*Reconstructed 2026-08-08, not contemporaneous — this ADR carried no lean when written. Supplied from the record and its use since, per the backfill disposition; it is not what would have been said at the time.*
+
+**Ratify.** Shared record-level observations (rather than telemetry keyed per program) survived the `pgm-` subclass arc unchanged, and craft lesson #9 records why the alternative splits one truth into many. Exercised across two live programs.
