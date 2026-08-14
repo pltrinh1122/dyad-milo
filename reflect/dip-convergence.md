@@ -618,6 +618,39 @@ Also recorded: one slot kept carrying two axes — labels (provenance vs disposi
 (review-outcome vs merge-state), and the proposal to move records to SQL (invocation vs storage).
 Separating the axes resolved all three. It has become this dyad's most reliable move.
 
+## Canonical invocation built; and the first limit of mechanism-over-compliance (2026-08-13, #35/#36)
+
+Two hand-overs landed together, and they sit at opposite ends of the same principle.
+
+**#35 — canonical-by-construction (ADR-0015 built, `skills/canon_tool.py`).** The adversarial-validate
+had been resolving validators by **sub-agent prompt wording**: correct in practice, a habit rather than
+a mechanism. Now an authoritative invocation resolves from `origin/main` and **refuses** if it cannot;
+`--local` runs the working tree and announces it is not authoritative. Two consumers, opposite needs —
+gates want canonical, development wants local — and conflating them is what made it look hard.
+Implementation note worth keeping: the canonical bytes go to a temp file rather than a pipe, because
+`python3 -` sets `__file__` to `<stdin>` and would break ADR-0013's stamp — losing one half of the
+mechanism to build the other.
+
+**#36 — the meter is reported on request only (ADR-0019).** Milo volunteered the adherence figure; the
+Operator's next record said the number *"brings up emotions and desire to optimize for the sake of
+optimization."* Grounding found the spec named **one** guard for mirror-safety — *not tuned on an
+entry-firing reward* — which covers the **generator** and says nothing about the **display**. The
+coercion arrived through the display and **passed the stated guard cleanly**. Craft lesson #13 on a
+third surface: a guard narrower than its invariant is satisfiable while the invariant goes unserved.
+Two artifacts had already disagreed — `dre_adherence`'s docstring said *"surfacing a number publicly is
+a separate manual step, by design"* while the discipline said *always*.
+
+17. **`mechanism over compliance` has a domain, and naming its edge is part of holding it.** Every
+    device this dyad has built gates an **artifact**. #36 governs a **behaviour**, and there is no
+    artifact between milo's judgment and the Operator's ear — no linter reaches conversational output,
+    no test asserts what was said. So ADR-0019 lands as **prose, knowingly**, with the limit recorded
+    rather than dressed up. The failure mode this guards against is subtle: a principle applied
+    everywhere becomes a principle applied *decoratively* somewhere, and a gesture shaped like a
+    mechanism is worse than an acknowledged gap, because it stops anyone looking. The nearest real
+    move available was the one taken — make the artifacts stop contradicting each other, so the discipline
+    states what the tool already assumed. What would falsify the fix: the number gets volunteered
+    again, and only the Operator would notice, which is exactly what happened this time.
+
 ## Honest scope
 
 n=0, coverage E0. Nothing here has survived an outside attack or a lived cycle; the four

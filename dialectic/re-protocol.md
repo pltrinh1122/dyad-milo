@@ -20,7 +20,21 @@ change**. This file is the operational *How*; the schema and rationale live in
 1. milo persists it **verbatim** to the private client store, under the base envelope (`created` instant,
    PT `practice_day` bucket, `zone`, `trigger`, `programs`) — one record per entry.
 2. milo materializes any cited reference (§ Reference materialization).
-3. milo confirms the practice-day and current adherence.
+3. milo confirms the **practice-day** — the bucket the rep landed in. **Adherence is reported on
+   request only**, never volunteered (disposed 2026-08-13 via #36).
+
+   The two were fused in one step, and that is how coercion rode in on the back of a fact.
+   Practice-day is **factual** — which day, checkable, no evaluative content. Adherence is
+   **evaluative** — a percentage against a figure the spec insists is *"self-observation, not a
+   target to hit"* (§ 2). A mirror reflects when you look into it; a scoreboard displays whether
+   or not you asked, and volunteering the number after nearly every rep is structurally the
+   latter. The same rule binds **program-level meters**, not only BP#0 — the coercion risk is
+   identical and does not care which meter produced the number.
+
+   **No capture-time self-lint** (ADR-0007, stated here at the operational layer so the mistake is
+   harder to repeat): capture is un-gated; validation gates the **land** at step 4. A pre-commit
+   lint is an *un-prescribed* step — the discipline never asked for it, and #33's stale-validator
+   incident was one being run with a stale tool.
 4. **adversarial-validate (final step).** milo spawns an **adversarial sub-agent** — a separate context —
    that executes **`d-rub-with-land`** on the just-captured record (rub-protocol § `d-rub-with-land`):
    adversarially rub it (capture-fidelity, schema, bucket, honesty), then **land the survivor to `main`**;
