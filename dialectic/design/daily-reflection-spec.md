@@ -151,6 +151,12 @@ policy; the grounded discriminators (essence invariant, base/sub-class boundary,
   lapse-tail appears.
 - **Candidate pull-mechanism (TODO, undesigned):** surface curiosity-relevant reading to widen entry
   surface-area — a *pull*, never a *push*. Guard: mirror-safe only while NOT tuned on an entry-firing reward.
+- **Mirror-safety has two guards, not one** (widened 2026-08-13 via #36). The guard above covers the
+  **generator** — don't tune content on an entry-firing reward. It says nothing about the **display**,
+  and the coercion that actually arrived came through the display: an unrequested adherence figure,
+  surfaced after nearly every rep, passing the tuning guard cleanly. So: **the meter is reported on
+  request only, never volunteered** (`re-protocol.md` § Interaction model step 3). A guard narrower
+  than the invariant it protects is satisfiable while the invariant is not served.
 
 ## 8. `d-re` discipline (interaction model + acceptance value)
 

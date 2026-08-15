@@ -148,5 +148,11 @@ Not built; this ADR records the shape.
 ## Consequences of the shape chosen
 
 ADR-0013's stamp stands and ADR-0006's CI path remains mechanized, so **the authoritative land path
-was never exposed** while this sat open. Until D is built, the interactive path still rests on
-prompt wording and habit — which is the dependency the disposal removes, not one it accepts.
+was never exposed** while this sat open.
+
+**Built 2026-08-13** as `skills/canon_tool.py`, closing #35: an authoritative invocation resolves its
+validator from `origin/main` and refuses if it cannot; `--local` runs the working tree and announces
+that it is not authoritative. The `mode` input this ADR's DFD framing surfaced enters there, defaulting
+to authoritative. One implementation note worth keeping: the canonical bytes are written to a temp file
+rather than piped to `python3 -`, because piping sets `__file__` to `<stdin>` and would break ADR-0013's
+stamp — losing one half of the mechanism to build the other.
