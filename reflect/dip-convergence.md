@@ -419,8 +419,9 @@ The loop held: report → intake → dispose → land, the practice thread never
 ## Program abstraction arc — unified store → `pgm-` subclass → delegation (2026-07-24 → 27)
 
 The arc that answered the session goal — *make `dyad-milo` central for all the Operator's programs[]* — in
-three disposed, merged steps (each `d-fb` → `d-sense` → `d-arc`, no-self-ratify throughout). **Resume point:
-this section.**
+three disposed, merged steps (each `d-fb` → `d-sense` → `d-arc`, no-self-ratify throughout).
+*(Was the resume point; **superseded** by `reflect/session-handover-2026-08-15.md` — two hand-maintained
+pointers is one too many, per craft lesson #16.)*
 
 - **Unified telemetry store (#19 → PR #20; private PR #10).** `§ Externality` re-cut to **two homes, two
   axes**: only telemetry *recording* unifies (one private per-client store, all programs across every dyad);
@@ -650,6 +651,14 @@ a separate manual step, by design"* while the discipline said *always*.
     move available was the one taken — make the artifacts stop contradicting each other, so the discipline
     states what the tool already assumed. What would falsify the fix: the number gets volunteered
     again, and only the Operator would notice, which is exactly what happened this time.
+
+## Resume point (2026-08-15)
+
+**`reflect/session-handover-2026-08-15.md`** — the 2026-08-05 → 08-15 `milo:dev` arc, migrated from a
+remote session to a local terminal instance. Substrate state, what landed (PRs #27–#41, ADR-0012 →
+ADR-0019), the open work in priority order, decisions recorded but unbuilt, the limits of what was
+verifiable, and the pending dyad-leo fleet adoption. Craft lessons #11–#17 are indexed there and
+carried in full above.
 
 ## Honest scope
 
