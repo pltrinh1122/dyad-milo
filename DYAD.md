@@ -84,6 +84,11 @@ Mostly `NOT_YET_WORN` (concurrency/WIP, tooling, proactivity materialize through
 through a reviewed PR; the Agent surfaces, the Operator disposes (no-self-ratify). Enforced
 mechanically by dyad-rt (below), not by agent compliance.
 
+**Comment-channel — n=0:** the Operator and the Agent post from one GitHub account, so authorship
+and turn-state ride **in content** — a provenance header, role-disjoint ack emoji, PII-clear or
+withheld. `comment ≠ signature`. The polling sweep is **not** adopted (proactivity stays
+`NOT_YET_WORN`). Single-home: `dialectic/comment-protocol.md`; rationale ADR-0021.
+
 **Thread-mode (`d-re-mode-invariant`) — worn in:** a **`milo:practice`** thread does client-record
 capture + land only; it never implements craft/mechanism changes. A mechanism need it surfaces is
 **reported, not built** — recorded via **`d-fb`** as a PII-clear hand-over (a gh-issue) and deferred to a
