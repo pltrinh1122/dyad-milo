@@ -1,14 +1,29 @@
 #!/usr/bin/env python3
 """local_ci — run every CI leg locally, when the forge cannot.
 
-**Why this exists.** GitHub Actions stopped executing: the monthly quota is
-exhausted, so jobs are allocated no runner and complete in ~3 seconds with empty
-output and no logs (issue #71). A check that never ran reports `failure`
-indistinguishably from a check that ran and found a defect — the *same*
-observational problem ADR-0013 solved for stale validators, arriving one layer up.
+**Why this exists.** The Actions quota is exhausted, so jobs that bill against it are
+allocated no runner and complete in ~3 seconds with empty output and no logs
+(issue #71). A check that never ran reports `failure` indistinguishably from a check
+that ran and found a defect — the *same* observational problem ADR-0013 solved for
+stale validators, arriving one layer up.
 
-The forge legs are the mechanical half of `§ Operating-policy`'s git-workflow. With
-them dark, `d-rub-with-land`'s durability rung is fail-closed on a red that carries
+**The outage is asymmetric, and the asymmetry is the point.** Observed 2026-08-30:
+this repo's four workflows ran and passed (7–15s each) on the very PR that added this
+module, while the **private** client store's `lint-records` failed in 3 seconds on
+`main`. That is consistent with quota being charged for private repositories and not
+for public ones — so the leg that is actually dark is the one gating **client
+records**, which is also the corpus that changes on every `d-re`.
+
+That makes this module's two halves unequal, and it should not pretend otherwise:
+
+- the **records leg** genuinely stands in for a dark gate — this is the load-bearing half;
+- the **four public legs** are, while the forge is up, a *pre-push* check that duplicates
+  live CI rather than replacing it. They earn their place by catching a defect before it
+  costs a push cycle, and by keeping one runner that still works if the public legs ever
+  go dark too — not by substituting for something absent.
+
+The forge legs are the mechanical half of `§ Operating-policy`'s git-workflow. Where
+they are dark, `d-rub-with-land`'s durability rung is fail-closed on a red that carries
 **zero information about the artifact**, which deadlocks every land. This module
 restores the *signal* locally so the deadlock has a principled exit, and it is
 deliberately **not** a licence to land on red: it produces a verdict that a human or
